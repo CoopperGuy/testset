@@ -7,6 +7,8 @@
 #define MAX_LOADSTRING 100
 
 // 119A 신동환 커밋.
+// 풀리퀘스트 테스트
+
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
