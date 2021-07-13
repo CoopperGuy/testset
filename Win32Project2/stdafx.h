@@ -19,3 +19,17 @@
 
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
+#include <list>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+
+#include "d3d9.h"
+#pragma comment(lib ,"d3d9.lib")
+#include "d3dx9.h"
+#pragma comment(lib ,"d3dx9.lib")
+
+
+#include"Include.h"
+
