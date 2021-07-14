@@ -71,7 +71,7 @@ int CPlayer::Update()
 
 		m_bJump = true;
 	}
-	Jumping();
+	//Jumping();
 
 	return OBJ_NOEVENT;
 }
