@@ -20,7 +20,7 @@ typedef struct tagObjInfo {
 	float spd;
 	float agl;
 }OBJINFO;
-
+//ddd
 
 typedef struct tagLinePos
 {
