@@ -45,6 +45,7 @@ bool CCollisionMgr::Collision_OBB(CObj * _Dst, CObj * _Src)
 	D3DXVECTOR3 vec[4] = { HeightVec(_Dst) ,HeightVec(_Src)  , WidthVec(_Dst), WidthVec(_Src) };
 
 	D3DXVECTOR3 unit;
+	//d
 
 	for (int i = 0; i < 4; i++) {
 		float sum = 0;
