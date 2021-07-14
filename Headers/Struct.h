@@ -21,7 +21,17 @@ typedef struct tagObjInfo {
 	float agl;
 }OBJINFO;
 //ddd
+typedef struct tagGravity {
+	tagGravity(float _p,float _t,float _y,bool _j,bool _g)
+	:m_fJumpPower(_p),m_fJumpTime(_t),m_fJumpY(_y),m_bJump(_j),m_bg(_g){
 
+	}
+	float		m_fJumpPower;
+	float		m_fJumpTime;
+	float		m_fJumpY;
+	bool		m_bJump;
+	bool		m_bg;
+};
 typedef struct tagLinePos
 {
 	tagLinePos() { ZeroMemory(this, sizeof(tagLinePos)); }
