@@ -1,11 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "KeyMgr.h"
-#include "ObjMgr.h"
-#include "LineMgr.h"
 
-CPlayer::CPlayer() : m_bJump(false), m_fJumpPower(45.f), m_fJumpTime(0.f)
-, m_fJumpY(0.f), m_bg(false)
+CPlayer::CPlayer() 
+	:m_tG( 45.f,0.f, 0.f, false,false)
 {
 
 
@@ -66,10 +63,10 @@ int CPlayer::Update()
 	}
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-		if (!m_bJump)
-			m_fJumpY = m_tInfo.vPos.y;
+		if (!m_tG.m_bJump)
+			m_tG.m_fJumpY = m_tInfo.vPos.y;
 
-		m_bJump = true;
+		m_tG.m_bJump = true;
 	}
 	//Jumping();
 
@@ -100,30 +97,30 @@ void CPlayer::Release()
 void CPlayer::Jumping()
 {
 	float fY = 0.f;
-	bool bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.vPos.x, m_tInfo.vPos.y, &fY, &m_bg);
+	bool bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.vPos.x, m_tInfo.vPos.y, &fY, &m_tG.m_bg);
 	switch (bLineCol)
 	{
 	case false:
-		m_tInfo.vPos.y = m_tInfo.vPos.y + (0.1f * 9.8f * m_fJumpTime * m_fJumpTime);
-		m_fJumpTime += 0.2f;
+		m_tInfo.vPos.y = m_tInfo.vPos.y + (0.1f * 9.8f * m_tG.m_fJumpTime * m_tG.m_fJumpTime);
+		m_tG.m_fJumpTime += 0.2f;
 		break;
 	}
-	if (m_bJump || m_bg)
+	if (m_tG.m_bJump || m_tG.m_bg)
 	{
 		//m_tInfo.fY -= m_fJumpPower * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime;
-		if (m_bJump)
-			m_tInfo.vPos.y = m_fJumpY - (m_fJumpPower * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime);
-		else if (m_bg)
-			m_tInfo.vPos.y = m_tInfo.vPos.y + (0.1f * 9.8f * m_fJumpTime * m_fJumpTime);
+		if (m_tG.m_bJump)
+			m_tInfo.vPos.y = m_tG.m_fJumpY - (m_tG.m_fJumpPower * m_tG.m_fJumpTime - 0.5f * 9.8f * m_tG.m_fJumpTime * m_tG.m_fJumpTime);
+		else if (m_tG.m_bg)
+			m_tInfo.vPos.y = m_tInfo.vPos.y + (0.1f * 9.8f * m_tG.m_fJumpTime * m_tG.m_fJumpTime);
 
-		m_fJumpTime += 0.2f;
+		m_tG.m_fJumpTime += 0.2f;
 
 		if (bLineCol && m_tInfo.vPos.y > fY)
 		{
 			m_tInfo.vPos.y = fY;
-			m_bJump = false;
-			m_fJumpTime = 0.f;
-			m_bg = false;
+			m_tG.m_bJump = false;
+			m_tG.m_fJumpTime = 0.f;
+			m_tG.m_bg = false;
 		}
 	}
 	else if (bLineCol)

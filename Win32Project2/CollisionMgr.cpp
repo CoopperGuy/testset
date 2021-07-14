@@ -11,6 +11,9 @@ CCollisionMgr::~CCollisionMgr()
 {
 }
 
+
+//#####################################################################################//
+//충돌 계산용 함수
 D3DXVECTOR3 CCollisionMgr::HeightVec(CObj * pObj)
 {
 	D3DXVECTOR3 Look = { 1.f,0.f,0.f };
@@ -38,6 +41,11 @@ D3DXVECTOR3 CCollisionMgr::Get_Unit(D3DXVECTOR3 unit)
 	temp = { unit.x / size ,unit.y / size,0.f };
 	return temp;
 }
+//충돌 계산용 함수
+//#####################################################################################//
+
+
+
 
 bool CCollisionMgr::Collision_OBB(CObj * _Dst, CObj * _Src)
 {

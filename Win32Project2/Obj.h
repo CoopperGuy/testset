@@ -2,6 +2,9 @@
 
 #ifndef __COBJ_H__
 #define __COBJ_H__
+#include "KeyMgr.h"
+#include "ObjMgr.h"
+#include "LineMgr.h"
 
 class CObj
 {
