@@ -18,7 +18,7 @@ public:
 
 public:
 	const LINEINFO& Get_Info() const { return m_tInfo; }
-	const float& Get_LineY(float _x) const;
+	float Get_LineY(float _x);
 
 private:
 	LINEINFO	m_tInfo;

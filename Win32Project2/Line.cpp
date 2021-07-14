@@ -33,7 +33,7 @@ void CLine::Release()
 {
 }
 
-const float & CLine::Get_LineY(float _x) const
+float CLine::Get_LineY(float _x) 
 {
 	float x1 = m_tInfo.tLeftPos.fX;
 	float y1 = m_tInfo.tLeftPos.fY;

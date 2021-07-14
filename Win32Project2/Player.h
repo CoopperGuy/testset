@@ -2,7 +2,8 @@
 
 #ifndef __CPLAYER_H__
 #define __CPLAYER_H__
-
+//현재 만들어야 되는거
+//점수,라이프,무기 스왑?
 #include "Obj.h"
 class CPlayer :
 	public CObj
@@ -20,12 +21,14 @@ public:
 public:
 	void Jumping();
 	static CObj* Create();
+public:
+	void Set_Point(int _point) { m_tObjInfo.score += _point; }
+public:
+	int Get_Point() { return m_tObjInfo.score; }
 private:
-	float		m_fJumpPower;
-	float		m_fJumpTime;
-	float		m_fJumpY;
-	bool		m_bJump;
-	bool		m_bg;
+	GRAVITY m_tG;
+	CObj* CurrentWeapon;
+
 	//test
 };
 

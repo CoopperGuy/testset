@@ -123,6 +123,9 @@
     <ClInclude Include="TestMon.h">
       <Filter>소스 파일\01.Obj\03.Monster\01.TestMon</Filter>
     </ClInclude>
+    <ClInclude Include="ScrollMgr.h">
+      <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Win32Project2.cpp">
@@ -169,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="TestMon.cpp">
       <Filter>소스 파일\01.Obj\03.Monster\01.TestMon</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollMgr.cpp">
+      <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

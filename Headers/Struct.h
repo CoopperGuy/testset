@@ -12,13 +12,15 @@ typedef struct tagInfo
 }INFO;
 
 typedef struct tagObjInfo {
-	tagObjInfo(int _hp, int _atk, float _spd, float _agl) :hp(_hp), atk(_atk),spd(_spd), agl(_agl) {
+	tagObjInfo(int _hp, int _atk,int _score, float _spd, float _agl) :hp(_hp), atk(_atk),spd(_spd), agl(_agl),score(_score) {
 
 	}
 	int hp;
 	int atk;
+	int score;
 	float spd;
 	float agl;
+
 }OBJINFO;
 //ddd
 typedef struct tagGravity {
@@ -31,7 +33,7 @@ typedef struct tagGravity {
 	float		m_fJumpY;
 	bool		m_bJump;
 	bool		m_bg;
-};
+}GRAVITY;
 typedef struct tagLinePos
 {
 	tagLinePos() { ZeroMemory(this, sizeof(tagLinePos)); }
