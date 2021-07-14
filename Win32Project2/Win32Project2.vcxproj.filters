@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="00.Headers">
-      <UniqueIdentifier>{30eac327-c5fa-45d6-be60-ed1fccb5c416}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\00.MainGame">
       <UniqueIdentifier>{a0cf5534-8e7c-4b54-988c-d5836831ccd1}</UniqueIdentifier>
     </Filter>
@@ -77,27 +74,6 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Include.h">
-      <Filter>00.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="extern.h">
-      <Filter>00.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="enum.h">
-      <Filter>00.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Struct.h">
-      <Filter>00.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Function.h">
-      <Filter>00.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>00.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractFactory.h">
-      <Filter>00.Headers</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>리소스 파일</Filter>
