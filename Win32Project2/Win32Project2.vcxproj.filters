@@ -67,6 +67,9 @@
     <Filter Include="소스 파일\01.Obj\04.Item">
       <UniqueIdentifier>{995153a8-799d-42cd-86a8-3d1d5ba14bc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\03.Monster\01.TestMon">
+      <UniqueIdentifier>{b825cb42-40a0-442a-8b18-f40fe7df9531}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -135,6 +138,15 @@
     <ClInclude Include="Player.h">
       <Filter>소스 파일\01.Obj\01.Player</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionMgr.h">
+      <Filter>소스 파일\99.Mgr\04.CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>소스 파일\01.Obj\03.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMon.h">
+      <Filter>소스 파일\01.Obj\03.Monster\01.TestMon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Win32Project2.cpp">
@@ -172,6 +184,15 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\01.Obj\01.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMgr.cpp">
+      <Filter>소스 파일\99.Mgr\04.CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>소스 파일\01.Obj\03.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMon.cpp">
+      <Filter>소스 파일\01.Obj\03.Monster\01.TestMon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

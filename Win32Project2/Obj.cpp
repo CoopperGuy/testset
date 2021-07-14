@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Obj.h"
-
+#include "ObjMgr.h"
 
 CObj::CObj() :m_bDead(OBJ_NOEVENT), m_tObjInfo(1, 0, 5.f, 0.f)
 {
