@@ -5,6 +5,19 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32Project2", "Win32Project2\Win32Project2.vcxproj", "{88C95C95-D4E0-4B03-8FCA-923B6BA7DC65}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Headers", "Headers", "{CF32EF6E-764C-44C7-B649-66DA7C9A3ED9}"
+	ProjectSection(SolutionItems) = preProject
+		Headers\AbstractFactory.h = Headers\AbstractFactory.h
+		Headers\Define.h = Headers\Define.h
+		Headers\enum.h = Headers\enum.h
+		Headers\extern.h = Headers\extern.h
+		Headers\Function.h = Headers\Function.h
+		Headers\Include.h = Headers\Include.h
+		Headers\Struct.h = Headers\Struct.h
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyEditor", "MyEditor\MyEditor.vcxproj", "{ABD63544-52B8-4B2D-A251-7850B578C270}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +34,14 @@ Global
 		{88C95C95-D4E0-4B03-8FCA-923B6BA7DC65}.Release|x64.Build.0 = Release|x64
 		{88C95C95-D4E0-4B03-8FCA-923B6BA7DC65}.Release|x86.ActiveCfg = Release|Win32
 		{88C95C95-D4E0-4B03-8FCA-923B6BA7DC65}.Release|x86.Build.0 = Release|Win32
+		{ABD63544-52B8-4B2D-A251-7850B578C270}.Debug|x64.ActiveCfg = Debug|x64
+		{ABD63544-52B8-4B2D-A251-7850B578C270}.Debug|x64.Build.0 = Debug|x64
+		{ABD63544-52B8-4B2D-A251-7850B578C270}.Debug|x86.ActiveCfg = Debug|Win32
+		{ABD63544-52B8-4B2D-A251-7850B578C270}.Debug|x86.Build.0 = Debug|Win32
+		{ABD63544-52B8-4B2D-A251-7850B578C270}.Release|x64.ActiveCfg = Release|x64
+		{ABD63544-52B8-4B2D-A251-7850B578C270}.Release|x64.Build.0 = Release|x64
+		{ABD63544-52B8-4B2D-A251-7850B578C270}.Release|x86.ActiveCfg = Release|Win32
+		{ABD63544-52B8-4B2D-A251-7850B578C270}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
