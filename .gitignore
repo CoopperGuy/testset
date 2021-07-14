@@ -40,3 +40,5 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
+*.db
+Win32Project2.VC.db
