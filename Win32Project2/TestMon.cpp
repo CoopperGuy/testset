@@ -14,9 +14,9 @@ CTestMon::~CTestMon()
 
 HRESULT CTestMon::Initialize()
 {
-	m_tInfo.vPos = { 400.f, 300.f, 0.f };
-	m_tInfo.vDir = D3DXVECTOR3(1.f, 1.f, 0.f);
-	m_tInfo.vSize = D3DXVECTOR3(30.f, 30.f, 0.f);
+	m_tInfo.vPos = { 300.f, 300.f, 0.f };
+	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
+	m_tInfo.vSize = D3DXVECTOR3(100.f, 100.f, 0.f);
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
 	m_tObjInfo.spd = 5.f;

@@ -21,8 +21,8 @@ HRESULT CPlayer::Initialize()
 {
 
 	m_tInfo.vPos = { 100.f, 100.f, 0.f };
-	m_tInfo.vDir = D3DXVECTOR3(1.f, 1.f, 0.f);
-	m_tInfo.vSize = D3DXVECTOR3(30.f, 30.f, 0.f);
+	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
+	m_tInfo.vSize = D3DXVECTOR3(100.f, 100.f, 0.f);
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
 	m_tObjInfo.spd = 5.f;
