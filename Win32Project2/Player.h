@@ -26,6 +26,7 @@ private:
 	float		m_fJumpY;
 	bool		m_bJump;
 	bool		m_bg;
+	//test
 };
 
 

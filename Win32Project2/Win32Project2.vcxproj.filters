@@ -170,6 +170,9 @@
     <ClCompile Include="TestMon.cpp">
       <Filter>소스 파일\01.Obj\03.Monster\01.TestMon</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>소스 파일\01.Obj\01.Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Win32Project2.rc">
