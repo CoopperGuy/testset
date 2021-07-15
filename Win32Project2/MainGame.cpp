@@ -3,6 +3,7 @@
 #include "ObjMgr.h"
 #include "LineMgr.h"
 #include "SceneMgr.h"
+#include "UIMgr.h"
 #include "KeyMgr.h"
 CMainGame::CMainGame()
 {
@@ -48,5 +49,6 @@ void CMainGame::Release()
 	CLineMgr::Destroy_Instance();
 	CSceneMgr::Destroy_Instance();
 	CKeyMgr::Destroy_Instance();
+	CUIMgr::Destroy_Instance();
 }
 

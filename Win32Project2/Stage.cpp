@@ -20,7 +20,7 @@ void CStage::Initialize()
 void CStage::Update()
 {
 	CObjMgr::Get_Instance()->Update();
-
+	CUIMgr::Get_Instance()->Update();
 }
 
 void CStage::Late_Update()
@@ -33,6 +33,7 @@ void CStage::Render(HDC _DC)
 {
 	CObjMgr::Get_Instance()->Render(_DC);
 	CLineMgr::Get_Instance()->Render(_DC);
+	CUIMgr::Get_Instance()->Render(_DC);
 }
 
 void CStage::Release()

@@ -67,6 +67,24 @@
     <Filter Include="소스 파일\01.Obj\03.Monster\01.TestMon">
       <UniqueIdentifier>{b825cb42-40a0-442a-8b18-f40fe7df9531}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\04.Item\01.PointItem">
+      <UniqueIdentifier>{b9e289c5-4f45-4499-8492-68bb89cca768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.UI">
+      <UniqueIdentifier>{2ebb040b-5172-4fd0-ba2a-f0825ba96fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\07.UIMgr">
+      <UniqueIdentifier>{09d70942-b653-41d3-aaa7-db502694749c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.UI\01.Life">
+      <UniqueIdentifier>{8417e6d0-1e5c-4a29-872e-760373c074ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.UI\02.Inven">
+      <UniqueIdentifier>{a33a2c2a-b27e-4bb0-9b58-1956a1eb558a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.UI\03.Score">
+      <UniqueIdentifier>{4db6dc22-226d-420a-8efc-c2e1e7e6173c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -126,6 +144,27 @@
     <ClInclude Include="ScrollMgr.h">
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>소스 파일\01.Obj\04.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PItem.h">
+      <Filter>소스 파일\01.Obj\04.Item\01.PointItem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>소스 파일\03.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Life.h">
+      <Filter>소스 파일\03.UI\01.Life</Filter>
+    </ClInclude>
+    <ClInclude Include="Inven.h">
+      <Filter>소스 파일\03.UI\02.Inven</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMgr.h">
+      <Filter>소스 파일\99.Mgr\07.UIMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>소스 파일\03.UI\03.Score</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Win32Project2.cpp">
@@ -175,6 +214,27 @@
     </ClCompile>
     <ClCompile Include="ScrollMgr.cpp">
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\01.Obj\04.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PItem.cpp">
+      <Filter>소스 파일\01.Obj\04.Item\01.PointItem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>소스 파일\03.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Life.cpp">
+      <Filter>소스 파일\03.UI\01.Life</Filter>
+    </ClCompile>
+    <ClCompile Include="Inven.cpp">
+      <Filter>소스 파일\03.UI\02.Inven</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMgr.cpp">
+      <Filter>소스 파일\99.Mgr\07.UIMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>소스 파일\03.UI\03.Score</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

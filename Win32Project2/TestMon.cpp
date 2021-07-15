@@ -56,11 +56,12 @@ void CTestMon::Late_Update()
 
 void CTestMon::Render(HDC _DC)
 {
-	MoveToEx(_DC, m_vQ[0].x, m_vQ[0].y, nullptr);
+	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
 
 	for (int i = 1; i < 4; ++i)
-		LineTo(_DC, m_vQ[i].x, m_vQ[i].y);
-	LineTo(_DC, m_vQ[0].x, m_vQ[0].y);
+		LineTo(_DC, m_vQ[i].x + ScrollX, m_vQ[i].y);
+	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
 }
 
 void CTestMon::Release()

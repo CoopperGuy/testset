@@ -60,13 +60,10 @@ void CObjMgr::Render(HDC _DC)
 	}
 	//테스트용으로 내림 lateupdate로 올려야함
 	for (auto& iter : m_listObj[OBJID::MONSTER]) {
-		if (CCollisionMgr::Collision_OBB(m_listObj[OBJID::PLAYER].front(), iter)) {
-			TextOutW(_DC, 100, 100, L"collision", sizeof("collision"));
-		}
-		else {
-			TextOutW(_DC, 200, 100, L"nocollision", sizeof("nocollision"));
-
-		}
+		if (CCollisionMgr::Collision_OBB(m_listObj[OBJID::PLAYER].front(), iter))
+			TextOutW(_DC, 100, 100, L"collision", sizeof("collisio"));
+		else
+			TextOutW(_DC, 200, 100, L"nocollision", sizeof("nocollisio"));
 	}
 }
 

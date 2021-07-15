@@ -5,7 +5,10 @@
 #include "KeyMgr.h"
 #include "ObjMgr.h"
 #include "LineMgr.h"
+#include "ScrollMgr.h"
 
+//매니저 추가하면 이쪽에다가 
+//대부분의 자식객체가 쓰는 것도 여기다가.
 class CObj
 {
 public:
@@ -21,6 +24,12 @@ public:
 	D3DXVECTOR3 Get_Pos()  { return m_tInfo.vPos; }
 	D3DXVECTOR3 Get_Dir()  { return m_tInfo.vDir; }
 	D3DXVECTOR3 Get_Size() { return m_tInfo.vSize; }
+public:
+	void Set_Dead() { m_bDead = OBJ_DEAD; }
+	void Set_Score(int _Point) { m_tObjInfo.score += _Point; }
+public:
+	int Get_Score() { return m_tObjInfo.score; }
+	int Get_Life() { return m_tObjInfo.hp; }
 protected:
 	D3DXVECTOR3 m_vQ[4];
 	D3DXVECTOR3 m_vP[4];

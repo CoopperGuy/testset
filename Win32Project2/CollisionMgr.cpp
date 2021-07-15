@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "CollisionMgr.h"
 #include "Obj.h"
-
+#include "Player.h"
+#include "Item.h"
 CCollisionMgr::CCollisionMgr()
 {
 }
@@ -10,6 +11,20 @@ CCollisionMgr::CCollisionMgr()
 CCollisionMgr::~CCollisionMgr()
 {
 }
+
+void CCollisionMgr::Collision_Player_Item(list<CObj*> _Dst, list<CObj*> _Src)
+{
+	for (auto& diter : _Dst) {
+		for (auto& siter : _Src) {
+			if (Collision_OBB(diter, siter)) {
+				diter->Set_Score(siter->Get_Score());
+				static_cast<CPlayer*>(diter)->Set_Bullet(static_cast<CItem*>(siter)->Get_Item());
+				siter->Set_Dead();
+			}
+		}
+	}
+}
+
 
 
 //#####################################################################################//
@@ -46,7 +61,8 @@ D3DXVECTOR3 CCollisionMgr::Get_Unit(D3DXVECTOR3 unit)
 
 
 
-
+/*#######################################################################################*/
+//OBB충돌판정
 bool CCollisionMgr::Collision_OBB(CObj * _Dst, CObj * _Src)
 {
 	D3DXVECTOR3 dist = (_Src->Get_Pos() - _Dst->Get_Pos());
@@ -68,3 +84,5 @@ bool CCollisionMgr::Collision_OBB(CObj * _Dst, CObj * _Src)
 	}
 	return true;
 }
+//OBB충돌판정
+/*#######################################################################################*/

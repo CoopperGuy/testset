@@ -2,7 +2,7 @@
 #include "Player.h"
 
 CPlayer::CPlayer() 
-	:m_tG( 45.f,0.f, 0.f, false,false)
+	:m_tG( 40.f,0.f, 0.f, false,false)
 {
 
 
@@ -20,7 +20,7 @@ HRESULT CPlayer::Initialize()
 	m_tInfo.vPos = { 100.f, 100.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 100.f, 0.f);
-	m_tObjInfo.hp = 1;
+	m_tObjInfo.hp = 3;
 	m_tObjInfo.atk = 1;
 	m_tObjInfo.spd = 5.f;
 	m_tObjInfo.agl = 0.f;
@@ -38,12 +38,14 @@ int CPlayer::Update()
 {
 	if (m_bDead) 
 		return OBJ_DEAD;
-	
-	D3DXMATRIX matScale, matRotZ, matTrans, matWorld;
+	//D3DXVec3Normalize(&m_tInfo.vDir,&m_tInfo.vDir);
+	//D3DXVECTOR3 Look = { 1.f,0.f,0.f };
+	//float fcos = D3DXVec3Dot(&m_tInfo.vDir, &Look) / (D3DXVec3Length(&m_tInfo.vDir));
+	//float rad = acosf(fcos);
+	D3DXMATRIX matScale, matTrans, matWorld;
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(00.f));
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
-	matWorld = matScale * matRotZ * matTrans;
+	matWorld = matScale  * matTrans;
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -68,8 +70,9 @@ int CPlayer::Update()
 
 		m_tG.m_bJump = true;
 	}
-	//Jumping();
-
+	Drop();
+	Jumping();
+	Offset();
 	return OBJ_NOEVENT;
 }
 
@@ -82,11 +85,12 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC _DC)
 {
-	MoveToEx(_DC, m_vQ[0].x, m_vQ[0].y, nullptr);
+	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
 
 	for (int i = 1; i < 4; ++i)
-		LineTo(_DC, m_vQ[i].x, m_vQ[i].y);
-	LineTo(_DC, m_vQ[0].x, m_vQ[0].y);
+		LineTo(_DC, m_vQ[i].x + ScrollX, m_vQ[i].y);
+	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
 
 }
 
@@ -97,34 +101,52 @@ void CPlayer::Release()
 void CPlayer::Jumping()
 {
 	float fY = 0.f;
-	bool bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.vPos.x, m_tInfo.vPos.y, &fY, &m_tG.m_bg);
-	switch (bLineCol)
-	{
-	case false:
-		m_tInfo.vPos.y = m_tInfo.vPos.y + (0.1f * 9.8f * m_tG.m_fJumpTime * m_tG.m_fJumpTime);
-		m_tG.m_fJumpTime += 0.2f;
-		break;
-	}
+	float inclination = 0.f;
+	bool bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.vPos.x, m_tInfo.vPos.y, &fY, &m_tG.m_bg, inclination);
+	float spdY = 0.f;
+
 	if (m_tG.m_bJump || m_tG.m_bg)
 	{
 		//m_tInfo.fY -= m_fJumpPower * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime;
-		if (m_tG.m_bJump)
-			m_tInfo.vPos.y = m_tG.m_fJumpY - (m_tG.m_fJumpPower * m_tG.m_fJumpTime - 0.5f * 9.8f * m_tG.m_fJumpTime * m_tG.m_fJumpTime);
-		else if (m_tG.m_bg)
-			m_tInfo.vPos.y = m_tInfo.vPos.y + (0.1f * 9.8f * m_tG.m_fJumpTime * m_tG.m_fJumpTime);
-
+		if (m_tG.m_bJump) {
+			spdY = (m_tG.m_fJumpPower * m_tG.m_fJumpTime - 0.5f * 9.8f * m_tG.m_fJumpTime * m_tG.m_fJumpTime);
+	
+			m_tInfo.vPos.y = m_tG.m_fJumpY - spdY;
+		}
+		else if (m_tG.m_bg) {
+			spdY = (4.9f * m_tG.m_fJumpTime);
+			if (spdY > 15.f)
+				spdY = 15.f;
+			m_tInfo.vPos.y = m_tInfo.vPos.y + spdY;
+		}
 		m_tG.m_fJumpTime += 0.2f;
 
-		if (bLineCol && m_tInfo.vPos.y > fY)
+		if (bLineCol && m_tInfo.vPos.y > (fY - m_tInfo.vSize.y * 0.5f))
 		{
-			m_tInfo.vPos.y = fY;
+			m_tInfo.vPos.y = (fY - m_tInfo.vSize.y * 0.5f);
 			m_tG.m_bJump = false;
 			m_tG.m_fJumpTime = 0.f;
 			m_tG.m_bg = false;
 		}
+		return;
 	}
-	else if (bLineCol)
-		m_tInfo.vPos.y = fY;
+	else if (bLineCol) {
+		m_tInfo.vPos.y = fY - m_tInfo.vSize.y * 0.5f;
+		return;
+	}
+	switch (bLineCol)
+	{
+	case false:
+		spdY = (4.9f * m_tG.m_fJumpTime);
+		if (spdY > 15.f)
+			spdY = 15.f;
+		m_tInfo.vPos.y = m_tInfo.vPos.y + spdY;
+		m_tG.m_fJumpTime += 0.2f;
+		break;
+	}
+	//m_tInfo.vDir = { 1.f,inclination,0.f };
+	//D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+
 }
 
 CObj * CPlayer::Create()
@@ -136,4 +158,55 @@ CObj * CPlayer::Create()
 		return nullptr;
 	}
 	return pInstance;
+}
+
+CPlayer::BULLET CPlayer::getItemType(CItem::ITEMTAG _tag)
+{
+	switch (_tag)
+	{
+	case CItem::ITEM_POINT:
+		break;
+	case CItem::ITEM_END:
+		break;
+	}
+	return BULLET(0,0, BULLETTYPE::BULLET_END);
+}
+
+void CPlayer::Drop()
+{
+	if (m_tInfo.vPos.y > WINCY*2.f) {
+		m_tInfo.vPos.y = 100.f;
+		m_tInfo.vPos.x = 100.f;
+	}
+}
+
+void CPlayer::Offset()
+{
+	int OffsetX = (WINCX>>1) - 200;
+	int ScrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+
+	if (OffsetX < (m_tInfo.vPos.x + ScrollX))
+		CScrollMgr::Get_Instance()->Set_ScrollX(OffsetX - (m_tInfo.vPos.x + ScrollX));
+	if (OffsetX > (m_tInfo.vPos.x + ScrollX))
+		CScrollMgr::Get_Instance()->Set_ScrollX(OffsetX - (m_tInfo.vPos.x + ScrollX));
+}
+
+void CPlayer::Set_Bullet(CItem::ITEMTAG _tag)
+{
+	bool isIn=false;
+	if (_tag == CItem::ITEMTAG::ITEM_POINT)
+		return;
+	if (Inven.size() < MAX_INVEN) {
+		for (auto& iter : Inven) {
+			if (iter.BulletID == _tag) {
+				//Ãß°¡
+				isIn = true;
+				break;
+			}
+		}
+		if (!isIn) {
+			Inven.emplace_back(getItemType(_tag));
+		}
+	}
+
 }
