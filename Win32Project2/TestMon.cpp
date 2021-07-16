@@ -14,6 +14,8 @@ CTestMon::~CTestMon()
 
 HRESULT CTestMon::Initialize()
 {
+	m_eID = EDITID::TESTMON;
+
 	m_tInfo.vPos = { 300.f, 300.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 100.f, 0.f);
@@ -56,12 +58,11 @@ void CTestMon::Late_Update()
 
 void CTestMon::Render(HDC _DC)
 {
-	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
+	MoveToEx(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y, nullptr);
 
 	for (int i = 1; i < 4; ++i)
-		LineTo(_DC, m_vQ[i].x + ScrollX, m_vQ[i].y);
-	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
+		LineTo(_DC, (int)m_vQ[i].x, (int)m_vQ[i].y);
+	LineTo(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y);
 }
 
 void CTestMon::Release()

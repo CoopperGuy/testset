@@ -30,8 +30,8 @@ public:
 		BULLETTYPE BulletID;
 	}BULLET;
 private:
-	CPlayer();
 public:
+	CPlayer();
 	virtual ~CPlayer();
 public:
 	virtual HRESULT Initialize() override;

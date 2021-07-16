@@ -18,6 +18,12 @@ public:
 	virtual void Late_Update() PURE;
 	virtual void Render(HDC _DC) PURE;
 	virtual void Release() PURE;
+
+public:
+	const EDITID::ID& Get_ID() { return m_eID; }
+
+protected:
+	EDITID::ID		m_eID;
 };
 
 
