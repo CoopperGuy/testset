@@ -37,7 +37,9 @@ public:
 	{
 		SAFE_DELETE(m_pInstance);
 	}
-
+public:
+	CObj* Get_Player() { return m_listObj[OBJID::PLAYER].front(); }
+	bool Get_PlayerEmpty() { return m_listObj[OBJID::PLAYER].empty(); }
 private:
 	static CObjMgr*		m_pInstance;
 	list<CObj*>			m_listObj[OBJID::END];

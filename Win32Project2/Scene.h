@@ -5,6 +5,7 @@
 
 #include "ObjMgr.h"
 #include "LineMgr.h"
+#include "UIMgr.h"
 #include "Obj.h"
 #include "Player.h"
 #include "TestMon.h"

@@ -2,7 +2,7 @@
 
 #ifndef __LINE_H__
 #define __LINE_H__
-
+#include "ScrollMgr.h"
 
 class CLine
 {
