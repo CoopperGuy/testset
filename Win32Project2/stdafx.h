@@ -19,7 +19,6 @@
 
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
-#include <map>
 #include <list>
 #include <vector>
 #include <algorithm>
@@ -33,5 +32,4 @@ using namespace std;
 
 
 #include"Include.h"
-#include "Graphic_Device.h"
-#include "Texture_Manager.h"
+

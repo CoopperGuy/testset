@@ -1,11 +1,5 @@
 #include "stdafx.h"
 #include "Stage.h"
-
-#include "LineMgr.h"
-#include "TileMgr.h"
-#include "BckMgr.h"
-#include "DataMgr.h"
-
 CStage::CStage()
 {
 }
@@ -18,14 +12,15 @@ CStage::~CStage()
 
 void CStage::Initialize()
 {
-	CBckMgr::Get_Instance()->Initialize();
-	CDataMgr::Get_Instance()->Load_Data();
+	CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(), OBJID::PLAYER);
+	CObjMgr::Get_Instance()->Add_Object(CTestMon::Create(), OBJID::MONSTER);
+	CLineMgr::Get_Instance()->Initialize();
 }
 
 void CStage::Update()
 {
-	CBckMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
+
 }
 
 void CStage::Late_Update()
@@ -36,10 +31,6 @@ void CStage::Late_Update()
 
 void CStage::Render(HDC _DC)
 {
-	
-
-	CBckMgr::Get_Instance()->Render(_DC);
-	CTileMgr::Get_Instance()->Render(_DC);
 	CObjMgr::Get_Instance()->Render(_DC);
 	CLineMgr::Get_Instance()->Render(_DC);
 }

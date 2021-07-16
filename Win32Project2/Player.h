@@ -9,8 +9,8 @@ class CPlayer :
 	public CObj
 {
 private:
-public:
 	CPlayer();
+public:
 	virtual ~CPlayer();
 public:
 	virtual HRESULT Initialize() override;

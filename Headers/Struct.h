@@ -51,18 +51,4 @@ typedef struct tagLineInfo
 	LINEPOS		tLeftPos;
 	LINEPOS		tRightPos;
 }LINEINFO;
-
-typedef struct tagTexInfo
-{
-	LPDIRECT3DTEXTURE9 pTexture;
-	D3DXIMAGE_INFO tImageInfo;
-}TEXINFO;
-
-typedef struct tagTile
-{
-	D3DXVECTOR3 vPos;
-	D3DXVECTOR3 vSize;
-	DWORD dwDrawID;
-	DWORD dwOption;
-}TILE;
 #endif // !__STRUCT_H__

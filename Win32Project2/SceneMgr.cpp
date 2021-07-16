@@ -2,7 +2,6 @@
 #include "SceneMgr.h"
 #include "Scene.h"
 #include "Stage.h"
-#include "Editor.h"
 CSceneMgr* CSceneMgr::m_Instance = nullptr;
 CSceneMgr::CSceneMgr()
 	: m_ePreScene(END), m_eCurScene(END), m_pScene(nullptr)
@@ -35,7 +34,6 @@ void CSceneMgr::Scene_Change(SCENEID _eID)
 			//m_pScene = new CEnd;
 			break;
 		case CSceneMgr::EDIT:
-			m_pScene = new CEditor;
 			break;
 		}
 		m_pScene->Initialize();

@@ -16,16 +16,6 @@ public:
 	void Late_Update();
 	void Render(HDC _DC);
 	void Release();
-
-public:
-	void Picking_Obj(EDITID::ID);
-
-	void Save_Player();
-	void Load_Player();
-
-	void Save_Monster();
-	void Load_Monster();
-
 public:
 	static CObjMgr* Get_Instance()
 	{
