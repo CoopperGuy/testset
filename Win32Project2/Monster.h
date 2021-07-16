@@ -9,6 +9,8 @@ class CMonster :
 	public CObj
 {
 public:
+	enum STATE {RUN, HIT, END};
+
 	CMonster();
 	virtual ~CMonster();
 
@@ -24,6 +26,7 @@ public:
 
 protected:
 	EDITID::ID		m_eID;
+	STATE			m_eState;
 };
 
 
