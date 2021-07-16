@@ -18,7 +18,7 @@ HRESULT CLinear_Bullet::Initialize()
 
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
-	m_tObjInfo.spd = 50.f;
+	m_tObjInfo.spd = 25.f;
 	m_tObjInfo.agl = 0.f;
 
 	/*m_dwTime = GetTickCount();
@@ -50,6 +50,11 @@ int CLinear_Bullet::Update()
 	for (int i = 0; i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
+	}
+
+	if (IsOutside())
+	{
+		m_bDead = OBJ_DEAD;
 	}
 
 	return OBJ_NOEVENT;

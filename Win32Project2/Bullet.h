@@ -16,6 +16,8 @@ public:
 
 	void Set_Position(const D3DXVECTOR3& _vPos);
 
+	bool IsOutside();
+
 protected:
 
 };

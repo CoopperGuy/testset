@@ -5,7 +5,7 @@
 
 namespace OBJID
 {
-	enum ID { PLAYER, MONSTER, ITEM, END };
+	enum ID { PLAYER, MONSTER, ITEM, BULLET, END };
 }
 
 
