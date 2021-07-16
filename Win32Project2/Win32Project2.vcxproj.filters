@@ -67,7 +67,13 @@
     <Filter Include="소스 파일\01.Obj\03.Monster\01.TestMon">
       <UniqueIdentifier>{b825cb42-40a0-442a-8b18-f40fe7df9531}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Obj\03.Monster\Monster_Normal">
+    <Filter Include="소스 파일\01.Obj\02.Bullet\Linear_Bullet">
+      <UniqueIdentifier>{e3c7282e-e91e-422a-9002-910f8ba01fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\02.Bullet\Guided_Bullet">
+      <UniqueIdentifier>{b30b01db-1455-4f20-b74e-bf3d2920eebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\03.Monster\Normal_Monster">
       <UniqueIdentifier>{94345540-2897-4bd0-acdb-6065394ba785}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -130,7 +136,16 @@
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
     </ClInclude>
     <ClInclude Include="Normal_Monster.h">
-      <Filter>소스 파일\01.Obj\03.Monster\Monster_Normal</Filter>
+      <Filter>소스 파일\01.Obj\03.Monster\Normal_Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>소스 파일\01.Obj\02.Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Linear_Bullet.h">
+      <Filter>소스 파일\01.Obj\02.Bullet\Linear_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Guided_Bullet.h">
+      <Filter>소스 파일\01.Obj\02.Bullet\Guided_Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +198,16 @@
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
     </ClCompile>
     <ClCompile Include="Normal_Monster.cpp">
-      <Filter>소스 파일\01.Obj\03.Monster\Monster_Normal</Filter>
+      <Filter>소스 파일\01.Obj\03.Monster\Normal_Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>소스 파일\01.Obj\02.Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Linear_Bullet.cpp">
+      <Filter>소스 파일\01.Obj\02.Bullet\Linear_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Guided_Bullet.cpp">
+      <Filter>소스 파일\01.Obj\02.Bullet\Guided_Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

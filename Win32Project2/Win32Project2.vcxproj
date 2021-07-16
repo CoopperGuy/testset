@@ -147,9 +147,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionMgr.h" />
+    <ClInclude Include="Guided_Bullet.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="Linear_Bullet.h" />
     <ClInclude Include="LineMgr.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Monster.h" />
@@ -168,9 +171,12 @@
     <ClInclude Include="Win32Project2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
+    <ClCompile Include="Guided_Bullet.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Linear_Bullet.cpp" />
     <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster.cpp" />

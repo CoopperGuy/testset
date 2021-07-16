@@ -17,8 +17,6 @@ public:
 	virtual void Render(HDC _DC) override;
 	virtual void Release() override;
 
-	CObj* Find_Closest();
-
 private:
 	float m_fAngle;
 	CObj* m_pTarget;

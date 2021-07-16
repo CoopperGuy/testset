@@ -41,8 +41,24 @@ int CGuided_Bullet::Update()
 	{
 		return OBJ_DEAD;
 	}
-	D3DXVECTOR3 _
+	CObj* target = CObjMgr::Get_Instance()->Get_Target(this, OBJID::MONSTER);
 
+	if (target == nullptr)
+	{
+		m_tInfo.vPos.x += m_tObjInfo.spd;
+	}
+	else
+	{
+		float rad = acosf((m_pTarget->Get_Pos().x - m_tInfo.vPos.x)
+			/ sqrtf((m_pTarget->Get_Pos().x - m_tInfo.vPos.x) * (m_pTarget->Get_Pos().x - m_tInfo.vPos.x)
+				+ (m_pTarget->Get_Pos().y - m_tInfo.vPos.y) * (m_pTarget->Get_Pos().y - m_tInfo.vPos.y)));
+
+		if (m_tInfo.vPos.y < m_pTarget->Get_Pos().y)
+		{
+			rad *= -1.f;
+		}
+		m_fAngle = rad * 180 / 3.141592;
+	}
 
 	return OBJ_NOEVENT;
 }
@@ -65,10 +81,4 @@ void CGuided_Bullet::Render(HDC _DC)
 
 void CGuided_Bullet::Release()
 {
-}
-
-CObj * CGuided_Bullet::Find_Closest()
-{
-	list<Obj*>
-	return nullptr;
 }
