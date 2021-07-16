@@ -6,6 +6,9 @@
 #include "BckMgr.h"
 #include "DataMgr.h"
 
+#include "Normal_Monster.h"
+#include "Jump_Monster.h"
+
 CStage::CStage()
 {
 }
@@ -21,6 +24,8 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(), OBJID::PLAYER);
 	CBckMgr::Get_Instance()->Initialize();
 	CDataMgr::Get_Instance()->Load_Data();
+
+	//CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CJump_Monster>::Create(800, 350), OBJID::MONSTER);
 }
 
 void CStage::Update()

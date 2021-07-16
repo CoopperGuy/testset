@@ -40,6 +40,8 @@ void CObjMgr::Update()
 		}
 	}
 	//	Get_Player()->Update();
+
+	//CCollisionMgr::COllision_Bulllet_Monster(m_listObj[OBJID::PLAYERBULLET], m_listObj[OBJID::MONSTER]);
 }
 
 void CObjMgr::Late_Update()
@@ -262,5 +264,31 @@ void CObjMgr::Load_Monster()
 
 	CloseHandle(hFile);
 	MessageBox(g_hWnd, L"Monster 불러오기 성공!", L"성공", MB_OK);
+}
+
+CObj * CObjMgr::Get_Target(CObj * _pObject, OBJID::ID _eID)
+{
+	if (m_listObj[_eID].empty())
+	{
+		return nullptr;
+	}
+
+	CObj* pTarget = nullptr;
+	float fDistance = 0.f;
+
+	for (auto& Dst : m_listObj[_eID])
+	{
+		float fX = Dst->Get_Pos().x - _pObject->Get_Pos().x;
+		float fY = Dst->Get_Pos().y - _pObject->Get_Pos().y;
+		float fDia = sqrtf(fX * fX + fY * fY);
+
+		if (fDistance > fDia || !pTarget)
+		{
+			pTarget = Dst;
+			fDistance = fDia;
+		}
+	}
+
+	return pTarget;
 }
 

@@ -112,6 +112,18 @@
     <Filter Include="소스 파일\99.Mgr\01.ObjMgr\01.MonObjMgr">
       <UniqueIdentifier>{c9f0b071-22ae-4898-aeb9-197b0c26757f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\02.Bullet\Linear_Bullet">
+      <UniqueIdentifier>{e93dea80-102b-4b3e-9615-25c3206b1b81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\02.Bullet\Guided_Bullet">
+      <UniqueIdentifier>{4f5cc179-7f39-4da5-ae3d-978d81941df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\03.Monster\Normal_Monster">
+      <UniqueIdentifier>{59fe8341-76c8-4aa6-8460-40cf986eb281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\03.Monster\Jump_Monster">
+      <UniqueIdentifier>{4dae835d-2b2e-4731-a0ab-359705ad45cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -219,6 +231,21 @@
     <ClInclude Include="MonObjMgr.h">
       <Filter>소스 파일\99.Mgr\01.ObjMgr\01.MonObjMgr</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>소스 파일\01.Obj\02.Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Linear_Bullet.h">
+      <Filter>소스 파일\01.Obj\02.Bullet\Linear_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Guided_Bullet.h">
+      <Filter>소스 파일\01.Obj\02.Bullet\Guided_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Normal_Monster.h">
+      <Filter>소스 파일\01.Obj\03.Monster\Normal_Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Jump_Monster.h">
+      <Filter>소스 파일\01.Obj\03.Monster\Jump_Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -316,6 +343,21 @@
     </ClCompile>
     <ClCompile Include="MonObjMgr.cpp">
       <Filter>소스 파일\99.Mgr\01.ObjMgr\01.MonObjMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>소스 파일\01.Obj\02.Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Linear_Bullet.cpp">
+      <Filter>소스 파일\01.Obj\02.Bullet\Linear_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Guided_Bullet.cpp">
+      <Filter>소스 파일\01.Obj\02.Bullet\Guided_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Normal_Monster.cpp">
+      <Filter>소스 파일\01.Obj\03.Monster\Normal_Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Jump_Monster.cpp">
+      <Filter>소스 파일\01.Obj\03.Monster\Jump_Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
