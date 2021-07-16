@@ -21,12 +21,19 @@ public:
 	virtual void Render(HDC _DC) PURE;
 	virtual void Release() PURE;
 
+	bool IsOutside();
+	void Set_Hit() { m_eState = HIT; }
+	void Hit_Jump();
+
 public:
 	const EDITID::ID& Get_ID() { return m_eID; }
 
 protected:
 	EDITID::ID		m_eID;
+
 	STATE			m_eState;
+	GRAVITY			m_tG;
+	float			m_fAngle;
 };
 
 

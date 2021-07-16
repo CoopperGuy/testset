@@ -11,10 +11,11 @@ CBullet::~CBullet()
 {
 }
 
-bool CBullet::IsOutside()
+bool CBullet::IsFarFromPlayer()
 {
-	if (m_tInfo.vPos.x < 0 || m_tInfo.vPos.x > WINCX
-		|| m_tInfo.vPos.y < 0 || m_tInfo.vPos.y > WINCY)
+	D3DXVECTOR3 _player = CObjMgr::Get_Instance()->Get_Player()->Get_Pos();
+	if (m_tInfo.vPos.x < _player.x - WINCX || m_tInfo.vPos.x > _player.x + WINCX
+		|| m_tInfo.vPos.y < _player.y - WINCY || m_tInfo.vPos.y > _player.y + WINCY)
 	{
 		return true;
 	}

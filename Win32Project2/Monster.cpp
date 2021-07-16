@@ -6,6 +6,7 @@ CMonster::CMonster()
 	:m_eID(EDITID::ID::END)
 	, m_eState(RUN)
 	, m_tG(50.f, 0.f, 0.f, false, false)
+	, m_fAngle(0.f)
 {
 }
 
@@ -16,7 +17,8 @@ CMonster::~CMonster()
 
 bool CMonster::IsOutside()
 {
-	if (m_tInfo.vPos.x < 0 || m_tInfo.vPos.x > WINCX
+	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	if (m_tInfo.vPos.x < ScrollX
 		|| m_tInfo.vPos.y < 0 || m_tInfo.vPos.y > WINCY)
 	{
 		return true;

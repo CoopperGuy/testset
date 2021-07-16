@@ -18,7 +18,7 @@ HRESULT CLinear_Bullet::Initialize()
 
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
-	m_tObjInfo.spd = 25.f;
+	m_tObjInfo.spd = 15.f;
 	m_tObjInfo.agl = 0.f;
 
 	/*m_dwTime = GetTickCount();
@@ -52,7 +52,7 @@ int CLinear_Bullet::Update()
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
 	}
 
-	if (IsOutside())
+	if (IsFarFromPlayer())
 	{
 		m_bDead = OBJ_DEAD;
 	}
@@ -66,14 +66,16 @@ void CLinear_Bullet::Late_Update()
 
 void CLinear_Bullet::Render(HDC _DC)
 {
-	MoveToEx(_DC, m_vQ[0].x, m_vQ[0].y, nullptr);
+	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+
+	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
 
 	for (int i = 1; i < 4; ++i)
 	{
-		LineTo(_DC, m_vQ[i].x, m_vQ[i].y);
+		LineTo(_DC, m_vQ[i].x + ScrollX, m_vQ[i].y);
 	}
 
-	LineTo(_DC, m_vQ[0].x, m_vQ[0].y);
+	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
 }
 
 void CLinear_Bullet::Release()

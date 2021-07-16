@@ -27,6 +27,9 @@ public:
 	void Load_Monster();
 
 public:
+	CObj* Get_Target(CObj* _pObject, OBJID::ID _eID);
+
+public:
 	static CObjMgr* Get_Instance()
 	{
 		if (!m_pInstance)

@@ -14,7 +14,7 @@ public:
 	virtual void Render(HDC _DC) PURE;
 	virtual void Release() PURE;
 
-	bool IsOutside();
+	bool IsFarFromPlayer();
 
 protected:
 

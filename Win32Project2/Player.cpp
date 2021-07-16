@@ -1,6 +1,11 @@
 ﻿#include "stdafx.h"
 #include "Player.h"
 
+#include "MonObjMgr.h"
+#include "Linear_Bullet.h"
+#include "Guided_Bullet.h"
+
+
 CPlayer::CPlayer() 
 	:m_tG( 45.f,0.f, 0.f, false,false)
 {
@@ -67,6 +72,15 @@ int CPlayer::Update()
 			m_tG.m_fJumpY = m_tInfo.vPos.y;
 
 		m_tG.m_bJump = true;
+	}
+
+	if (CKeyMgr::Get_Instance()->Key_Down('X'))
+	{
+		CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
+	}
+	if (CKeyMgr::Get_Instance()->Key_Down('C'))
+	{
+		CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
 	}
 	Drop();
 	Jumping();

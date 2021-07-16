@@ -1,26 +1,28 @@
 #include "stdafx.h"
-#include "Normal_Monster.h"
+#include "Jump_Monster.h"
 
 
-CNormal_Monster::CNormal_Monster()
+CJump_Monster::CJump_Monster()
+	: m_tRunG(50.f, 0.f, 0.f, false, false)
 {
-	m_eID = EDITID::NORMAL_MONSTER;
+	m_eID = EDITID::JUMP_MONSTER;
 }
 
-CNormal_Monster::~CNormal_Monster()
+
+CJump_Monster::~CJump_Monster()
 {
 	Release();
 }
 
-HRESULT CNormal_Monster::Initialize()
+HRESULT CJump_Monster::Initialize()
 {
-	m_tInfo.vPos = { 800.f, 400.f, 0.f };
+	m_tInfo.vPos = { 800.f, 500.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
-	m_tInfo.vSize = D3DXVECTOR3(100.f, 150.f, 0.f);
+	m_tInfo.vSize = D3DXVECTOR3(50.f, 75.f, 0.f);
 
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
-	m_tObjInfo.spd = 5.f;
+	m_tObjInfo.spd = 3.f;
 	m_tObjInfo.agl = 0.f;
 	/*
 	m_dwTime = GetTickCount();
@@ -34,7 +36,7 @@ HRESULT CNormal_Monster::Initialize()
 	return S_OK;
 }
 
-int CNormal_Monster::Update()
+int CJump_Monster::Update()
 {
 	if (m_bDead)
 	{
@@ -43,7 +45,13 @@ int CNormal_Monster::Update()
 
 	if (m_eState == RUN)
 	{
-		m_tInfo.vPos.x -= m_tObjInfo.spd;
+		if (!m_tRunG.m_bJump)
+		{
+			m_tRunG.m_fJumpY = m_tInfo.vPos.y;
+			m_tRunG.m_bJump = true;
+		}
+	
+		Run_Jump();
 	}
 	else if (m_eState == HIT)
 	{
@@ -76,11 +84,11 @@ int CNormal_Monster::Update()
 	return OBJ_NOEVENT;
 }
 
-void CNormal_Monster::Late_Update()
+void CJump_Monster::Late_Update()
 {
 }
 
-void CNormal_Monster::Render(HDC _DC)
+void CJump_Monster::Render(HDC _DC)
 {
 	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
@@ -93,6 +101,23 @@ void CNormal_Monster::Render(HDC _DC)
 	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
 }
 
-void CNormal_Monster::Release()
+void CJump_Monster::Release()
 {
+}
+
+void CJump_Monster::Run_Jump()
+{
+	m_tInfo.vPos.x -= m_tObjInfo.spd;
+
+	m_tInfo.vPos.y = m_tRunG.m_fJumpY
+		- (m_tRunG.m_fJumpPower * m_tRunG.m_fJumpTime
+			- 0.5f * 9.8f * m_tRunG.m_fJumpTime * m_tRunG.m_fJumpTime);
+	m_tRunG.m_fJumpTime += 0.2f;
+
+	if (m_tInfo.vPos.y > m_tRunG.m_fJumpY)
+	{
+		m_tInfo.vPos.y = m_tRunG.m_fJumpY;
+		m_tRunG.m_bJump = false;
+		m_tRunG.m_fJumpTime = 0.f;
+	}
 }
