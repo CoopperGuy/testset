@@ -28,6 +28,8 @@ public:
 		SAFE_DELETE(m_pInstance);
 	}
 
+	CObj* Get_Target(CObj* _pObject, OBJID::ID _eID);
+
 private:
 	static CObjMgr*		m_pInstance;
 	list<CObj*>			m_listObj[OBJID::END];
