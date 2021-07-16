@@ -14,8 +14,6 @@ public:
 	virtual void Render(HDC _DC) PURE;
 	virtual void Release() PURE;
 
-	void Set_Position(const D3DXVECTOR3& _vPos);
-
 	bool IsOutside();
 
 protected:
