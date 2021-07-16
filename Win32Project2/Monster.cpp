@@ -3,6 +3,7 @@
 
 
 CMonster::CMonster()
+	:m_eID(EDITID::ID::END)
 {
 }
 

@@ -67,6 +67,51 @@
     <Filter Include="소스 파일\01.Obj\03.Monster\01.TestMon">
       <UniqueIdentifier>{b825cb42-40a0-442a-8b18-f40fe7df9531}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj">
+      <UniqueIdentifier>{8873fb3c-b92b-4707-be16-accbcf8fe77e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj\UpObj">
+      <UniqueIdentifier>{44cccb72-b184-410a-b27b-e67121b64741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj\DownObj">
+      <UniqueIdentifier>{acd35b98-ee14-4618-b6d8-454af3717075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj\Tile">
+      <UniqueIdentifier>{5febfce5-fd27-44a3-944e-110ac1629837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\98.Texture_Manager">
+      <UniqueIdentifier>{a5288055-e70d-4235-994f-a69acbf1c636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\98.Texture_Manager\Texture">
+      <UniqueIdentifier>{bd12bad7-da21-4e28-b7cf-e14dd5c82f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\98.Texture_Manager\Single_Texture">
+      <UniqueIdentifier>{d015a398-2acd-4021-baff-93fd31d64c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\98.Texture_Manager\Multi_Texture">
+      <UniqueIdentifier>{20beb657-5077-4110-b25d-53e313b76bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\98.Scene\02.Editor">
+      <UniqueIdentifier>{5e66bba3-c7dc-41ee-b7b1-16a04cc437dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\07.TileMgr">
+      <UniqueIdentifier>{fcf292e4-dedb-480c-b928-230a6ecb9b05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\97.DataMgr">
+      <UniqueIdentifier>{042a660b-41ac-419f-a118-be8f428b8c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\96.BckMgr">
+      <UniqueIdentifier>{8cc73372-5424-4fbf-9194-0dcab82e3d48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj\BkGround">
+      <UniqueIdentifier>{ae713de2-ee38-4027-8d11-bfead03efc49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\01.ObjMgr\02.MapObjMgr">
+      <UniqueIdentifier>{a39af479-f923-48ec-8c67-c0131096696f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\01.ObjMgr\01.MonObjMgr">
+      <UniqueIdentifier>{c9f0b071-22ae-4898-aeb9-197b0c26757f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -126,11 +171,56 @@
     <ClInclude Include="ScrollMgr.h">
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
     </ClInclude>
+    <ClInclude Include="MapObj.h">
+      <Filter>소스 파일\01.Obj\05.MapObj</Filter>
+    </ClInclude>
+    <ClInclude Include="DownObj.h">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>소스 파일\01.Obj\05.MapObj\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="UpObj.h">
+      <Filter>소스 파일\01.Obj\05.MapObj\UpObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic_Device.h">
+      <Filter>소스 파일\99.Mgr\99.GrephicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture_Manager.h">
+      <Filter>소스 파일\99.Mgr\98.Texture_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>소스 파일\99.Mgr\98.Texture_Manager\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTexture.h">
+      <Filter>소스 파일\99.Mgr\98.Texture_Manager\Multi_Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTexture.h">
+      <Filter>소스 파일\99.Mgr\98.Texture_Manager\Single_Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>소스 파일\98.Scene\02.Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMgr.h">
+      <Filter>소스 파일\99.Mgr\07.TileMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="DataMgr.h">
+      <Filter>소스 파일\99.Mgr\97.DataMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="BckGround.h">
+      <Filter>소스 파일\01.Obj\05.MapObj\BkGround</Filter>
+    </ClInclude>
+    <ClInclude Include="BckMgr.h">
+      <Filter>소스 파일\99.Mgr\96.BckMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObjMgr.h">
+      <Filter>소스 파일\99.Mgr\01.ObjMgr\02.MapObjMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="MonObjMgr.h">
+      <Filter>소스 파일\99.Mgr\01.ObjMgr\01.MonObjMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Win32Project2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="MainGame.cpp">
       <Filter>소스 파일\00.MainGame</Filter>
     </ClCompile>
@@ -175,6 +265,57 @@
     </ClCompile>
     <ClCompile Include="ScrollMgr.cpp">
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObj.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj</Filter>
+    </ClCompile>
+    <ClCompile Include="DownObj.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="UpObj.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj\UpObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32Project2.cpp">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic_Device.cpp">
+      <Filter>소스 파일\99.Mgr\99.GrephicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture_Manager.cpp">
+      <Filter>소스 파일\99.Mgr\98.Texture_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>소스 파일\99.Mgr\98.Texture_Manager\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTexture.cpp">
+      <Filter>소스 파일\99.Mgr\98.Texture_Manager\Multi_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTexture.cpp">
+      <Filter>소스 파일\99.Mgr\98.Texture_Manager\Single_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>소스 파일\98.Scene\02.Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMgr.cpp">
+      <Filter>소스 파일\99.Mgr\07.TileMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="DataMgr.cpp">
+      <Filter>소스 파일\99.Mgr\97.DataMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="BckGround.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj\BkGround</Filter>
+    </ClCompile>
+    <ClCompile Include="BckMgr.cpp">
+      <Filter>소스 파일\99.Mgr\96.BckMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObjMgr.cpp">
+      <Filter>소스 파일\99.Mgr\01.ObjMgr\02.MapObjMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="MonObjMgr.cpp">
+      <Filter>소스 파일\99.Mgr\01.ObjMgr\01.MonObjMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
