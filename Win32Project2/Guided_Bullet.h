@@ -1,10 +1,26 @@
 #pragma once
-#include "Obj.h"
-class Guided_Bullet :
-	public CObj
+#include "Bullet.h"
+
+class CObj;
+
+class CGuided_Bullet :
+	public CBullet
 {
 public:
-	Guided_Bullet();
-	~Guided_Bullet();
+	CGuided_Bullet();
+	~CGuided_Bullet();
+
+	// CBullet을(를) 통해 상속됨
+	virtual HRESULT Initialize() override;
+	virtual int Update() override;
+	virtual void Late_Update() override;
+	virtual void Render(HDC _DC) override;
+	virtual void Release() override;
+
+	CObj* Find_Closest();
+
+private:
+	float m_fAngle;
+	CObj* m_pTarget;
 };
 

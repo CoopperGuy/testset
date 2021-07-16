@@ -79,3 +79,29 @@ void CObjMgr::Release()
 	}
 }
 
+CObj* CObjMgr::Get_Target(CObj * _pObject, OBJID::ID _eID)
+{
+	if (m_listObj[_eID].empty())
+	{
+		return nullptr;
+	}
+
+	CObj* pTarget = nullptr;
+	float fDistance = 0.f;
+
+	for (auto& Dst : m_listObj[_eID])
+	{
+		float fX = Dst->Get_Pos().x - _pObject->Get_Pos().x;
+		float fY = Dst->Get_Pos().y - _pObject->Get_Pos().y;
+		float fDia = sqrtf(fX * fX + fY * fY);
+
+		if (fDistance > fDia || !pTarget)
+		{
+			pTarget = Dst;
+			fDistance = fDia;
+		}
+	}
+
+	return pTarget;
+}
+
