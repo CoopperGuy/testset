@@ -82,11 +82,11 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC _DC)
 {
-	MoveToEx(_DC, m_vQ[0].x, m_vQ[0].y, nullptr);
+	MoveToEx(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y, nullptr);
 
 	for (int i = 1; i < 4; ++i)
-		LineTo(_DC, m_vQ[i].x, m_vQ[i].y);
-	LineTo(_DC, m_vQ[0].x, m_vQ[0].y);
+		LineTo(_DC, (int)m_vQ[i].x, (int)m_vQ[i].y);
+	LineTo(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y);
 
 }
 

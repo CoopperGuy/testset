@@ -20,6 +20,13 @@ public:
 	bool Collision_Line(float _x, float _y1, float* _y, bool* _bG);
 
 public:
+	void Picking_Line();
+
+public:
+	void Save_Line();
+	void Load_Line();
+
+public:
 	static CLineMgr* Get_Instance()
 	{
 		if (!m_pInstance)
