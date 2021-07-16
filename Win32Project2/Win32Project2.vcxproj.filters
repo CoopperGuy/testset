@@ -67,6 +67,9 @@
     <Filter Include="소스 파일\01.Obj\03.Monster\01.TestMon">
       <UniqueIdentifier>{b825cb42-40a0-442a-8b18-f40fe7df9531}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\03.Monster\Monster_Normal">
+      <UniqueIdentifier>{94345540-2897-4bd0-acdb-6065394ba785}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -126,6 +129,9 @@
     <ClInclude Include="ScrollMgr.h">
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
     </ClInclude>
+    <ClInclude Include="Normal_Monster.h">
+      <Filter>소스 파일\01.Obj\03.Monster\Monster_Normal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Win32Project2.cpp">
@@ -175,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="ScrollMgr.cpp">
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Normal_Monster.cpp">
+      <Filter>소스 파일\01.Obj\03.Monster\Monster_Normal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

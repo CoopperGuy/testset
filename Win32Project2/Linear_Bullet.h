@@ -1,17 +1,22 @@
 #pragma once
-#include "Monster.h"
-class CNormal_Monster :
-	public CMonster
+#include "Obj.h"
+class Linear_Bullet :
+	public CObj
 {
 public:
-	CNormal_Monster();
-	~CNormal_Monster();
+	Linear_Bullet();
+	~Linear_Bullet();
 
-	// CMonster을(를) 통해 상속됨
+	// CObj을(를) 통해 상속됨
 	virtual HRESULT Initialize() override;
 	virtual int Update() override;
 	virtual void Late_Update() override;
 	virtual void Render(HDC _DC) override;
 	virtual void Release() override;
+
+	void Set_Position(const D3DXVECTOR3& _vPos);
+
+private:
+
 };
 
