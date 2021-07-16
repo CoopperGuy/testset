@@ -94,8 +94,8 @@ void CEditor::Update()
 		m_eID = EDITID::MONSTERDEL;
 	if (CKeyMgr::Get_Instance()->Key_Down('R'))
 		m_eID = EDITID::TESTMON;
-	if (CKeyMgr::Get_Instance()->Key_Down('T'))
-		;
+//	if (CKeyMgr::Get_Instance()->Key_Down('T'))
+		
 
 
 	if (CKeyMgr::Get_Instance()->Key_Down('S'))

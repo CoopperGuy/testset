@@ -5,7 +5,7 @@
 #include "KeyMgr.h"
 #include "ObjMgr.h"
 #include "LineMgr.h"
-
+#include "ScrollMgr.h"
 class CObj
 {
 public:
@@ -24,6 +24,11 @@ public:
 	const bool& Get_Dead() { return m_bDead; }
 	const INFO& Get_Info() { return m_tInfo; }
 	const OBJINFO& Get_ObjInfo() { return m_tObjInfo; }
+public:
+	void Set_Dead() { m_bDead = OBJ_DEAD; }
+	void Set_Score(int _Point) { m_tObjInfo.score += _Point; }
+public:
+	int Get_Score() { return m_tObjInfo.score; }
 
 public:
 	void Set_Pos(float _fx, float _fy) { m_tInfo.vPos = { _fx, _fy, 0.f }; }

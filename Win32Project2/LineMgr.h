@@ -17,7 +17,7 @@ public:
 	void Release();
 
 public:
-	bool Collision_Line(float _x, float _y1, float* _y, bool* _bG,float& _inclination);
+	bool Collision_Line(float _x, float _y1, float* _y, bool* _bG);
 
 public:
 	void Picking_Line();
