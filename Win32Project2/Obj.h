@@ -6,6 +6,7 @@
 #include "ObjMgr.h"
 #include "LineMgr.h"
 #include "ScrollMgr.h"
+#include "Graphic_Device.h"
 
 //매니저 추가하면 이쪽에다가 
 //대부분의 자식객체가 쓰는 것도 여기다가.

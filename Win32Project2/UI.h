@@ -4,6 +4,7 @@
 #define __CUI_H__
 #include "ObjMgr.h"
 #include "Player.h"
+#include "Graphic_Device.h"
 
 class CUI
 {

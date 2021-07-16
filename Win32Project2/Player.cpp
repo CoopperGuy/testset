@@ -26,7 +26,7 @@ HRESULT CPlayer::Initialize()
 	m_tObjInfo.agl = 0.f;
 
 	m_dwTime = GetTickCount();
-	m_dwDelayTime = 100;
+	m_dwDelayTime = 500;
 	m_vP[0] = { -m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[1] = { m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[2] = { m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
@@ -51,24 +51,28 @@ int CPlayer::Update()
 	{
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
 	}
-	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT)) {
-		m_tInfo.vPos.x -= m_tObjInfo.spd;
-	}
-	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT)) {
-		m_tInfo.vPos.x += m_tObjInfo.spd;
-	}
-	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP)) {
-		m_tInfo.vPos.y -= m_tObjInfo.spd;
-	}
-	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN)) {
-		m_tInfo.vPos.y += m_tObjInfo.spd;
-	}
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	//if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT)) {
+	//	m_tInfo.vPos.x -= m_tObjInfo.spd;
+	//}
+	//if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT)) {
+	//	m_tInfo.vPos.x += m_tObjInfo.spd;
+	//}
+	//if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP)) {
+	//	m_tInfo.vPos.y -= m_tObjInfo.spd;
+	//}
+	//if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN)) {
+	//	m_tInfo.vPos.y += m_tObjInfo.spd;
+	//}
+	//m_tInfo.vPos.x += m_tObjInfo.spd;
+	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_SPACE))
 	{
 		if (!m_tG.m_bJump)
 			m_tG.m_fJumpY = m_tInfo.vPos.y;
 
 		m_tG.m_bJump = true;
+	}
+	if (CKeyMgr::Get_Instance()->Key_Down('A')) {
+		Shut_Bullet();
 	}
 	Drop();
 	Jumping();
@@ -97,7 +101,7 @@ void CPlayer::Render(HDC _DC)
 void CPlayer::Release()
 {
 }
-
+/*움직임 , 화면 관리 함수 */
 void CPlayer::Jumping()
 {
 	float fY = 0.f;
@@ -149,28 +153,6 @@ void CPlayer::Jumping()
 
 }
 
-CObj * CPlayer::Create()
-{
-	CPlayer* pInstance = new CPlayer;
-	if (FAILED(pInstance->Initialize()))
-	{
-		Safe_Delete(pInstance);
-		return nullptr;
-	}
-	return pInstance;
-}
-
-CPlayer::BULLET CPlayer::getItemType(CItem::ITEMTAG _tag)
-{
-	switch (_tag)
-	{
-	case CItem::ITEM_POINT:
-		break;
-	case CItem::ITEM_END:
-		break;
-	}
-	return BULLET(0,0, BULLETTYPE::BULLET_END);
-}
 
 void CPlayer::Drop()
 {
@@ -182,24 +164,59 @@ void CPlayer::Drop()
 
 void CPlayer::Offset()
 {
-	int OffsetX = (WINCX>>1) - 200;
+	int OffsetX = (WINCX>>1);
 	int ScrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 
 	if (OffsetX < (m_tInfo.vPos.x + ScrollX))
-		CScrollMgr::Get_Instance()->Set_ScrollX(OffsetX - (m_tInfo.vPos.x + ScrollX));
+		CScrollMgr::Get_Instance()->Set_ScrollX(OffsetX - (m_tInfo.vPos.x + 200 + ScrollX));
 	if (OffsetX > (m_tInfo.vPos.x + ScrollX))
-		CScrollMgr::Get_Instance()->Set_ScrollX(OffsetX - (m_tInfo.vPos.x + ScrollX));
+		CScrollMgr::Get_Instance()->Set_ScrollX(OffsetX - (m_tInfo.vPos.x + 200 + ScrollX));
+}
+/*움직임 , 화면 관리 함수 */
+
+/*총알 관련 함수*/
+void CPlayer::Shut_Bullet()
+{
+	BULLETTYPE _id = Inven[cur_Weapon].BulletID;
+	switch (_id)
+	{
+	case CPlayer::BULLET_MELEE:
+		break;
+	case CPlayer::BULLET_NORMAL:
+		if (Inven[cur_Weapon].cur_magazine > 0) {
+			Inven[cur_Weapon].cur_magazine--;
+		}
+		break;
+	case CPlayer::BULLET_GUIDE:
+		if (Inven[cur_Weapon].cur_magazine > 0) {
+			Inven[cur_Weapon].cur_magazine--;
+		}
+		break;
+	}
+}
+
+CPlayer::BULLET CPlayer::getItemType(CItem::ITEMTAG _tag)
+{
+	switch (_tag)
+	{
+	case CItem::ITEM_GUN:
+		return BULLET(10,50,CPlayer::BULLETTYPE::BULLET_NORMAL);
+	case CItem::ITEM_GUIDE:
+		return BULLET(30, 200, CPlayer::BULLETTYPE::BULLET_GUIDE);
+		break;
+	}
+	return BULLET(0, 0, BULLETTYPE::BULLET_END);
 }
 
 void CPlayer::Set_Bullet(CItem::ITEMTAG _tag)
 {
 	bool isIn=false;
-	if (_tag == CItem::ITEMTAG::ITEM_POINT)
+	if (_tag == CItem::ITEMTAG::ITEM_POINT)//포인트 아이템이면 그냥 ㅂㅂ
 		return;
 	if (Inven.size() < MAX_INVEN) {
 		for (auto& iter : Inven) {
 			if (iter.BulletID == _tag) {
-				//추가
+				iter = iter + getItemType(_tag);//연산자 오버로딩
 				isIn = true;
 				break;
 			}
@@ -209,4 +226,20 @@ void CPlayer::Set_Bullet(CItem::ITEMTAG _tag)
 		}
 	}
 
+}
+/*총알 관련 함수*/
+
+
+
+
+
+CObj * CPlayer::Create()
+{
+	CPlayer* pInstance = new CPlayer;
+	if (FAILED(pInstance->Initialize()))
+	{
+		Safe_Delete(pInstance);
+		return nullptr;
+	}
+	return pInstance;
 }

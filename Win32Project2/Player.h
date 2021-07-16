@@ -13,10 +13,17 @@ class CPlayer :
 	public CObj
 {
 public:
-	enum BULLETTYPE{ BULLET_NORMAL,BULLET_END};
+	enum BULLETTYPE{ BULLET_MELEE,BULLET_NORMAL,BULLET_GUIDE,BULLET_END};
 	typedef struct tagBullet {
 		tagBullet(int _c,int _m,BULLETTYPE _id)
 			: cur_magazine(_c),max_magazine(_m),BulletID(_id){
+		}
+		tagBullet operator+(tagBullet b1) {
+			BulletID = b1.BulletID;
+			cur_magazine += b1.cur_magazine;
+			if (cur_magazine > max_magazine)
+				cur_magazine = max_magazine;
+			return *this;
 		}
 		int cur_magazine;
 		int max_magazine;
@@ -36,7 +43,7 @@ public:
 	void Jumping();
 	void Drop();
 	void Offset();
-	static CObj* Create();
+	void Shut_Bullet();
 public:
 	CPlayer::BULLET getItemType(CItem::ITEMTAG _tag);
 public:
@@ -45,6 +52,8 @@ public:
 public:
 	int Get_Point() { return m_tObjInfo.score; }
 	const vector<BULLET>& Get_Inven()const { return Inven; }
+public:
+	static CObj* Create();
 private:
 	template<typename T>
 	CObj* Create_Bullet(int _y)

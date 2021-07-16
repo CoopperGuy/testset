@@ -9,7 +9,7 @@ class CItem :
 	public CObj
 {
 public:
-	enum ITEMTAG{ITEM_POINT,ITEM_END};
+	enum ITEMTAG{ITEM_POINT,ITEM_GUN,ITEM_GUIDE,ITEM_END};
 public:
 	CItem();
 	virtual ~CItem();
