@@ -362,9 +362,10 @@ void CPlayer::Set_Bullet(CItem::ITEMTAG _tag)
 
 }
 
-CObj * CPlayer::Create()
+CObj * CPlayer::Create(float _x,float _y)
 {
 	CPlayer* pInstance = new CPlayer;
+	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);

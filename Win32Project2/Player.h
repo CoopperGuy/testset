@@ -62,7 +62,7 @@ public:
 	bool Get_Immortal() { return isImmortal; }
 	const vector<BULLET>& Get_Inven()const { return Inven; }
 public:
-	static CObj* Create();
+	static CObj* Create(float _x, float _y);
 private:
 	template<typename T>
 	CObj* Create_Bullet(int _y)
