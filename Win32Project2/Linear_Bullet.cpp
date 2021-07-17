@@ -8,6 +8,7 @@ CLinear_Bullet::CLinear_Bullet()
 
 CLinear_Bullet::~CLinear_Bullet()
 {
+	Release();
 }
 
 HRESULT CLinear_Bullet::Initialize()
@@ -82,4 +83,16 @@ void CLinear_Bullet::Render(HDC _DC)
 
 void CLinear_Bullet::Release()
 {
+}
+
+CObj * CLinear_Bullet::Create(float _x, float _y)
+{
+	CLinear_Bullet* pInstance = new CLinear_Bullet;
+	pInstance->Set_Pos(_x, _y);
+	if (FAILED(pInstance->Initialize()))
+	{
+		Safe_Delete(pInstance);
+		return nullptr;
+	}
+	return pInstance;
 }

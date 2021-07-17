@@ -350,9 +350,9 @@ void CObjMgr::Load_MapObj()
 
 }
 
-CObj * CObjMgr::Get_Target(CObj * _pObject, OBJID::ID _eID)
+CObj* CObjMgr::Get_TargetMonster(CObj * _pObject)
 {
-	if (m_listObj[_eID].empty())
+	if (m_listObj[OBJID::MONSTER].empty())
 	{
 		return nullptr;
 	}
@@ -360,16 +360,19 @@ CObj * CObjMgr::Get_Target(CObj * _pObject, OBJID::ID _eID)
 	CObj* pTarget = nullptr;
 	float fDistance = 0.f;
 
-	for (auto& Dst : m_listObj[_eID])
+	for (auto& Dst : m_listObj[OBJID::MONSTER])
 	{
-		float fX = Dst->Get_Pos().x - _pObject->Get_Pos().x;
-		float fY = Dst->Get_Pos().y - _pObject->Get_Pos().y;
-		float fDia = sqrtf(fX * fX + fY * fY);
-
-		if (fDistance > fDia || !pTarget)
+		if (!(static_cast<CMonster*>(Dst)->IsHit()))
 		{
-			pTarget = Dst;
-			fDistance = fDia;
+			float fX = Dst->Get_Pos().x - _pObject->Get_Pos().x;
+			float fY = Dst->Get_Pos().y - _pObject->Get_Pos().y;
+			float fDia = sqrtf(fX * fX + fY * fY);
+
+			if (fDistance > fDia || !pTarget)
+			{
+				pTarget = Dst;
+				fDistance = fDia;
+			}
 		}
 	}
 

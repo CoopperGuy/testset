@@ -11,6 +11,7 @@ CGuided_Bullet::CGuided_Bullet()
 
 CGuided_Bullet::~CGuided_Bullet()
 {
+	Release();
 }
 
 HRESULT CGuided_Bullet::Initialize()
@@ -43,7 +44,7 @@ int CGuided_Bullet::Update()
 	{
 		return OBJ_DEAD;
 	}
-	CObj* m_pTarget = CObjMgr::Get_Instance()->Get_Target(this, OBJID::MONSTER);
+	CObj* m_pTarget = CObjMgr::Get_Instance()->Get_TargetMonster(this);
 
 	if (m_pTarget == nullptr)
 	{
@@ -104,4 +105,16 @@ void CGuided_Bullet::Render(HDC _DC)
 
 void CGuided_Bullet::Release()
 {
+}
+
+CObj * CGuided_Bullet::Create(float _x, float _y)
+{
+	CGuided_Bullet* pInstance = new CGuided_Bullet;
+	pInstance->Set_Pos(_x, _y);
+	if (FAILED(pInstance->Initialize()))
+	{
+		Safe_Delete(pInstance);
+		return nullptr;
+	}
+	return pInstance;
 }

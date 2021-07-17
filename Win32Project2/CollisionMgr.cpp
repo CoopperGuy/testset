@@ -32,9 +32,11 @@ void CCollisionMgr::Collision_Player_Monster(list<CObj*> _Dst, list<CObj*> _Src)
 		for (auto& siter : _Src) {
 			if (static_cast<CPlayer*>(diter)->Get_Immortal())
 				return;
-			if (Collision_OBB(diter, siter)) {
-				static_cast<CPlayer*>(diter)->Set_Immortal();
-				diter->Set_Life(-1);
+			if (!static_cast<CMonster*>(siter)->IsHit()) {
+				if (Collision_OBB(diter, siter)) {
+					static_cast<CPlayer*>(diter)->Set_Immortal();
+					diter->Set_Life(-1);
+				}
 			}
 		}
 	}
@@ -46,10 +48,13 @@ void CCollisionMgr::COllision_Bulllet_Monster(list<CObj*> _Dst, list<CObj*> _src
 	{
 		for (auto& siter : _src)
 		{
-			if (Collision_OBB(diter, siter))
+			if (!static_cast<CMonster*>(siter)->IsHit())
 			{
-				diter->Set_Dead();
-				static_cast<CMonster*>(siter)->Set_Hit();
+				if (Collision_OBB(diter, siter))
+				{
+					diter->Set_Dead();
+					static_cast<CMonster*>(siter)->Set_Hit();
+				}
 			}
 		}
 	}

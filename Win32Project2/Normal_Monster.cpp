@@ -7,7 +7,6 @@ CNormal_Monster::CNormal_Monster()
 	: m_iDrawID(0)
 	, m_iMaxDrawID(3)
 {
-	m_eID = EDITID::NORMAL_MONSTER;
 }
 
 CNormal_Monster::~CNormal_Monster()
@@ -19,7 +18,7 @@ HRESULT CNormal_Monster::Initialize()
 {
 	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Monster/Normal_Monster/Normal_Monster%d.png", L"Normal_Monster", L"Run", 4);
 
-	m_tInfo.vPos = { 800.f, 400.f, 0.f };
+	//m_tInfo.vPos = { 800.f, 400.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 85.f, 0.f);
 
@@ -108,4 +107,16 @@ void CNormal_Monster::Render(HDC _DC)
 
 void CNormal_Monster::Release()
 {
+}
+
+CObj* CNormal_Monster::Create(float _x, float _y)
+{
+	CNormal_Monster* pInstance = new CNormal_Monster;
+	pInstance->Set_Pos(_x, _y);
+	if (FAILED(pInstance->Initialize()))
+	{
+		Safe_Delete(pInstance);
+		return nullptr;
+	}
+	return pInstance;
 }

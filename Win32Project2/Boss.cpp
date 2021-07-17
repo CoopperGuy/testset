@@ -9,6 +9,7 @@ CBoss::CBoss()
 
 CBoss::~CBoss()
 {
+	Release();
 }
 
 HRESULT CBoss::Initialize()
@@ -31,4 +32,16 @@ void CBoss::Render(HDC _DC)
 
 void CBoss::Release()
 {
+}
+
+CObj * CBoss::Create(float _x, float _y)
+{
+	CBoss* pInstance = new CBoss;
+	pInstance->Set_Pos(_x, _y);
+	if (FAILED(pInstance->Initialize()))
+	{
+		Safe_Delete(pInstance);
+		return nullptr;
+	}
+	return pInstance;
 }

@@ -14,6 +14,8 @@ public:
 	virtual void Render(HDC _DC) override;
 	virtual void Release() override;
 
+	static CObj* Create(float _x, float _y);
+
 private:
 
 };

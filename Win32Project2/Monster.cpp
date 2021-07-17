@@ -7,6 +7,7 @@ CMonster::CMonster()
 	, m_eState(RUN)
 	, m_tG(50.f, 0.f, 0.f, false, false)
 	, m_fAngle(0.f)
+	, m_bIsHit(false)
 {
 }
 

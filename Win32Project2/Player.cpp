@@ -114,11 +114,11 @@ int CPlayer::Update()
 	////총알 테스트용
 	//if (CKeyMgr::Get_Instance()->Key_Down('Z'))
 	//{
-	//	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
+	//	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
 	//}
 	//if (CKeyMgr::Get_Instance()->Key_Down('X'))
 	//{
-	//	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
+	//	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
 	//}
 
 	Drop();
@@ -294,13 +294,13 @@ void CPlayer::Shut_Bullet()
 	case CPlayer::BULLET_NORMAL:
 		if (Inven[cur_Weapon].cur_magazine > 0) {
 			Inven[cur_Weapon].cur_magazine--;
-			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
+			CObjMgr::Get_Instance()->Add_Object(CLinear_Bullet::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
 		}
 		break;
 	case CPlayer::BULLET_GUIDE:
 		if (Inven[cur_Weapon].cur_magazine > 0) {
 			Inven[cur_Weapon].cur_magazine--;
-			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
+			CObjMgr::Get_Instance()->Add_Object(CGuided_Bullet::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
 		}
 		break;
 	}
