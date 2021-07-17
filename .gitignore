@@ -1,44 +1,15 @@
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-# Visual C++ cache files
-ipch/
-*.aps
-*.ncb
-*.opendb
-*.opensdf
-*.sdf
-*.cachefile
-*.VC.db
-*.VC.VC.opendb
-*.db
-Win32Project2.VC.db
+Win32Project2/Debug/vc140.idb
+Win32Project2/Debug/vc140.pdb
+Win32Project2/Debug/Win32Project2.log
+Win32Project2/Debug/Win32Project2.tlog/CL.read.1.tlog
+Win32Project2/Debug/Win32Project2.tlog/CL.write.1.tlog
+Win32Project2/Debug/Win32Project2.tlog/link.command.1.tlog
+Win32Project2/Debug/Win32Project2.tlog/link.read.1.tlog
+Win32Project2/Debug/Win32Project2.tlog/link.write.1.tlog
+Win32Project2/Debug/Win32Project2.tlog/rc.read.1.tlog
+Win32Project2/Debug/Win32Project2.tlog/rc.write.1.tlog
+Win32Project2/Debug/Win32Project2.tlog/Win32Project2.lastbuildstate
+.vs/Win32Project2/v14/.suo
+Debug/Win32Project2.ilk
+Debug/Win32Project2.pdb

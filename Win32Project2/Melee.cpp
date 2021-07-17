@@ -23,13 +23,15 @@ HRESULT CMelee::Initialize()
 	m_tObjInfo.agl = 0.f;
 
 	m_dwTime = GetTickCount();
-	m_dwDelayTime = 20;
+	m_dwDelayTime = 40;
 
-	m_vP[0] = { -m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f };
-	m_vP[1] = { m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f };
-	m_vP[2] = { m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
-	m_vP[3] = { -m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
 
+	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Bullet/Melee/Melee0%d.png", L"Bullet", L"Melee", 4)))
+		return S_FALSE;
+	m_tFrame.CurID = 0;
+	m_tFrame.EndId = 4;
+	m_tFrame.dwDelayTime = 10;
+	m_tFrame.m_pFrameKey = L"Melee";
 	return S_OK;
 
 }
@@ -48,10 +50,6 @@ int CMelee::Update()
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
 	matWorld = matScale * matRotZ * matTrans;
 
-	for (int i = 0; i < 4; ++i)
-	{
-		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
-	}
 
 
 	return OBJ_NOEVENT;
@@ -65,12 +63,22 @@ void CMelee::Late_Update()
 
 void CMelee::Render(HDC _DC)
 {
+	Update_State();
 	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
+	D3DXMATRIX matScale, matTrans;
+	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
+	D3DXMatrixTranslation(&matTrans, (m_tInfo.vPos.x + ScrollX), m_tInfo.vPos.y, 0.f);
+	matWorld = matScale * matTrans;
+	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Bullet", m_tFrame.m_pFrameKey, m_tFrame.CurID);
+	float fCenterX = 0;
+	float fCenterY = 0;
+	if (pTexInfo != nullptr) {
+		fCenterX = pTexInfo->tImageInfo.Width >> 1;
+		fCenterY = pTexInfo->tImageInfo.Height;
+		CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+		CGraphic_Device::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	for (int i = 1; i < 4; ++i)
-		LineTo(_DC, m_vQ[i].x + ScrollX, m_vQ[i].y);
-	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
+	}
 }
 
 void CMelee::Release()
