@@ -16,13 +16,15 @@ CJump_Monster::~CJump_Monster()
 
 HRESULT CJump_Monster::Initialize()
 {
+	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::TEX_ID::SINGLE_TEX, L"../Texture/Monster/Jump_Monster/Jump_Monster.png", L"Jump_Monster");
+
 	m_tInfo.vPos = { 800.f, 500.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(50.f, 75.f, 0.f);
 
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
-	m_tObjInfo.spd = 3.f;
+	m_tObjInfo.spd = 1.f;
 	m_tObjInfo.agl = 0.f;
 	/*
 	m_dwTime = GetTickCount();
@@ -61,14 +63,16 @@ int CJump_Monster::Update()
 			m_tG.m_bJump = true;
 
 		}
-		//m_fAngle -= 5.f;
+		m_fAngle -= 5.f;
 		Hit_Jump();
 	}
 
-	D3DXMATRIX matScale, matRotZ, matTrans, matWorld;
+	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+
+	D3DXMATRIX matScale, matRotZ, matTrans;
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(m_fAngle));
-	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x + ScrollX, m_tInfo.vPos.y, m_tInfo.vPos.z);
 	matWorld = matScale * matRotZ * matTrans;
 
 	for (int i = 0; i < 4; ++i)
@@ -91,14 +95,13 @@ void CJump_Monster::Late_Update()
 void CJump_Monster::Render(HDC _DC)
 {
 	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
+	
+	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Jump_Monster");
+	float fCenterX = float(pTexInfo->tImageInfo.Width >> 1);
+	float fCenterY = float(pTexInfo->tImageInfo.Height >> 1);
 
-	for (int i = 1; i < 4; ++i)
-	{
-		LineTo(_DC, m_vQ[i].x + ScrollX, m_vQ[i].y);
-	}
-
-	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
+	CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+	CGraphic_Device::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
 void CJump_Monster::Release()

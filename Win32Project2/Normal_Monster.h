@@ -15,6 +15,7 @@ public:
 	virtual void Release() override;
 
 private:
-
+	int m_iDrawID;
+	int m_iMaxDrawID;
 };
 

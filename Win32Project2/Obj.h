@@ -49,6 +49,8 @@ protected:
 	DWORD m_dwDelayTime;
 	bool	m_bDead;
 
+	D3DXMATRIX matWorld;
+
 };
 
 #endif // !__COBJ_H__

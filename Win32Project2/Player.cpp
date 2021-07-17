@@ -90,6 +90,17 @@ int CPlayer::Update()
 				cur_Weapon = i;
 		}
 	}
+
+	////총알 테스트용
+	//if (CKeyMgr::Get_Instance()->Key_Down('Z'))
+	//{
+	//	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
+	//}
+	//if (CKeyMgr::Get_Instance()->Key_Down('X'))
+	//{
+	//	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
+	//}
+
 	Drop();
 	Jumping();
 	Offset();
