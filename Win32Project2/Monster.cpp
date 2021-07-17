@@ -7,6 +7,7 @@ CMonster::CMonster()
 	, m_eState(RUN)
 	, m_tG(50.f, 0.f, 0.f, false, false)
 	, m_fAngle(0.f)
+	, m_bIsHit(false)
 {
 }
 
@@ -17,8 +18,8 @@ CMonster::~CMonster()
 
 bool CMonster::IsOutside()
 {
-	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-	if (m_tInfo.vPos.x < ScrollX
+	D3DXVECTOR3 _player = CObjMgr::Get_Instance()->Get_Player()->Get_Pos();
+	if (m_tInfo.vPos.x < _player.x - 500
 		|| m_tInfo.vPos.y < 0 || m_tInfo.vPos.y > WINCY)
 	{
 		return true;

@@ -30,7 +30,7 @@ public:
 	void Load_MapObj();
 
 public:
-	CObj* Get_Target(CObj* _pObject, OBJID::ID _eID);
+	CObj* Get_TargetMonster(CObj* _pObject);
 
 public:
 	static CObjMgr* Get_Instance()

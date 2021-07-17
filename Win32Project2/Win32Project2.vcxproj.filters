@@ -160,6 +160,9 @@
     <Filter Include="소스 파일\01.Obj\05.MapObj\DownObj\MoveTri">
       <UniqueIdentifier>{1a121170-1cc0-45e0-b07d-341f2bff3afe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\03.Monster\Boss">
+      <UniqueIdentifier>{86a1ec0b-56e6-49be-9623-5d594551d86a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -318,6 +321,9 @@
     <ClInclude Include="Totem.h">
       <Filter>소스 파일\01.Obj\05.MapObj\DownObj\Totem</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>소스 파일\01.Obj\03.Monster\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -466,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="Totem.cpp">
       <Filter>소스 파일\01.Obj\05.MapObj\DownObj\Totem</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>소스 파일\01.Obj\03.Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,8 @@ public:
 	virtual void Release() PURE;
 
 	bool IsOutside();
-	void Set_Hit() { m_eState = HIT; }
+	bool IsHit() { return m_bIsHit; }
+	void Set_Hit() { m_eState = HIT; m_bIsHit = true; }
 	void Hit_Jump();
 
 public:
@@ -31,6 +32,7 @@ public:
 protected:
 	EDITID::ID		m_eID;
 
+	bool			m_bIsHit;
 	STATE			m_eState;
 	GRAVITY			m_tG;
 	float			m_fAngle;

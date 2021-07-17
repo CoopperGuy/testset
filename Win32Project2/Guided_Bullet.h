@@ -2,6 +2,7 @@
 #include "Bullet.h"
 
 class CObj;
+class CMonster;
 
 class CGuided_Bullet :
 	public CBullet
@@ -16,6 +17,8 @@ public:
 	virtual void Late_Update() override;
 	virtual void Render(HDC _DC) override;
 	virtual void Release() override;
+
+	static CObj* Create(float _x, float _y);
 
 private:
 	float m_fAngle;
