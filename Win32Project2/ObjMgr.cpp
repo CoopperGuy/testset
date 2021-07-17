@@ -4,6 +4,7 @@
 #include "Obj.h"
 #include "Player.h"
 #include "Monster.h"
+#include "MapObj.h"
 
 #include "MonObjMgr.h"
 #include "MapObjMgr.h"
@@ -93,6 +94,8 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 
 	switch (_editid)
 	{
+	
+	//Player
 	case EDITID::PLAYER:
 	{
 		if (!m_listObj[OBJID::PLAYER].empty())
@@ -100,11 +103,14 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 			Safe_Delete(m_listObj[OBJID::PLAYER].front());
 			m_listObj[OBJID::PLAYER].clear();
 		}
-		CObj* pObj = CAbstractFactory<CPlayer>::Create((float)pt.x, (float)pt.y);
+		CObj* pObj = CAbstractFactory<CPlayer>::Create((float)x, (float)y);
 		m_listObj[OBJID::PLAYER].emplace_back(pObj);
 	}
 	break;
-	case EDITID::TESTMON:
+
+	// Monster
+	case EDITID::NORMAL_MONSTER:
+	case EDITID::JUMP_MONSTER:
 	{
 		CObj* pObj = CMonObjMgr::Get_Instance()->Create_Monster(_editid, (float)x, (float)y);
 		m_listObj[OBJID::MONSTER].emplace_back(pObj);
@@ -118,6 +124,31 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 			{
 				Safe_Delete(*iter);
 				m_listObj[OBJID::MONSTER].erase(iter);
+				return;
+			}
+		}
+	}
+	break;
+
+	// MapObj
+	case EDITID::ID::MAPTOTEM:
+		y += 50;
+	case EDITID::ID::MAPSWORD:
+	case EDITID::ID::MAPMOVETRI:
+	case EDITID::ID::MAPTRI:
+	{
+		CObj* pObj = CMapObjMgr::Get_Instance()->Create_MapObj(_editid, (float)x, (float)y);
+		m_listObj[OBJID::MAPOBJ].emplace_back(pObj);
+	}
+		break;
+	case EDITID::MAPDEL:
+	{
+		for (auto& iter = m_listObj[OBJID::MAPOBJ].begin(); iter != m_listObj[OBJID::MAPOBJ].end(); ++iter)
+		{
+			if (((*iter)->Get_Pos().x == x) && (((*iter)->Get_Pos().y == y) || ((*iter)->Get_Pos().y == y +50 )))
+			{
+				Safe_Delete(*iter);
+				m_listObj[OBJID::MAPOBJ].erase(iter);
 				return;
 			}
 		}
@@ -175,6 +206,7 @@ void CObjMgr::Load_Player()
 			break;
 
 		CObj* pObj = CAbstractFactory<CPlayer>::Create(tInfo.vPos.x, tInfo.vPos.y);
+		pObj->Set_Info(tInfo);
 		pObj->Set_ObjInfo(tObjInfo);
 
 		m_listObj[OBJID::PLAYER].emplace_back(pObj);
@@ -219,8 +251,6 @@ void CObjMgr::Load_Monster()
 		return;
 	}
 
-	Release();
-
 	DWORD		dwByte = 0;
 	EDITID::ID	eID = EDITID::END;
 	INFO		tInfo = {};
@@ -235,23 +265,12 @@ void CObjMgr::Load_Monster()
 		if (0 == dwByte)
 			break;
 
-		CObj* pObj = nullptr;
+		CObj* pObj = CMonObjMgr::Get_Instance()->Create_Monster(eID, tInfo.vPos.x, tInfo.vPos.y);
 
-		switch (eID)
-		{
-		case EDITID::TESTMON:
-			pObj = CMonObjMgr::Get_Instance()->Create_Monster(eID, tInfo.vPos.x, tInfo.vPos.y);
-			break;
-		case EDITID::MONSTER2:
-			break;
-		case EDITID::END:
-			break;
-		default:
-			break;
-		}
 		if (!pObj)
 			return;
 
+		pObj->Set_Info(tInfo);
 		pObj->Set_ObjInfo(tObjInfo);
 
 		m_listObj[OBJID::MONSTER].emplace_back(pObj);
@@ -259,6 +278,76 @@ void CObjMgr::Load_Monster()
 
 	CloseHandle(hFile);
 	MessageBox(g_hWnd, L"Monster 불러오기 성공!", L"성공", MB_OK);
+}
+
+void CObjMgr::Save_MapObj()
+{
+	HANDLE hFile = CreateFile(L"../Data/MapObj.dat", GENERIC_WRITE
+		, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+	{
+		MessageBox(g_hWnd, L"MapObj 저장 실패!", L"실패", MB_OK);
+		return;
+	}
+
+	DWORD dwByte = 0;
+
+	for (auto& pMapObj : m_listObj[OBJID::MAPOBJ])
+	{
+		WriteFile(hFile, &(static_cast<CMapObj*>(pMapObj))->Get_ID(), sizeof(EDITID::ID), &dwByte, NULL);
+		WriteFile(hFile, &pMapObj->Get_Info(), sizeof(INFO), &dwByte, NULL);
+		WriteFile(hFile, &pMapObj->Get_Time(), sizeof(DWORD), &dwByte, NULL);
+		WriteFile(hFile, &pMapObj->Get_Delaytime(), sizeof(DWORD), &dwByte, NULL);
+	}
+	CloseHandle(hFile);
+	MessageBox(g_hWnd, L"MapObj 저장 성공!", L"성공", MB_OK);
+
+}
+
+void CObjMgr::Load_MapObj()
+{
+	HANDLE hFile = CreateFile(L"../Data/MapObj.dat", GENERIC_READ
+		, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+	{
+		MessageBox(g_hWnd, L"MapObj 불러오기 실패!", L"실패", MB_OK);
+		return;
+	}
+
+	Release();
+
+	DWORD		dwByte = 0;
+	EDITID::ID	eID = EDITID::END;
+	INFO		tInfo = {};
+	DWORD		dwTime = 0, dwDelay = 0;
+
+	while (true)
+	{
+		ReadFile(hFile, &eID, sizeof(EDITID::ID), &dwByte, NULL);
+		ReadFile(hFile, &tInfo, sizeof(INFO), &dwByte, NULL);
+		ReadFile(hFile, &dwTime, sizeof(DWORD), &dwByte, NULL);
+		ReadFile(hFile, &dwDelay, sizeof(DWORD), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+
+		CObj* pObj = CMapObjMgr::Get_Instance()->Create_MapObj(eID, tInfo.vPos.x, tInfo.vPos.y);
+
+		if (!pObj)
+			return;
+
+		pObj->Set_Info(tInfo);
+		pObj->Set_Time(dwTime);
+		pObj->Set_DelayTime(dwDelay);
+
+		m_listObj[OBJID::MAPOBJ].emplace_back(pObj);
+	}
+
+	CloseHandle(hFile);
+	MessageBox(g_hWnd, L"MapObj 불러오기 성공!", L"성공", MB_OK);
+
 }
 
 CObj * CObjMgr::Get_Target(CObj * _pObject, OBJID::ID _eID)

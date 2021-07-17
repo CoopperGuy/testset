@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "MonObjMgr.h"
 
-#include "TestMon.h"
+#include "Normal_Monster.h"
+#include "Jump_Monster.h"
 
 IMPLEMENT_SINGLETON(CMonObjMgr)
 CMonObjMgr::CMonObjMgr()
@@ -19,10 +20,11 @@ CObj * CMonObjMgr::Create_Monster(EDITID::ID _eID, float _fx,  float _fy)
 
 	switch (_eID)
 	{
-	case EDITID::TESTMON:
-		pObj = CAbstractFactory<CTestMon>::Create(_fx, _fy);
+	case EDITID::NORMAL_MONSTER:
+		pObj = CAbstractFactory<CNormal_Monster>::Create(_fx, _fy);
 		break;
-	case EDITID::MONSTER2:
+	case EDITID::JUMP_MONSTER:
+		pObj = CAbstractFactory<CJump_Monster>::Create(_fx, _fy);
 		break;
 	default:
 		break;

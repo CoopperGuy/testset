@@ -11,3 +11,20 @@ CMapObj::CMapObj()
 CMapObj::~CMapObj()
 {
 }
+
+void CMapObj::Set_Animation(int _StartID, int _EndID, bool _bReset)
+{
+	if (_bReset)
+	{
+		if (m_iDrawID < _EndID)
+			++m_iDrawID;
+		else
+			m_iDrawID = _StartID;
+	}
+	else
+	{
+		if (m_iDrawID < _EndID)
+			++m_iDrawID;
+	}
+
+}

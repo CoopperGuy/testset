@@ -8,6 +8,12 @@ class CMapObjMgr
 private:
 	CMapObjMgr();
 	~CMapObjMgr();
+
+public:
+	HRESULT Ready_MapObj();
+
+	CObj* Create_MapObj(EDITID::ID, float, float);
+
 };
 
 
