@@ -25,7 +25,7 @@ HRESULT CNormal_Monster::Initialize()
 
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
-	m_tObjInfo.spd = -1.f;
+	m_tObjInfo.spd = 1.f;
 	m_tObjInfo.agl = 0.f;
 	/*
 	m_dwTime = GetTickCount();
@@ -68,11 +68,11 @@ int CNormal_Monster::Update()
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(m_fAngle));
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x + ScrollX, m_tInfo.vPos.y, m_tInfo.vPos.z);
-	matWorld = matScale * matRotZ * matTrans;
+	m_matWorld = matScale * matRotZ * matTrans;
 
 	for (int i = 0; i < 4; ++i)
 	{
-		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
+		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &m_matWorld);
 	}
 
 	if (IsOutside())
@@ -101,7 +101,7 @@ void CNormal_Monster::Render(HDC _DC)
 	float fCenterX = float(pTexInfo->tImageInfo.Width >> 1);
 	float fCenterY = float(pTexInfo->tImageInfo.Height >> 1);
 
-	CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+	CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&m_matWorld);
 	CGraphic_Device::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 	
 }
