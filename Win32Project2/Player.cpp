@@ -313,7 +313,6 @@ void CPlayer::Drop()
 		m_tInfo.vPos.y = 100.f;
 		m_tInfo.vPos.x = 100.f;
 		m_tObjInfo.hp--;
-		//df
 	}
 }
 
