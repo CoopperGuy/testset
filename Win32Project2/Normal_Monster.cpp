@@ -18,6 +18,8 @@ HRESULT CNormal_Monster::Initialize()
 {
 	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Monster/Normal_Monster/Normal_Monster%d.png", L"Normal_Monster", L"Run", 4);
 
+	m_eID = EDITID::ID::NORMAL_MONSTER;
+
 	//m_tInfo.vPos = { 800.f, 400.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 85.f, 0.f);
@@ -89,6 +91,14 @@ void CNormal_Monster::Late_Update()
 void CNormal_Monster::Render(HDC _DC)
 {
 	//int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+
+	D3DXMATRIX matScale, matRotZ, matTrans;
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(m_fAngle));
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x + ScrollX, m_tInfo.vPos.y, m_tInfo.vPos.z);
+	m_matWorld = matScale * matRotZ * matTrans;
+
 
 	++m_iDrawID;
 	if (m_eState == HIT || m_iDrawID > m_iMaxDrawID)
@@ -112,11 +122,11 @@ void CNormal_Monster::Release()
 CObj* CNormal_Monster::Create(float _x, float _y)
 {
 	CNormal_Monster* pInstance = new CNormal_Monster;
-	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
+	pInstance->Set_Pos(_x, _y);
 	return pInstance;
 }

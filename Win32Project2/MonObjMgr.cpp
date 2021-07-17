@@ -21,11 +21,13 @@ CObj * CMonObjMgr::Create_Monster(EDITID::ID _eID, float _fx,  float _fy)
 	switch (_eID)
 	{
 	case EDITID::NORMAL_MONSTER:
-		pObj = CAbstractFactory<CNormal_Monster>::Create(_fx, _fy);
+		pObj = pObj = CNormal_Monster::Create(_fx, _fy);
 		break;
 	case EDITID::JUMP_MONSTER:
-		pObj = CAbstractFactory<CJump_Monster>::Create(_fx, _fy);
+		pObj = CJump_Monster::Create(_fx, _fy);
 		break;
+	case EDITID::BOSS:
+
 	default:
 		break;
 	}

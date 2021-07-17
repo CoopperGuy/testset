@@ -13,6 +13,7 @@ private:
 public:
 	void Add_Line(CLine* _line) { m_listLine.emplace_back(_line); }
 	void Initialize();
+	void Update();
 	void Render(HDC _DC);
 	void Release();
 

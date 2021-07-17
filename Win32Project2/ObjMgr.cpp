@@ -111,6 +111,8 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 	// Monster
 	case EDITID::NORMAL_MONSTER:
 	case EDITID::JUMP_MONSTER:
+		if (_editid == EDITID::JUMP_MONSTER)
+			y -= 20;
 	{
 		CObj* pObj = CMonObjMgr::Get_Instance()->Create_Monster(_editid, (float)x, (float)y);
 		m_listObj[OBJID::MONSTER].emplace_back(pObj);
@@ -120,7 +122,7 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 	{
 		for (auto& iter = m_listObj[OBJID::MONSTER].begin(); iter != m_listObj[OBJID::MONSTER].end(); ++iter)
 		{
-			if ((*iter)->Get_Pos().x == x && (*iter)->Get_Pos().y == y)
+			if ((*iter)->Get_Pos().x == x && (*iter)->Get_Pos().y == y || ((*iter)->Get_Pos().y == y - 20))
 			{
 				Safe_Delete(*iter);
 				m_listObj[OBJID::MONSTER].erase(iter);
@@ -218,7 +220,7 @@ void CObjMgr::Load_Player()
 
 void CObjMgr::Save_Monster()
 {
-	HANDLE hFile = CreateFile(L"../Data/Monster.dat", GENERIC_WRITE
+	HANDLE hFile = CreateFile(L"../Data/Monster/Monster.dat", GENERIC_WRITE
 		, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (INVALID_HANDLE_VALUE == hFile)
@@ -242,7 +244,7 @@ void CObjMgr::Save_Monster()
 
 void CObjMgr::Load_Monster()
 {
-	HANDLE hFile = CreateFile(L"../Data/Monster.dat", GENERIC_READ
+	HANDLE hFile = CreateFile(L"../Data/Monster/Monster.dat", GENERIC_READ
 		, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (INVALID_HANDLE_VALUE == hFile)
@@ -315,8 +317,6 @@ void CObjMgr::Load_MapObj()
 		MessageBox(g_hWnd, L"MapObj 불러오기 실패!", L"실패", MB_OK);
 		return;
 	}
-
-	Release();
 
 	DWORD		dwByte = 0;
 	EDITID::ID	eID = EDITID::END;

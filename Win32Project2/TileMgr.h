@@ -13,6 +13,7 @@ private:
 
 public:
 	void Initialize();
+	void Update();
 	void Render(HDC _DC);
 	void Release();
 

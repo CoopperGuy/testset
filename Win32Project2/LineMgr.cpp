@@ -16,17 +16,53 @@ CLineMgr::~CLineMgr()
 
 void CLineMgr::Initialize()
 {
+	RECT rc = { 0, 0, WINCX, WINCY };
+	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+	float	fY = (float)(rc.bottom - rc.top - TILECY - (TILECY>>1));
+
 	for (int i = 0; i < TILEX; ++i)
 	{
-		CLine* temp = new CLine(LINEPOS{ i*(float)TILECX, WINCY - TILECY}, LINEPOS{ (i+1) * (float)TILECX, WINCY - TILECY });
+		CLine* temp = new CLine(LINEPOS{ i*(float)TILECX, fY}, LINEPOS{ (i+1) * (float)TILECX, fY });
 		m_listLine.emplace_back(temp);
 	}
 }
 
+void CLineMgr::Update()
+{
+	auto iter = m_listLine.begin();
+	for (; iter != m_listLine.end(); )
+	{
+		int iEvent = (*iter)->Update();
+		if (OBJ_DEAD == iEvent)
+		{
+			SAFE_DELETE(*iter);
+			iter = m_listLine.erase(iter);
+		}
+		else
+			++iter;
+	}
+
+	if (m_listLine.size() < 20)
+	{
+		RECT rc = { 0, 0, WINCX, WINCY };
+		AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+		float	fY = (float)(rc.bottom - rc.top - TILECY - (TILECY >> 1));
+
+		CLine* pLine = new CLine(LINEPOS{ m_listLine.back()->Get_Info().tRightPos.fX,  fY }, LINEPOS{ m_listLine.back()->Get_Info().tRightPos.fX+TILECX ,  fY });
+		m_listLine.emplace_back(pLine);
+
+	}
+}
+
+
+
 void CLineMgr::Render(HDC _DC)
 {
-	for (auto& pLine : m_listLine)
-		pLine->Render(_DC);
+	auto iter = m_listLine.begin();
+	for (; iter != m_listLine.end(); ++iter)
+	{
+		(*iter)->Render(_DC);
+	}
 }
 
 void CLineMgr::Release()
@@ -93,7 +129,11 @@ void CLineMgr::Picking_Line()
 			return;
 		}
 	}
-	CLine* temp = new CLine(LINEPOS{ (float)x, WINCY - TILECY }, LINEPOS{ x + (float)TILECX, WINCY - TILECY });
+	RECT rc = { 0, 0, WINCX, WINCY };
+	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+	float	fY = (float)(rc.bottom - rc.top - TILECY - (TILECY >> 1));
+
+	CLine* temp = new CLine(LINEPOS{ (float)x, fY }, LINEPOS{ x + (float)TILECX, fY});
 	m_listLine.emplace_back(temp);
 }
 
