@@ -13,6 +13,7 @@ public:
 
 public:
 	HRESULT Initialize();
+	int Update();
 	void Render(HDC _DC);
 	void Release();
 
@@ -22,6 +23,7 @@ public:
 
 private:
 	LINEINFO	m_tInfo;
+	bool		m_bDead;
 };
 
 

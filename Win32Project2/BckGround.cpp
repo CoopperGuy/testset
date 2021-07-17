@@ -26,7 +26,7 @@ int CBckGround::Update()
 	if (m_bDead)
 		return OBJ_DEAD;
 
-	if (m_tInfo.vPos.x + CScrollMgr::Get_Instance()->Get_ScrollX()< m_tInfo.vSize.x * -0.5f)
+	if (m_tInfo.vPos.x + CScrollMgr::Get_Instance()->Get_ScrollX() * 0.33f < m_tInfo.vSize.x * -0.5f)
 		m_bDead = true;
 
 	return OBJ_NOEVENT;
@@ -45,7 +45,7 @@ void CBckGround::Render(HDC _DC)
 	float fCenterY = (float)(pTexInfo->tImageInfo.Height >> 1);
 	D3DXMATRIX matScale, matTrans, matWorld;
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
-	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x + CScrollMgr::Get_Instance()->Get_ScrollX(), m_tInfo.vPos.y, 0.f);
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x + (CScrollMgr::Get_Instance()->Get_ScrollX() * 0.33f), m_tInfo.vPos.y, 0.f);
 	matWorld = matScale * matTrans;
 
 	CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);

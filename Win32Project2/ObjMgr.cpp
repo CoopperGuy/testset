@@ -103,8 +103,7 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 			Safe_Delete(m_listObj[OBJID::PLAYER].front());
 			m_listObj[OBJID::PLAYER].clear();
 		}
-		CObj* pObj = CPlayer::Create((float)x, (float)y);
-		m_listObj[OBJID::PLAYER].emplace_back(pObj);
+		CObjMgr::Get_Instance()->Add_Object(CPlayer::Create((float)x, (float)y), OBJID::PLAYER);
 	}
 	break;
 
@@ -205,7 +204,7 @@ void CObjMgr::Load_Player()
 		if (0 == dwByte)
 			break;
 
-		CObj* pObj = CAbstractFactory<CPlayer>::Create(tInfo.vPos.x, tInfo.vPos.y);
+		CObj* pObj = CPlayer::Create(tInfo.vPos.x, tInfo.vPos.y);
 		pObj->Set_Info(tInfo);
 		pObj->Set_ObjInfo(tObjInfo);
 
@@ -315,8 +314,6 @@ void CObjMgr::Load_MapObj()
 		MessageBox(g_hWnd, L"MapObj 불러오기 실패!", L"실패", MB_OK);
 		return;
 	}
-
-	Release();
 
 	DWORD		dwByte = 0;
 	EDITID::ID	eID = EDITID::END;

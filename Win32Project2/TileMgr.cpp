@@ -6,7 +6,7 @@
 IMPLEMENT_SINGLETON(CTileMgr)
 CTileMgr::CTileMgr()
 {
-	m_vecTile.reserve(TILEX * TILEY);
+	m_vecTile.reserve(TILEX);
 }
 
 
@@ -20,38 +20,48 @@ void CTileMgr::Initialize()
 	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Stage/Terrain/Tile/Tile0%d.png", L"Terrain",L"Tile",3)))
 		return;
 
-	for (int i = 0; i < TILEY; ++i)
-	{
-		for (int j = 0; j < TILEX; ++j)
-		{
-			float	fX = (float)((TILECX >> 1) + (j * TILECX));
-			float	fY = (float)((TILECY >> 1) + (i * TILECY));
 
-			m_vecTile.emplace_back(CAbstractFactory<CTile>::Create(fX, fY));
+	for (int i = 0; i < TILEX; ++i)
+	{
+		float	fX = (float)((TILECX >> 1) + (i * TILECX));
+		float	fY = (float)(WINCY - (TILECY >> 1));
+
+		m_vecTile.emplace_back(CAbstractFactory<CTile>::Create(fX, fY));
+	}
+	
+}
+
+void CTileMgr::Update()
+{
+	auto& iter = m_vecTile.begin();
+	for (; iter != m_vecTile.end(); )
+	{
+		int iEvent = (*iter)->Update();
+		if (OBJ_DEAD == iEvent)
+		{
+			SAFE_DELETE(*iter);
+			iter = m_vecTile.erase(iter);
 		}
+		else
+			++iter;
+	}
+
+	if (m_vecTile.size() <= 20)
+	{
+		CObj* pObj = (CAbstractFactory<CTile>::Create(m_vecTile.back()->Get_Pos().x + m_vecTile.back()->Get_Size().x, (float)(WINCY - (TILECY >> 1))));
+		static_cast<CTile*>(pObj)->Set_DrawID(1);
+
+		m_vecTile.emplace_back(pObj);
 	}
 }
 
 void CTileMgr::Render(HDC _DC)
 {
-	int	iCullX = abs((int)CScrollMgr::Get_Instance()->Get_ScrollX() / TILECX);
-	int	iCullY = 0;
-
-	int iCullEndX = iCullX + (WINCX / TILECX) + 2;
-	int iCullEndY = iCullY + (WINCY / TILECY) + 2;
-
-	for (int i = iCullY; i < iCullEndY; ++i)
-	{
-		for (int j = iCullX; j < iCullEndX; ++j)
+		auto iter = m_vecTile.begin();
+		for (; iter != m_vecTile.end(); ++iter)
 		{
-			int iIdx = i * TILEX + j;
-
-			if (0 > iIdx || m_vecTile.size() <= (size_t)iIdx)
-				continue;
-
-			m_vecTile[iIdx]->Render(_DC);
+			(*iter)->Render(_DC);
 		}
-	}
 }
 
 void CTileMgr::Release()
@@ -67,10 +77,7 @@ void CTileMgr::Picking_Tile(int _iDrawID)
 	ScreenToClient(g_hWnd, &pt);
 	pt.x -= (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 
-	int x = pt.x / TILECX;
-	int y = pt.y / TILECY;
-
-	int iIdx = y * TILEX + x;
+	int iIdx = pt.x / TILECX;
 
 	if (0 > iIdx || m_vecTile.size() <= (size_t)iIdx)
 		return;
@@ -111,8 +118,6 @@ void CTileMgr::Load_Tile()
 		MessageBox(g_hWnd, L"Tile 불러오기 실패!", L"실패", MB_OK);
 		return;
 	}
-
-	Release();
 
 	DWORD	dwByte = 0;
 	INFO	tInfo = {};

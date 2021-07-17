@@ -1,3 +1,5 @@
-﻿  MainGame.cpp
-  Win32Project2.vcxproj -> C:\Users\crise\OneDrive\문서\GitHub\testee\Debug\Win32Project2.exe
-  Win32Project2.vcxproj -> C:\Users\crise\OneDrive\문서\GitHub\testee\Debug\Win32Project2.pdb (Full PDB)
+﻿  Stage.cpp
+d:\testset\win32project2\stage.cpp(1): fatal error C1041: 프로그램 데이터베이스 'D:\testset\Win32Project2\Debug\vc140.pdb'을(를) 열 수 없습니다. 여러 CL.EXE에서 동일한 .PDB 파일에 쓰는 경우 /FS를 사용하십시오.
+  ObjMgr.cpp
+  DataMgr.cpp
+  코드를 생성하고 있습니다...

@@ -23,6 +23,29 @@ void CLineMgr::Initialize()
 	}
 }
 
+void CLineMgr::Update()
+{
+	auto& iter = m_listLine.begin();
+	for (; iter != m_listLine.end(); )
+	{
+		int iEvent = (*iter)->Update();
+		if (OBJ_DEAD == iEvent)
+		{
+			SAFE_DELETE(*iter);
+			iter = m_listLine.erase(iter);
+		}
+		else
+			++iter;
+	}
+
+	if (m_listLine.size() <= 20)
+	{
+		CLine* pLine = new CLine(LINEPOS{m_listLine.back()->Get_Info().tRightPos.fX ,WINCY - TILECY } ,LINEPOS{ m_listLine.back()->Get_Info().tRightPos.fX + TILECX ,WINCY - TILECY});
+		
+		m_listLine.emplace_back(pLine);
+	}
+}
+
 void CLineMgr::Render(HDC _DC)
 {
 	for (auto& pLine : m_listLine)
@@ -128,8 +151,6 @@ void CLineMgr::Load_Line()
 		MessageBox(g_hWnd, L"Line 불러오기 실패!", L"실패", MB_OK);
 		return;
 	}
-
-	Release();
 
 	DWORD		dwByte = 0;
 	LINEINFO	tInfo = {};

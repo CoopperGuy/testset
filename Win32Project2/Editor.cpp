@@ -35,6 +35,7 @@ void CEditor::Initialize()
 
 void CEditor::Update()
 {
+	//CLineMgr::Get_Instance()->Update();
 	CBckMgr::Get_Instance()->Update();
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
@@ -148,7 +149,7 @@ void CEditor::Update()
 	if (CKeyMgr::Get_Instance()->Key_Down('L'))
 		CDataMgr::Get_Instance()->Load_Data();
 
-	CObjMgr::Get_Instance()->Update();
+	//CObjMgr::Get_Instance()->Update();
 
 }
 
@@ -161,6 +162,7 @@ void CEditor::Render(HDC _DC)
 	CBckMgr::Get_Instance()->Render(_DC);
 	CTileMgr::Get_Instance()->Render(_DC);
 	CObjMgr::Get_Instance()->Render(_DC);
+	CLineMgr::Get_Instance()->Render(_DC);
 }
 
 void CEditor::Release()
