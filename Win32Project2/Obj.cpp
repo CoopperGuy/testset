@@ -13,3 +13,11 @@ CObj::CObj() :m_bDead(OBJ_NOEVENT), m_tObjInfo(1, 0,0, 5.f, 0.f)
 CObj::~CObj()
 {
 }
+
+void CObj::Check_State()
+{
+}
+
+void CObj::Update_State()
+{
+}

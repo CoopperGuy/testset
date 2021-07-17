@@ -14,6 +14,7 @@ class CPlayer :
 {
 public:
 	enum BULLETTYPE{ BULLET_MELEE,BULLET_NORMAL,BULLET_GUIDE,BULLET_END};
+	enum PLAYERSTATE { P_RUN, P_JUMP, P_DJUMP, P_ATTACK, P_DIE, P_END };
 	typedef struct tagBullet {
 		tagBullet(int _c,int _m,BULLETTYPE _id , DWORD _pd)
 			: cur_magazine(_c),max_magazine(_m),BulletID(_id),PatternDelay(_pd){
@@ -43,10 +44,13 @@ public:
 	virtual void Render(HDC _DC) override;
 	virtual void Release() override;
 public:
+	void Shut_Bullet();
+
 	void Jumping();
 	void Drop();
 	void Offset();
-	void Shut_Bullet();
+	virtual void Check_State();
+	virtual void Update_State();
 public:
 	CPlayer::BULLET getItemType(CItem::ITEMTAG _tag);
 public:
@@ -73,8 +77,13 @@ private:
 	DWORD PatternTime;
 	DWORD ImmortalTime;
 	DWORD ImmortalDelay=400;
+
+	PLAYERSTATE curState = P_RUN;
+	PLAYERSTATE preState = P_END;
 	int cur_Weapon;
+	int isFlicker = 1;
 	bool isImmortal = false;
+
 	//test
 };
 
