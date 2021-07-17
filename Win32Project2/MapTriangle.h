@@ -1,14 +1,14 @@
 #pragma once
-#ifndef __DOWNOBJ_H__
-#define __DOWNOBJ_H__
+#ifndef __MAPTRIANGLE_H__
+#define __MAPTRIANGLE_H__
 
 #include "MapObj.h"
-class CDownObj :
+class CMapTriangle :
 	public CMapObj
 {
 public:
-	explicit CDownObj();
-	virtual ~CDownObj();
+	CMapTriangle();
+	~CMapTriangle();
 public:
 	// CMapObj을(를) 통해 상속됨
 	virtual HRESULT Initialize() override;
@@ -18,4 +18,4 @@ public:
 	virtual void Release() override;
 };
 
-#endif // !__DOWNOBJ_H__
+#endif // !__MAPTRIANGLE_H__

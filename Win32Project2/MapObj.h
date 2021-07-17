@@ -18,13 +18,17 @@ public:
 	virtual void Release() PURE;
 
 public:
-	const int& Get_DrawID() { return m_iDrawID; }
+	void Set_Animation(int, int, bool _bReset = false);
 
 public:
+	const int& Get_DrawID() { return m_iDrawID; }
+	const EDITID::ID& Get_ID() { return m_eID; }
+public:
 	void Set_DrawID(int _iID = 0) { m_iDrawID = _iID; }
-
+	void Set_ID(EDITID::ID _eID) { m_eID = _eID; }
 protected:
-	int m_iDrawID;
+	EDITID::ID	m_eID;
+	int			m_iDrawID;
 };
 
 #endif // !__MAPOBJ_H__

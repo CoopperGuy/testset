@@ -6,6 +6,7 @@
 class CEditor :
 	public CScene
 {
+	enum EDITKEY { TILE, PLAYER, MONSTER, MAPOBJ, LINE, END };
 public:
 	explicit CEditor();
 	virtual ~CEditor();
@@ -20,6 +21,7 @@ public:
 
 private:
 	EDITID::ID			m_eID;
+	EDITKEY				m_eKey;
 };
 
 #endif // !__EDITOR_H__
