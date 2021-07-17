@@ -64,6 +64,7 @@ void CEditor::Update()
 		case EDITID::ID::PLAYER:
 		case EDITID::ID::NORMAL_MONSTER:
 		case EDITID::ID::JUMP_MONSTER:
+		case EDITID::ID::BOSS:
 		case EDITID::ID::MONSTERDEL:
 		case EDITID::ID::MAPSWORD:
 		case EDITID::ID::MAPMOVETRI:
@@ -125,6 +126,8 @@ void CEditor::Update()
 			m_eID = EDITID::NORMAL_MONSTER;
 		if (CKeyMgr::Get_Instance()->Key_Down('2'))
 			m_eID = EDITID::JUMP_MONSTER;
+		if (CKeyMgr::Get_Instance()->Key_Down('3'))
+			m_eID = EDITID::BOSS;
 		if (CKeyMgr::Get_Instance()->Key_Down('5'))
 			m_eID = EDITID::MONSTERDEL;
 	}
@@ -149,7 +152,7 @@ void CEditor::Update()
 	if (CKeyMgr::Get_Instance()->Key_Down('L'))
 		CDataMgr::Get_Instance()->Load_Data();
 
-	//CObjMgr::Get_Instance()->Update();
+	CObjMgr::Get_Instance()->Update();
 
 }
 

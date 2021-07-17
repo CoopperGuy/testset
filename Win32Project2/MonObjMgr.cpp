@@ -3,6 +3,7 @@
 
 #include "Normal_Monster.h"
 #include "Jump_Monster.h"
+#include "Boss.h"
 
 IMPLEMENT_SINGLETON(CMonObjMgr)
 CMonObjMgr::CMonObjMgr()
@@ -25,6 +26,9 @@ CObj * CMonObjMgr::Create_Monster(EDITID::ID _eID, float _fx,  float _fy)
 		break;
 	case EDITID::JUMP_MONSTER:
 		pObj = CAbstractFactory<CJump_Monster>::Create(_fx, _fy);
+		break;
+	case EDITID::BOSS:
+		pObj = CAbstractFactory<CBoss>::Create(_fx, _fy);
 		break;
 	default:
 		break;

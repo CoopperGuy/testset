@@ -20,7 +20,6 @@ void CStage::Initialize()
 	CMapObjMgr::Get_Instance()->Ready_MapObj();
 	CDataMgr::Get_Instance()->Load_Data();
 
-	CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(100.f,100.f), OBJID::PLAYER);
 	CUIMgr::Get_Instance()->Add_Object(CLife::Create({ 100.f,100.f,0.f }, { 50.f,50.f,0.f }), UIID::STAGEUI);
 	CUIMgr::Get_Instance()->Add_Object(CLife::Create({ 100.f,100.f,0.f }, { 10.f,10.f,0.f }), UIID::STAGEUI);
 	CUIMgr::Get_Instance()->Add_Object(CScore::Create({ WINCX>>1,100.f,0.f }, { 10.f,10.f,0.f }), UIID::STAGEUI);

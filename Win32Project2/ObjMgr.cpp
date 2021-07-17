@@ -110,6 +110,8 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 	// Monster
 	case EDITID::NORMAL_MONSTER:
 	case EDITID::JUMP_MONSTER:
+		if (_editid == EDITID::JUMP_MONSTER)
+			y -= 20.f;
 	{
 		CObj* pObj = CMonObjMgr::Get_Instance()->Create_Monster(_editid, (float)x, (float)y);
 		m_listObj[OBJID::MONSTER].emplace_back(pObj);

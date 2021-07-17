@@ -1,5 +1,4 @@
-﻿  Stage.cpp
-d:\testset\win32project2\stage.cpp(1): fatal error C1041: 프로그램 데이터베이스 'D:\testset\Win32Project2\Debug\vc140.pdb'을(를) 열 수 없습니다. 여러 CL.EXE에서 동일한 .PDB 파일에 쓰는 경우 /FS를 사용하십시오.
-  ObjMgr.cpp
-  DataMgr.cpp
-  코드를 생성하고 있습니다...
+﻿  ObjMgr.cpp
+d:\testset\win32project2\objmgr.cpp(114): warning C4244: '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Win32Project2.vcxproj -> D:\testset\Debug\Win32Project2.exe
+  Win32Project2.vcxproj -> D:\testset\Debug\Win32Project2.pdb (Full PDB)
