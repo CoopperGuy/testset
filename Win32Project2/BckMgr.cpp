@@ -49,4 +49,5 @@ void CBckMgr::Render(HDC _DC)
 
 void CBckMgr::Release()
 {
+	m_vBck.clear();
 }

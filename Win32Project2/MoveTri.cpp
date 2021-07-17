@@ -15,7 +15,7 @@ HRESULT CMoveTri::Initialize()
 {
 	m_tInfo.vDir = { 1.f, 0.f, 0.f };
 	m_tInfo.vPos = { 0.f, 0.f, 0.f };
-	m_tInfo.vSize = { 75.f, 75.f, 0.f };
+	m_tInfo.vSize = { 63.f, 74.f, 0.f };
 	
 	m_eID = EDITID::MAPMOVETRI;
 

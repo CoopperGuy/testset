@@ -60,6 +60,7 @@ void CObjMgr::Late_Update()
 	}
 	CCollisionMgr::Collision_Player_Item(m_listObj[OBJID::PLAYER], m_listObj[OBJID::ITEM]);
 	CCollisionMgr::Collision_Player_Monster(m_listObj[OBJID::PLAYER], m_listObj[OBJID::MONSTER]);
+	CCollisionMgr::Collision_Player_Obstacle(m_listObj[OBJID::PLAYER], m_listObj[OBJID::MAPOBJ]);
 	CCollisionMgr::COllision_Bulllet_Monster(m_listObj[OBJID::PLAYERBULLET], m_listObj[OBJID::MONSTER]);
 
 }

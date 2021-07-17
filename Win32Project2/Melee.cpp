@@ -15,7 +15,7 @@ CMelee::~CMelee()
 HRESULT CMelee::Initialize()
 {
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
-	m_tInfo.vSize = D3DXVECTOR3(50.f, 100.f, 0.f);
+	m_tInfo.vSize = D3DXVECTOR3(100.f, 200.f, 0.f);
 
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
@@ -49,7 +49,7 @@ int CMelee::Update()
 	D3DXMATRIX matScale, matTrans;
 	D3DXMATRIX matP = static_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->Get_PMat();
 	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
-	D3DXMatrixTranslation(&matTrans,150.f, 75.f, 0.f);
+	D3DXMatrixTranslation(&matTrans,150.f, 100.f, 0.f);
 	matWorld = matScale * matTrans * matP;
  
 	m_tInfo.vPos = { matWorld._41 - ScrollX , matWorld._42,0.f };

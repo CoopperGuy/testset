@@ -15,7 +15,7 @@ HRESULT CDownSword::Initialize()
 {
 	m_tInfo.vDir = { 1.f, 0.f, 0.f };
 	m_tInfo.vPos = { 0.f, 0.f, 0.f };
-	m_tInfo.vSize = { 75.f, 225.f, 0.f };
+	m_tInfo.vSize = { 55.f, 190.f, 0.f };
 
 	m_eID = EDITID::MAPSWORD;
 
@@ -73,7 +73,7 @@ void CDownSword::Render(HDC _DC)
 	m_matWorld = matScale * matTrans;
 	CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&m_matWorld);
 	CGraphic_Device::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
-
+ 
 }
 
 void CDownSword::Release()

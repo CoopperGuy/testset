@@ -16,7 +16,7 @@ HRESULT CTotem::Initialize()
 {
 	m_tInfo.vDir = { 1.f, 0.f, 0.f };
 	m_tInfo.vPos = { 0.f, 0.f, 0.f };
-	m_tInfo.vSize = { 75.f, 125.f, 0.f };
+	m_tInfo.vSize = { 75.f, 120.f, 0.f };
 
 	m_eID = EDITID::MAPTOTEM;
 

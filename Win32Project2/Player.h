@@ -77,7 +77,7 @@ private:
 	vector<BULLET> Inven;	
 	DWORD PatternTime;
 	DWORD ImmortalTime;
-	DWORD ImmortalDelay=400;
+	DWORD ImmortalDelay=3000;
 
 	PLAYERSTATE curState = P_RUN;
 	PLAYERSTATE preState = P_END;

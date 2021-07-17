@@ -21,7 +21,7 @@ void CStage::Initialize()
 
 	CDataMgr::Get_Instance()->Load_Data();
 	CUIMgr::Get_Instance()->Add_Object(CLife::Create({ 100.f,100.f,0.f }, { 100.f,100.f,0.f }), UIID::STAGEUI);
-	CUIMgr::Get_Instance()->Add_Object(CScore::Create({ WINCX>>1,100.f,0.f }, { 100.f,100.f,0.f }), UIID::STAGEUI);
+	CUIMgr::Get_Instance()->Add_Object(CScore::Create({ WINCX>>1,527.f,0.f }, { 100.f,100.f,0.f }), UIID::STAGEUI);
 
 	CObjMgr::Get_Instance()->Add_Object(CPItem::Create({ 1300.f,500.f,0.f }), OBJID::ITEM);
 	CObjMgr::Get_Instance()->Add_Object(CGunItem::Create({ 600.f,500.f,0.f }), OBJID::ITEM);

@@ -10,7 +10,7 @@
 
 
 CPlayer::CPlayer() 
-	:m_tG( 45.f,0.f, 0.f, false,false)
+	:m_tG( 55.f,0.f, 0.f, false,false)
 {
 
 
@@ -36,6 +36,8 @@ HRESULT CPlayer::Initialize()
 	m_tObjInfo.agl = 0.f;
 	Inven.emplace_back(BULLET(0, 0, BULLET_MELEE , 200));
 	//플레이어 정보
+	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::TEX_ID::SINGLE_TEX, L"../Texture/Character/HitBox.png", L"HitBox");
+
 	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Character/Run/Run0%d.png", L"Player", L"Run", 4)))
 		return S_FALSE;
 	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Character/Jump/Jump0%d.png", L"Player", L"Jump", 3)))
@@ -131,12 +133,20 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC _DC)
 {
+	const TEXINFO* pTexInfo1 = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"HitBox");
+	float fCenterX1 = float(pTexInfo1->tImageInfo.Width >> 1);
+	float fCenterY1 = float(pTexInfo1->tImageInfo.Height >> 1);
+
+	CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+	CGraphic_Device::Get_Instance()->Get_Sprite()->Draw(pTexInfo1->pTexture, nullptr, &D3DXVECTOR3(fCenterX1, fCenterY1, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+
 	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Player", m_tFrame.m_pFrameKey, m_tFrame.CurID);
 	float fCenterX = 0;
 	float fCenterY = 0;
 	if (pTexInfo != nullptr) {
 		fCenterX = pTexInfo->tImageInfo.Width >> 1;
-		fCenterY = pTexInfo->tImageInfo.Height - 50.f;
+		fCenterY = (pTexInfo->tImageInfo.Height>>1) + 150.f;
 		CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 		int alpha = 0;
 		switch (isImmortal)
@@ -236,7 +246,7 @@ void CPlayer::Update_State()
 void CPlayer::Jumping()
 {
 	float fY = 0.f;
-	bool bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.vPos.x, m_tInfo.vPos.y, &fY, &m_tG.m_bg);
+	bool bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.vPos.x, m_tInfo.vPos.y, &fY, &m_tG.m_bg, m_tInfo.vSize.y*0.5f);
 	float spdY = 0.f;
 
 	if (m_tG.m_bJump || m_tG.m_bg)
@@ -256,7 +266,7 @@ void CPlayer::Jumping()
 
 		m_tG.m_fJumpTime += 0.2f;
 
-		if (bLineCol && m_tInfo.vPos.y > (fY - m_tInfo.vSize.y * 0.5f))
+		if (bLineCol && m_tInfo.vPos.y > (fY - (m_tInfo.vSize.y * 0.5f)))
 		{
 			m_tInfo.vPos.y = (fY - m_tInfo.vSize.y * 0.5f);
 			m_tG.m_bJump = false;
@@ -273,11 +283,13 @@ void CPlayer::Jumping()
 	switch (bLineCol)
 	{
 	case false:
-		spdY = (4.9f * m_tG.m_fJumpTime);
-		if (spdY > 15.f)
-			spdY = 15.f;
-		m_tInfo.vPos.y = m_tInfo.vPos.y + spdY;
-		m_tG.m_fJumpTime += 0.2f;
+		if (!m_tG.m_bJump) {
+			spdY = (4.9f * m_tG.m_fJumpTime);
+			if (spdY > 15.f)
+				spdY = 15.f;
+			m_tInfo.vPos.y = m_tInfo.vPos.y + spdY;
+			m_tG.m_fJumpTime += 0.2f;
+		}
 		break;
 	}
 
@@ -296,14 +308,14 @@ void CPlayer::Shut_Bullet()
 		if (Inven[cur_Weapon].cur_magazine > 0) {
 			Inven[cur_Weapon].cur_magazine--;
 			CObjMgr::Get_Instance()->Add_Object(
-				CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
+				CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y + m_tInfo.vSize.y*0.25f), OBJID::PLAYERBULLET);
 		}
 		break;
 	case CPlayer::BULLET_GUIDE:
 		if (Inven[cur_Weapon].cur_magazine > 0) {
 			Inven[cur_Weapon].cur_magazine--;
 			CObjMgr::Get_Instance()->Add_Object(
-				CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
+				CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y + m_tInfo.vSize.y*0.25f), OBJID::PLAYERBULLET);
 		}
 		break;
 	}

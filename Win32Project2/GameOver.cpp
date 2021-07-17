@@ -44,4 +44,5 @@ void CGameOver::Release()
 	CTileMgr::Destroy_Instance();
 	CObjMgr::Destroy_Instance();
 	CLineMgr::Destroy_Instance();
+	CScrollMgr::Destroy_Instance();
 }

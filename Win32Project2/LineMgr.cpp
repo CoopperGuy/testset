@@ -71,7 +71,7 @@ void CLineMgr::Release()
 	m_listLine.clear();
 }
 
-bool CLineMgr::Collision_Line(float _x, float _y1, float* _y, bool* _bG )
+bool CLineMgr::Collision_Line(float _x, float _y1, float* _y, bool* _bG,float _gap )
 {
 	if (m_listLine.empty())
 		return false;
@@ -100,7 +100,7 @@ bool CLineMgr::Collision_Line(float _x, float _y1, float* _y, bool* _bG )
 		float y2 = templ->Get_Info().tRightPos.fY;
 
 		*_y = ((y2 - y1) / (x2 - x1)) * (_x - x1) + y1;
-		if (*_y - _y1 > 65.f) {
+		if (*_y - _y1 > _gap + 15.f) {
 			*_bG = true;
 		}
 
