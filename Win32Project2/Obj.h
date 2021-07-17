@@ -24,6 +24,8 @@ public:
 	const bool& Get_Dead() { return m_bDead; }
 	const INFO& Get_Info() { return m_tInfo; }
 	const OBJINFO& Get_ObjInfo() { return m_tObjInfo; }
+	const DWORD& Get_Time() { return m_dwTime; }
+	const DWORD& Get_Delaytime() { return m_dwDelayTime; }
 public:
 	virtual void Check_State();
 	virtual void Update_State();
@@ -40,9 +42,11 @@ public:
 	void Set_Size(float _fx, float _fy) { m_tInfo.vSize = { _fx, _fy ,0.f }; }
 
 	void Set_vPos(D3DXVECTOR3 _pos) { m_tInfo.vPos = _pos; }
-
+	void Set_Info(INFO _tInfo) { m_tInfo = _tInfo; }
 	void Set_ObjInfo(OBJINFO _tobj) { m_tObjInfo = _tobj; }
 
+	void Set_Time(DWORD _dwtime) { m_dwTime = _dwtime; }
+	void Set_DelayTime(DWORD _dwDelayTime) { m_dwDelayTime = _dwDelayTime; }
 protected:
 	D3DXVECTOR3 m_vQ[4];
 	D3DXVECTOR3 m_vP[4];
@@ -53,7 +57,7 @@ protected:
 	DWORD m_dwTime;
 	DWORD m_dwDelayTime;
 	bool	m_bDead;
-
+	D3DXMATRIX m_matWorld;
 };
 
 #endif // !__COBJ_H__

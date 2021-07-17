@@ -18,7 +18,7 @@ void CLineMgr::Initialize()
 {
 	for (int i = 0; i < TILEX; ++i)
 	{
-		CLine* temp = new CLine(LINEPOS{i*100.f, 500.f}, LINEPOS{ (i+1) * 100.f, 500.f });
+		CLine* temp = new CLine(LINEPOS{ i*(float)TILECX, WINCY - TILECY}, LINEPOS{ (i+1) * (float)TILECX, WINCY - TILECY });
 		m_listLine.emplace_back(temp);
 	}
 }
@@ -82,7 +82,7 @@ void CLineMgr::Picking_Line()
 	ScreenToClient(g_hWnd, &pt);
 	pt.x -= (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 
-	int x = (pt.x / TILECX)*100;
+	int x = (pt.x / TILECX)*TILECX;
 
 	
 	for (auto& iter = m_listLine.begin(); iter != m_listLine.end(); ++iter)
@@ -93,7 +93,7 @@ void CLineMgr::Picking_Line()
 			return;
 		}
 	}
-	CLine* temp = new CLine(LINEPOS{ (float)x, 500.f }, LINEPOS{ x + 100.f, 500.f });
+	CLine* temp = new CLine(LINEPOS{ (float)x, WINCY - TILECY }, LINEPOS{ x + (float)TILECX, WINCY - TILECY });
 	m_listLine.emplace_back(temp);
 }
 

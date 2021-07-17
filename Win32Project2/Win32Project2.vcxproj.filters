@@ -70,9 +70,6 @@
     <Filter Include="소스 파일\01.Obj\05.MapObj">
       <UniqueIdentifier>{8873fb3c-b92b-4707-be16-accbcf8fe77e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Obj\05.MapObj\UpObj">
-      <UniqueIdentifier>{44cccb72-b184-410a-b27b-e67121b64741}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\01.Obj\05.MapObj\DownObj">
       <UniqueIdentifier>{acd35b98-ee14-4618-b6d8-454af3717075}</UniqueIdentifier>
     </Filter>
@@ -151,6 +148,18 @@
     <Filter Include="소스 파일\01.Obj\02.Bullet\Melee">
       <UniqueIdentifier>{f8d1765f-3280-4f2d-ae3e-47ab38450783}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj\DownObj\DownSword">
+      <UniqueIdentifier>{77908bbe-f89a-4e4a-ba83-1199036a5c24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj\DownObj\Triangle">
+      <UniqueIdentifier>{ffbed3eb-ff18-4361-aa46-0ea46072547f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj\DownObj\Totem">
+      <UniqueIdentifier>{442e40d3-854d-4dc8-be71-444b3d365376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\05.MapObj\DownObj\MoveTri">
+      <UniqueIdentifier>{1a121170-1cc0-45e0-b07d-341f2bff3afe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -210,17 +219,8 @@
     <ClInclude Include="ScrollMgr.h">
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
     </ClInclude>
-    <ClInclude Include="MapObj.h">
-      <Filter>소스 파일\01.Obj\05.MapObj</Filter>
-    </ClInclude>
-    <ClInclude Include="DownObj.h">
-      <Filter>소스 파일\01.Obj\05.MapObj\DownObj</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>소스 파일\01.Obj\05.MapObj\Tile</Filter>
-    </ClInclude>
-    <ClInclude Include="UpObj.h">
-      <Filter>소스 파일\01.Obj\05.MapObj\UpObj</Filter>
     </ClInclude>
     <ClInclude Include="Graphic_Device.h">
       <Filter>소스 파일\99.Mgr\99.GrephicDevice</Filter>
@@ -303,6 +303,21 @@
     <ClInclude Include="Melee.h">
       <Filter>소스 파일\01.Obj\02.Bullet\Melee</Filter>
     </ClInclude>
+    <ClInclude Include="MapObj.h">
+      <Filter>소스 파일\01.Obj\05.MapObj</Filter>
+    </ClInclude>
+    <ClInclude Include="DownSword.h">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj\DownSword</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTriangle.h">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj\Triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveTri.h">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj\MoveTri</Filter>
+    </ClInclude>
+    <ClInclude Include="Totem.h">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj\Totem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -350,17 +365,8 @@
     <ClCompile Include="ScrollMgr.cpp">
       <Filter>소스 파일\99.Mgr\03.ScrollMgr</Filter>
     </ClCompile>
-    <ClCompile Include="MapObj.cpp">
-      <Filter>소스 파일\01.Obj\05.MapObj</Filter>
-    </ClCompile>
-    <ClCompile Include="DownObj.cpp">
-      <Filter>소스 파일\01.Obj\05.MapObj\DownObj</Filter>
-    </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>소스 파일\01.Obj\05.MapObj\Tile</Filter>
-    </ClCompile>
-    <ClCompile Include="UpObj.cpp">
-      <Filter>소스 파일\01.Obj\05.MapObj\UpObj</Filter>
     </ClCompile>
     <ClCompile Include="Win32Project2.cpp">
       <Filter>헤더 파일</Filter>
@@ -445,6 +451,21 @@
     </ClCompile>
     <ClCompile Include="Melee.cpp">
       <Filter>소스 파일\01.Obj\02.Bullet\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObj.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj</Filter>
+    </ClCompile>
+    <ClCompile Include="DownSword.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj\DownSword</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTriangle.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj\Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveTri.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj\MoveTri</Filter>
+    </ClCompile>
+    <ClCompile Include="Totem.cpp">
+      <Filter>소스 파일\01.Obj\05.MapObj\DownObj\Totem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
