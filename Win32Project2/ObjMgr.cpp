@@ -41,7 +41,7 @@ void CObjMgr::Update()
 	}
 	//	Get_Player()->Update();
 
-	//CCollisionMgr::COllision_Bulllet_Monster(m_listObj[OBJID::PLAYERBULLET], m_listObj[OBJID::MONSTER]);
+	CCollisionMgr::COllision_Bulllet_Monster(m_listObj[OBJID::PLAYERBULLET], m_listObj[OBJID::MONSTER]);
 }
 
 void CObjMgr::Late_Update()

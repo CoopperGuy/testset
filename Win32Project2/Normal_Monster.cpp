@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Normal_Monster.h"
+#include "Texture_Manager.h"
 
 
 CNormal_Monster::CNormal_Monster()
@@ -14,6 +15,7 @@ CNormal_Monster::~CNormal_Monster()
 
 HRESULT CNormal_Monster::Initialize()
 {
+
 	m_tInfo.vPos = { 800.f, 400.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 150.f, 0.f);
@@ -83,6 +85,7 @@ void CNormal_Monster::Late_Update()
 void CNormal_Monster::Render(HDC _DC)
 {
 	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+
 	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
 
 	for (int i = 1; i < 4; ++i)
@@ -91,6 +94,8 @@ void CNormal_Monster::Render(HDC _DC)
 	}
 
 	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
+
+	
 }
 
 void CNormal_Monster::Release()
