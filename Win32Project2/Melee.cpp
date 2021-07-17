@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Melee.h"
-
+#include "Player.h"
 
 CMelee::CMelee()
 {
@@ -28,6 +28,7 @@ HRESULT CMelee::Initialize()
 
 	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Bullet/Melee/Melee0%d.png", L"Bullet", L"Melee", 4)))
 		return S_FALSE;
+	m_tFrame.dwTime = GetTickCount();
 	m_tFrame.CurID = 0;
 	m_tFrame.EndId = 4;
 	m_tFrame.dwDelayTime = 10;
@@ -43,32 +44,29 @@ int CMelee::Update()
 		return OBJ_DEAD;
 	}
 
+	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 
-	D3DXMATRIX matScale, matRotZ, matTrans;
-	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(0.f));
-	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
-	matWorld = matScale * matRotZ * matTrans;
-
-
+	D3DXMATRIX matScale, matTrans;
+	D3DXMATRIX matP = static_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->Get_PMat();
+	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
+	D3DXMatrixTranslation(&matTrans,150.f, 75.f, 0.f);
+	matWorld = matScale * matTrans * matP;
+ 
+	m_tInfo.vPos = { matWorld._41 - ScrollX , matWorld._42,0.f };
 
 	return OBJ_NOEVENT;
 }
 
 void CMelee::Late_Update()
 {
-	if (m_dwTime + m_dwDelayTime < GetTickCount())
+	if (m_tFrame.CurID == m_tFrame.EndId)
 		m_bDead = OBJ_DEAD;
 }
 
 void CMelee::Render(HDC _DC)
 {
 	Update_State();
-	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-	D3DXMATRIX matScale, matTrans;
-	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
-	D3DXMatrixTranslation(&matTrans, (m_tInfo.vPos.x + ScrollX), m_tInfo.vPos.y, 0.f);
-	matWorld = matScale * matTrans;
+	
 	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Bullet", m_tFrame.m_pFrameKey, m_tFrame.CurID);
 	float fCenterX = 0;
 	float fCenterY = 0;
@@ -83,6 +81,17 @@ void CMelee::Render(HDC _DC)
 
 void CMelee::Release()
 {
+}
+
+void CMelee::Update_State()
+{
+	if (m_tFrame.dwTime + m_tFrame.dwDelayTime < GetTickCount()) {
+		m_tFrame.CurID++;
+		if (m_tFrame.CurID == m_tFrame.EndId) {
+			m_tFrame.CurID = m_tFrame.EndId;
+		}
+		m_tFrame.dwTime = GetTickCount();
+	}
 }
 
 CObj * CMelee::Create(D3DXVECTOR3 _pos)

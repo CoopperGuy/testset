@@ -19,7 +19,10 @@ public:
 	virtual void Render(HDC _DC) override;
 	virtual void Release() override;
 public:
-	CObj* Create(D3DXVECTOR3 _pos);
+	void Update_Frame();
+public:
+	static CObj* Create(D3DXVECTOR3 _pos);
+	FRAME m_tFrame;
 };
 
 

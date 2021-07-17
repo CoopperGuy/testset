@@ -8,7 +8,7 @@ namespace OBJID
 	enum ID { PLAYER, PLAYERBULLET, MONSTER, ITEM, MAPOBJ, END };
 }
 namespace UIID {
-	enum ID{ MENUUI, STAGEUI, END};
+	enum ID{ MENUUI, STAGEUI, OVERUI, END};
 }
 namespace EDITID
 {

@@ -157,6 +157,7 @@
     <ClInclude Include="DataMgr.h" />
     <ClInclude Include="DownSword.h" />
     <ClInclude Include="Editor.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Graphic_Device.h" />
     <ClInclude Include="Guided_Bullet.h" />
     <ClInclude Include="GuideItem.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MoveTri.h" />
     <ClInclude Include="MultiTexture.h" />
+    <ClInclude Include="MyMenu.h" />
     <ClInclude Include="Normal_Monster.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
@@ -211,6 +213,7 @@
     <ClCompile Include="DataMgr.cpp" />
     <ClCompile Include="DownSword.cpp" />
     <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Graphic_Device.cpp" />
     <ClCompile Include="Guided_Bullet.cpp" />
     <ClCompile Include="GuideItem.cpp" />
@@ -232,6 +235,7 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MoveTri.cpp" />
     <ClCompile Include="MultiTexture.cpp" />
+    <ClCompile Include="MyMenu.cpp" />
     <ClCompile Include="Normal_Monster.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />

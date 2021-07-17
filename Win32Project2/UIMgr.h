@@ -18,6 +18,8 @@ public:
 	void Render(HDC _DC);
 	void Release();
 public:
+	void Delete_UI(UIID::ID _id);
+public:
 	static CUIMgr* Get_Instance()
 	{
 		if (!m_pInstance)

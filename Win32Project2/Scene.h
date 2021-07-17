@@ -17,6 +17,10 @@
 #include "Score.h"
 #include "Inven.h"
 
+#include "PItem.h"
+#include "GunItem.h"
+#include "GuideItem.h"
+
 #include "TestMon.h"
 #include "Normal_Monster.h"
 #include "Jump_Monster.h"

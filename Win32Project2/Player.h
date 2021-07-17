@@ -61,6 +61,7 @@ public:
 	int Get_Point() { return m_tObjInfo.score; }
 	bool Get_Immortal() { return isImmortal; }
 	const vector<BULLET>& Get_Inven()const { return Inven; }
+	const D3DXMATRIX& Get_PMat()const;
 public:
 	static CObj* Create(float _x, float _y);
 private:

@@ -15,7 +15,7 @@ CLife::~CLife()
 void CLife::Initialize()
 {
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
-	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/UI/Hp/Hp%d.png", L"UI", L"Hp", 4)))
+	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/UI/Hp/Hp%d.png", L"UI", L"Hp", 4 , m_tInfo.vSize.x,m_tInfo.vSize.y)))
 		return ;
 	m_tFrame.dwTime = GetTickCount();
 	m_tFrame.CurID = 0;
@@ -43,6 +43,7 @@ void CLife::Render_UI(HDC _DC)
 		const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"UI", m_tFrame.m_pFrameKey, m_tFrame.CurID);
 		float fCenterX = 0;
 		float fCenterY = 0;
+
 		if (pTexInfo != nullptr) {
 			fCenterX = pTexInfo->tImageInfo.Width >> 1;
 			fCenterY = pTexInfo->tImageInfo.Height >> 1;
