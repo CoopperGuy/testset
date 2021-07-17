@@ -14,7 +14,6 @@ CTestMon::~CTestMon()
 
 HRESULT CTestMon::Initialize()
 {
-	m_eID = EDITID::TESTMON;
 
 	m_tInfo.vPos = { 300.f, 300.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);

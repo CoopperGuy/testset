@@ -154,7 +154,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="DataMgr.h" />
-    <ClInclude Include="DownObj.h" />
+    <ClInclude Include="DownSword.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Graphic_Device.h" />
     <ClInclude Include="Guided_Bullet.h" />
@@ -171,9 +171,11 @@
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MapObj.h" />
     <ClInclude Include="MapObjMgr.h" />
+    <ClInclude Include="MapTriangle.h" />
     <ClInclude Include="Melee.h" />
     <ClInclude Include="MonObjMgr.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MoveTri.h" />
     <ClInclude Include="MultiTexture.h" />
     <ClInclude Include="Normal_Monster.h" />
     <ClInclude Include="Obj.h" />
@@ -194,9 +196,9 @@
     <ClInclude Include="Texture_Manager.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMgr.h" />
+    <ClInclude Include="Totem.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIMgr.h" />
-    <ClInclude Include="UpObj.h" />
     <ClInclude Include="Win32Project2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -205,7 +207,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="DataMgr.cpp" />
-    <ClCompile Include="DownObj.cpp" />
+    <ClCompile Include="DownSword.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Graphic_Device.cpp" />
     <ClCompile Include="Guided_Bullet.cpp" />
@@ -222,9 +224,11 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MapObj.cpp" />
     <ClCompile Include="MapObjMgr.cpp" />
+    <ClCompile Include="MapTriangle.cpp" />
     <ClCompile Include="Melee.cpp" />
     <ClCompile Include="MonObjMgr.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MoveTri.cpp" />
     <ClCompile Include="MultiTexture.cpp" />
     <ClCompile Include="Normal_Monster.cpp" />
     <ClCompile Include="Obj.cpp" />
@@ -248,9 +252,9 @@
     <ClCompile Include="Texture_Manager.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMgr.cpp" />
+    <ClCompile Include="Totem.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIMgr.cpp" />
-    <ClCompile Include="UpObj.cpp" />
     <ClCompile Include="Win32Project2.cpp" />
   </ItemGroup>
   <ItemGroup>

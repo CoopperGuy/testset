@@ -1,14 +1,14 @@
 #pragma once
-#ifndef __UPOBJ_H__
-#define __UPOBJ_H__
+#ifndef __MOVETRI_H__
+#define __MOVETRI_H__
 
 #include "MapObj.h"
-class CUpObj :
+class CMoveTri :
 	public CMapObj
 {
 public:
-	explicit CUpObj();
-	virtual ~CUpObj();
+	CMoveTri();
+	~CMoveTri();
 public:
 	// CMapObj을(를) 통해 상속됨
 	virtual HRESULT Initialize() override;
@@ -18,4 +18,4 @@ public:
 	virtual void Release() override;
 };
 
-#endif // !__UPOBJ_H__
+#endif // !__MOVETRI_H__

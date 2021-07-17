@@ -16,7 +16,7 @@ CBckMgr::~CBckMgr()
 
 HRESULT CBckMgr::Initialize()
 {
-	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::SINGLE_TEX, L"../Texture/Stage/Terrain/Back/BackTest.png", L"BackGround");
+	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::SINGLE_TEX, L"../Texture/Stage/Terrain/Back/Back.png", L"BackGround");
 
 	m_vBck.emplace_back(CAbstractFactory<CBckGround>::Create(WINCX >> 1, WINCY >> 1));
 	
