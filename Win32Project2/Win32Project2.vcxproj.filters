@@ -163,6 +163,12 @@
     <Filter Include="소스 파일\01.Obj\03.Monster\Boss">
       <UniqueIdentifier>{86a1ec0b-56e6-49be-9623-5d594551d86a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\98.Scene\00.MyMenu">
+      <UniqueIdentifier>{83353a0e-dbfc-471e-b708-cbdc0369bfcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\98.Scene\03.GameOver">
+      <UniqueIdentifier>{6a3633ab-3908-4b12-a3a5-7f458437debe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -324,6 +330,12 @@
     <ClInclude Include="Boss.h">
       <Filter>소스 파일\01.Obj\03.Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="MyMenu.h">
+      <Filter>소스 파일\98.Scene\00.MyMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>소스 파일\98.Scene\03.GameOver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -475,6 +487,12 @@
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>소스 파일\01.Obj\03.Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMenu.cpp">
+      <Filter>소스 파일\98.Scene\00.MyMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>소스 파일\98.Scene\03.GameOver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

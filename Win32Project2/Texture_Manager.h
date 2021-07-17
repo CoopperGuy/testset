@@ -16,6 +16,12 @@ public:
 		const wstring& wstrObjectKey,
 		const wstring& wstrStateKey = L"",
 		const DWORD dwCount = 0);
+	HRESULT Insert_Texture(TEX_ID eID, const wstring& wstrFilePath,
+		const wstring& wstrObjectKey,
+		const wstring& wstrStateKey ,
+		const DWORD dwCount,
+		const float _CX,
+		const float _CY);
 	const TEXINFO* Get_TexInfo_Texture(const wstring& wstrObjectKey,
 		const wstring& wstrStateKey = L"",
 		const DWORD& dwIndex = 0);

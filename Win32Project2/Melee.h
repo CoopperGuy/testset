@@ -17,6 +17,8 @@ public:
 	virtual void Render(HDC _DC) override;
 	virtual void Release() override;
 public:
+	virtual void Update_State();
+public:
 	static CObj* Create(D3DXVECTOR3 _pos);
 };
 

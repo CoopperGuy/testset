@@ -3,6 +3,8 @@
 #include "Scene.h"
 #include "Stage.h"
 #include "Editor.h"
+#include "GameOver.h"
+#include "MyMenu.h"
 CSceneMgr* CSceneMgr::m_Instance = nullptr;
 CSceneMgr::CSceneMgr()
 	: m_ePreScene(END), m_eCurScene(END), m_pScene(nullptr)
@@ -26,13 +28,13 @@ void CSceneMgr::Scene_Change(SCENEID _eID)
 		switch (m_eCurScene)
 		{
 		case CSceneMgr::MENU:
-			//m_pScene = new CMyMenu;
+			m_pScene = new CMyMenu;
 			break;
 		case CSceneMgr::STAGE:
 			m_pScene = new CStage;
 			break;
 		case CSceneMgr::GAMEOVER:
-			//m_pScene = new CEnd;
+			m_pScene = new CGameOver;
 			break;
 		case CSceneMgr::EDIT:
 			m_pScene = new CEditor;
