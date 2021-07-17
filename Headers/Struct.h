@@ -11,6 +11,16 @@ typedef struct tagInfo
 	//D3DXVECTOR4; //x,y,z,w
 }INFO;
 
+typedef struct tagFrame {
+
+	int CurID;
+	int EndId;
+	DWORD	dwDelayTime;
+	DWORD	dwTime;	
+	const TCHAR*	m_pFrameKey;
+
+}FRAME;
+
 typedef struct tagObjInfo {
 	tagObjInfo(int _hp, int _atk,int _score, float _spd, float _agl) :hp(_hp), atk(_atk),spd(_spd), agl(_agl),score(_score) {
 
@@ -31,6 +41,7 @@ typedef struct tagGravity {
 	float		m_fJumpPower;
 	float		m_fJumpTime;
 	float		m_fJumpY;
+	bool		m_bDJump = false;
 	bool		m_bJump;
 	bool		m_bg;
 }GRAVITY;

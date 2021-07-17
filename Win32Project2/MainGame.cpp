@@ -19,7 +19,7 @@ HRESULT CMainGame::Initialize()
 	CGraphic_Device::Get_Instance()->Ready_Graphic_Device();
 
 	m_hDC = GetDC(g_hWnd);
-	CSceneMgr::Get_Instance()->Scene_Change(CSceneMgr::EDIT);
+	CSceneMgr::Get_Instance()->Scene_Change(CSceneMgr::STAGE);
 
 	return S_OK;
 }

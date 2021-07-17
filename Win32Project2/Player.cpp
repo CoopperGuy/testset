@@ -36,6 +36,15 @@ HRESULT CPlayer::Initialize()
 	m_tObjInfo.agl = 0.f;
 	Inven.emplace_back(BULLET(0, 0, BULLET_MELEE , 200));
 	//플레이어 정보
+	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Character/Run/Run0%d.png", L"Player", L"Run", 4)))
+		return S_FALSE;
+	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Character/Jump/Jump0%d.png", L"Player", L"Jump", 3)))
+		return S_FALSE;
+	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Character/Jump/DJump0%d.png", L"Player", L"DJump", 6)))
+		return S_FALSE;
+	if (FAILED(CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::MULTI_TEX, L"../Texture/Character/Attack/Attack0%d.png", L"Player", L"Attack", 12)))
+		return S_FALSE;
+
 	m_dwTime = GetTickCount();
 	m_dwDelayTime = 100;
 	PatternTime = GetTickCount();
@@ -47,7 +56,7 @@ int CPlayer::Update()
 	if (m_bDead) 
 		return OBJ_DEAD;
 	
-	D3DXMATRIX matScale, matRotZ, matTrans, matWorld;
+	D3DXMATRIX matScale, matRotZ, matTrans;
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(00.f));
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
@@ -71,14 +80,25 @@ int CPlayer::Update()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		if (!m_tG.m_bJump)
+		if (m_tG.m_bJump) {
+			m_tG.m_bDJump = true;
+		}
+		if (!m_tG.m_bJump) {
+			curState = CPlayer::P_JUMP;
 			m_tG.m_fJumpY = m_tInfo.vPos.y;
-
-		m_tG.m_bJump = true;
+			m_tG.m_bJump = true;
+		}
+		if (m_tG.m_bDJump && m_tG.m_bJump) {
+			m_tG.m_fJumpY = m_tInfo.vPos.y;
+			m_tG.m_fJumpTime = 0.f;
+			curState = CPlayer::P_DJUMP;
+		}
 	}
-
+	
 	if (CKeyMgr::Get_Instance()->Key_Down('A'))
 	{
+		curState = CPlayer::P_ATTACK;
+
 		if (PatternTime + Inven[cur_Weapon].PatternDelay < GetTickCount()) {
 			Shut_Bullet();
 			PatternTime = GetTickCount();
@@ -93,6 +113,8 @@ int CPlayer::Update()
 	Drop();
 	Jumping();
 	Offset();
+	Check_State();
+	Update_State();
 	return OBJ_NOEVENT;
 }
 
@@ -106,17 +128,98 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC _DC)
 {
-	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-	MoveToEx(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y, nullptr);
+	float ScrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
+	D3DXMATRIX matScale, matTrans;
+	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
+	D3DXMatrixTranslation(&matTrans,  (m_tInfo.vPos.x + ScrollX) , m_tInfo.vPos.y ,0.f );
+	matWorld = matScale * matTrans;
+	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Player", m_tFrame.m_pFrameKey, m_tFrame.CurID);
+	float fCenterX = 0;
+	float fCenterY = 0;
+	if (pTexInfo != nullptr) {
+		fCenterX = pTexInfo->tImageInfo.Width >> 1;
+		fCenterY = pTexInfo->tImageInfo.Height;
+		CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+		int alpha = 0;
+		switch (isImmortal)
+		{
+		case true:
+			alpha = 255 - (128 * isFlicker);
+			CGraphic_Device::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(alpha, alpha, alpha, alpha));
+			break;
+		case false:
+			CGraphic_Device::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+			break;
+		}
+	}
+	
 
-	for (int i = 1; i < 4; ++i)
-		LineTo(_DC, m_vQ[i].x + ScrollX, m_vQ[i].y);
-	LineTo(_DC, m_vQ[0].x + ScrollX, m_vQ[0].y);
 
 }
 
 void CPlayer::Release()
 {
+}
+
+void CPlayer::Check_State()
+{
+	if (curState != preState) {
+		switch (curState)
+		{
+		case CPlayer::P_RUN:
+			m_tFrame.CurID = 0;
+			m_tFrame.EndId = 4;
+			m_tFrame.dwDelayTime = 100;
+			m_tFrame.m_pFrameKey = L"Run";
+			break;
+		case CPlayer::P_JUMP:
+			m_tFrame.CurID = 0;
+			m_tFrame.EndId = 3;
+			m_tFrame.dwDelayTime = 100;
+			m_tFrame.m_pFrameKey = L"Jump";
+			break;
+		case CPlayer::P_DJUMP:
+			m_tFrame.CurID = 0;
+			m_tFrame.EndId = 6;
+			m_tFrame.dwDelayTime = 100;
+			m_tFrame.m_pFrameKey = L"DJump";
+			break;
+		case CPlayer::P_ATTACK:
+			m_tFrame.CurID = 0;
+			m_tFrame.EndId = 11;
+			m_tFrame.dwDelayTime = 50;
+			m_tFrame.m_pFrameKey = L"Attack";
+			break;
+		}
+		preState = curState;
+	}
+}
+
+void CPlayer::Update_State()
+{
+	if (m_tFrame.dwTime + m_tFrame.dwDelayTime < GetTickCount()) {
+		m_tFrame.CurID++;
+		isFlicker = (isFlicker + 1) % 2;
+		if (m_tFrame.CurID == m_tFrame.EndId) {
+			switch (curState)
+			{
+			case CPlayer::P_RUN:
+				m_tFrame.CurID = 0;
+				break;
+			case CPlayer::P_JUMP:
+				m_tFrame.CurID = 1;
+				break;
+			case CPlayer::P_DJUMP:
+				m_tFrame.CurID = m_tFrame.EndId - 1;
+				break;
+			case CPlayer::P_ATTACK:
+				curState = CPlayer::P_RUN;
+				m_tFrame.CurID=0;
+				break;
+			}
+		}
+		m_tFrame.dwTime = GetTickCount();
+	}
 }
 
 void CPlayer::Jumping()
@@ -148,6 +251,8 @@ void CPlayer::Jumping()
 			m_tG.m_bJump = false;
 			m_tG.m_fJumpTime = 0.f;
 			m_tG.m_bg = false;
+			m_tG.m_bDJump = false;
+			curState = CPlayer::P_RUN;
 		}
 	}
 	else if (bLineCol) {
@@ -226,6 +331,8 @@ void CPlayer::Offset()
 		CScrollMgr::Get_Instance()->Set_ScrollX(OffsetX - (m_tInfo.vPos.x + ScrollX));
 }
 
+
+
 void CPlayer::Set_Bullet(CItem::ITEMTAG _tag)
 {
 	bool isIn = false;
@@ -255,9 +362,10 @@ void CPlayer::Set_Bullet(CItem::ITEMTAG _tag)
 
 }
 
-CObj * CPlayer::Create()
+CObj * CPlayer::Create(float _x,float _y)
 {
 	CPlayer* pInstance = new CPlayer;
+	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
