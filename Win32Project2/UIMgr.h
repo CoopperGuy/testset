@@ -13,7 +13,7 @@ private:
 	~CUIMgr();
 
 public:
-	void Add_Object(CUI* _pObj) { m_listUI.emplace_back(_pObj); }
+	void Add_Object(CUI* _pObj,UIID::ID _id) { m_listUI[_id].emplace_back(_pObj); }
 	void Update();
 	void Render(HDC _DC);
 	void Release();
@@ -31,7 +31,7 @@ public:
 
 private:
 	static CUIMgr*		m_pInstance;
-	list<CUI*>			m_listUI;
+	list<CUI*>			m_listUI[UIID::END];
 };
 
 

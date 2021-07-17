@@ -1,4 +1,6 @@
-﻿  ObjMgr.cpp
-BckGround.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/OPT:LBR' 사양으로 인해 무시됩니다.
-  Win32Project2.vcxproj -> C:\Users\Gyeong-soo Park\Documents\GitHub\testset\Debug\Win32Project2.exe
-  Win32Project2.vcxproj -> C:\Users\Gyeong-soo Park\Documents\GitHub\testset\Debug\Win32Project2.pdb (Full PDB)
+﻿  Score.cpp
+  Inven.cpp
+c:\users\crise\onedrive\문서\github\testee\win32project2\inven.cpp(28): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다...
+  Win32Project2.vcxproj -> C:\Users\crise\OneDrive\문서\GitHub\testee\Debug\Win32Project2.exe
+  Win32Project2.vcxproj -> C:\Users\crise\OneDrive\문서\GitHub\testee\Debug\Win32Project2.pdb (Full PDB)

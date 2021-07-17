@@ -124,6 +124,33 @@
     <Filter Include="소스 파일\01.Obj\03.Monster\Jump_Monster">
       <UniqueIdentifier>{4dae835d-2b2e-4731-a0ab-359705ad45cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\04.Item\01.PItem">
+      <UniqueIdentifier>{212f4f39-7ae2-4076-b464-ee7eb577fe36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.UI">
+      <UniqueIdentifier>{8067a72e-39e0-42a1-8e2a-d66933963fb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Mgr\08.UIMgr">
+      <UniqueIdentifier>{285c0d98-042e-4499-9a9f-6246ce2e83a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.UI\01.Life">
+      <UniqueIdentifier>{01851340-9490-4c8b-97d6-0bc5a0693665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.UI\02.Score">
+      <UniqueIdentifier>{e38e9474-783f-4d36-bc8a-2d3d96134efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.UI\03.Inven">
+      <UniqueIdentifier>{f1a226fa-9051-48b5-a36b-aee2f7b3f1ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\04.Item\02.GunItem">
+      <UniqueIdentifier>{bf932658-511f-4590-aedc-e630b5570b09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\04.Item\03.GuideItem">
+      <UniqueIdentifier>{e056bdd5-cf4b-4504-a73f-1e810b74b53f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\02.Bullet\Melee">
+      <UniqueIdentifier>{f8d1765f-3280-4f2d-ae3e-47ab38450783}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -246,6 +273,36 @@
     <ClInclude Include="Jump_Monster.h">
       <Filter>소스 파일\01.Obj\03.Monster\Jump_Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>소스 파일\01.Obj\04.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PItem.h">
+      <Filter>소스 파일\01.Obj\04.Item\01.PItem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>소스 파일\03.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMgr.h">
+      <Filter>소스 파일\99.Mgr\08.UIMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Life.h">
+      <Filter>소스 파일\03.UI\01.Life</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>소스 파일\03.UI\02.Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Inven.h">
+      <Filter>소스 파일\03.UI\03.Inven</Filter>
+    </ClInclude>
+    <ClInclude Include="GunItem.h">
+      <Filter>소스 파일\01.Obj\04.Item\02.GunItem</Filter>
+    </ClInclude>
+    <ClInclude Include="GuideItem.h">
+      <Filter>소스 파일\01.Obj\04.Item\03.GuideItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Melee.h">
+      <Filter>소스 파일\01.Obj\02.Bullet\Melee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -358,6 +415,36 @@
     </ClCompile>
     <ClCompile Include="Jump_Monster.cpp">
       <Filter>소스 파일\01.Obj\03.Monster\Jump_Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\01.Obj\04.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PItem.cpp">
+      <Filter>소스 파일\01.Obj\04.Item\01.PItem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>소스 파일\03.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMgr.cpp">
+      <Filter>소스 파일\99.Mgr\08.UIMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Life.cpp">
+      <Filter>소스 파일\03.UI\01.Life</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>소스 파일\03.UI\02.Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Inven.cpp">
+      <Filter>소스 파일\03.UI\03.Inven</Filter>
+    </ClCompile>
+    <ClCompile Include="GunItem.cpp">
+      <Filter>소스 파일\01.Obj\04.Item\02.GunItem</Filter>
+    </ClCompile>
+    <ClCompile Include="GuideItem.cpp">
+      <Filter>소스 파일\01.Obj\04.Item\03.GuideItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee.cpp">
+      <Filter>소스 파일\01.Obj\02.Bullet\Melee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

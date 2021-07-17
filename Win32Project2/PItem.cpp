@@ -32,11 +32,10 @@ int CPItem::Update()
 {
 	if (m_bDead)
 		return OBJ_DEAD;
-	D3DXMATRIX matScale, matRotZ, matTrans, matWorld;
+	D3DXMATRIX matScale, matTrans, matWorld;
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(00.f));
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
-	matWorld = matScale * matRotZ * matTrans;
+	matWorld = matScale  * matTrans;
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -58,9 +57,11 @@ void CPItem::Release()
 {
 }
 
-CObj * CPItem::Create()
+CObj * CPItem::Create(D3DXVECTOR3 _pos)
 {
 	CPItem* pInstance = new CPItem;
+	pInstance->Set_Item(ItemTag);
+	pInstance->Set_vPos(_pos);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);

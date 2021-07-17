@@ -15,19 +15,22 @@ class CPlayer :
 public:
 	enum BULLETTYPE{ BULLET_MELEE,BULLET_NORMAL,BULLET_GUIDE,BULLET_END};
 	typedef struct tagBullet {
-		tagBullet(int _c,int _m,BULLETTYPE _id)
-			: cur_magazine(_c),max_magazine(_m),BulletID(_id){
+		tagBullet(int _c,int _m,BULLETTYPE _id , DWORD _pd)
+			: cur_magazine(_c),max_magazine(_m),BulletID(_id),PatternDelay(_pd){
 		}
 		tagBullet operator+(tagBullet b1) {
 			BulletID = b1.BulletID;
 			cur_magazine += b1.cur_magazine;
 			if (cur_magazine > max_magazine)
 				cur_magazine = max_magazine;
+			PatternDelay = b1.PatternDelay;
 			return *this;
 		}
 		int cur_magazine;
 		int max_magazine;
 		BULLETTYPE BulletID;
+		DWORD PatternDelay;
+
 	}BULLET;
 private:
 public:
@@ -49,8 +52,10 @@ public:
 public:
 	void Set_Point(int _point) { m_tObjInfo.score += _point; }
 	void Set_Bullet(CItem::ITEMTAG _tag);
+	void Set_Immortal() { isImmortal = true; ImmortalTime = GetTickCount(); }
 public:
 	int Get_Point() { return m_tObjInfo.score; }
+	bool Get_Immortal() { return isImmortal; }
 	const vector<BULLET>& Get_Inven()const { return Inven; }
 public:
 	static CObj* Create();
@@ -65,7 +70,11 @@ private:
 private:
 	GRAVITY m_tG;
 	vector<BULLET> Inven;	
+	DWORD PatternTime;
+	DWORD ImmortalTime;
+	DWORD ImmortalDelay=400;
 	int cur_Weapon;
+	bool isImmortal = false;
 	//test
 };
 

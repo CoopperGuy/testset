@@ -6,9 +6,18 @@
 #include "ObjMgr.h"
 #include "LineMgr.h"
 #include "UIMgr.h"
+#include "LineMgr.h"
+#include "TileMgr.h"
+#include "BckMgr.h"
+#include "DataMgr.h"
+
 #include "Obj.h"
 #include "Player.h"
+#include "Life.h"
+
 #include "TestMon.h"
+#include "Normal_Monster.h"
+#include "Jump_Monster.h"
 
 class CScene
 {
