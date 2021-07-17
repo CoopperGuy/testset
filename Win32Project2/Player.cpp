@@ -25,10 +25,7 @@ HRESULT CPlayer::Initialize()
 	m_tInfo.vPos = { 100.f, 100.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 100.f, 0.f);
-	m_vP[0] = { -m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f };
-	m_vP[1] = { m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f };
-	m_vP[2] = { m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
-	m_vP[3] = { -m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
+
 	//위치정보
 	m_tObjInfo.hp = 3;
 	m_tObjInfo.atk = 1;
@@ -62,10 +59,6 @@ int CPlayer::Update()
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
 	matWorld = matScale * matRotZ * matTrans;
 
-	for (int i = 0; i < 4; ++i)
-	{
-		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
-	}
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT)) {
 		m_tInfo.vPos.x -= m_tObjInfo.spd;
 	}
@@ -80,19 +73,18 @@ int CPlayer::Update()
 	}
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		if (m_tG.m_bJump) {
+		if (!m_tG.m_bDJump && m_tG.m_bJump) {
 			m_tG.m_bDJump = true;
+			m_tG.m_fJumpY = m_tInfo.vPos.y;
+			m_tG.m_fJumpTime = 0.f;
+			curState = CPlayer::P_DJUMP;
 		}
 		if (!m_tG.m_bJump) {
 			curState = CPlayer::P_JUMP;
 			m_tG.m_fJumpY = m_tInfo.vPos.y;
 			m_tG.m_bJump = true;
 		}
-		if (m_tG.m_bDJump && m_tG.m_bJump) {
-			m_tG.m_fJumpY = m_tInfo.vPos.y;
-			m_tG.m_fJumpTime = 0.f;
-			curState = CPlayer::P_DJUMP;
-		}
+		
 	}
 	
 	if (CKeyMgr::Get_Instance()->Key_Down('A'))
@@ -100,7 +92,6 @@ int CPlayer::Update()
 		curState = CPlayer::P_ATTACK;
 
 		if (PatternTime + Inven[cur_Weapon].PatternDelay < GetTickCount()) {
-			Shut_Bullet();
 			PatternTime = GetTickCount();
 		}
 	}
@@ -110,22 +101,10 @@ int CPlayer::Update()
 				cur_Weapon = i;
 		}
 	}
-
-	////총알 테스트용
-	//if (CKeyMgr::Get_Instance()->Key_Down('Z'))
-	//{
-	//	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
-	//}
-	//if (CKeyMgr::Get_Instance()->Key_Down('X'))
-	//{
-	//	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
-	//}
-
 	Drop();
 	Jumping();
 	Offset();
-	Check_State();
-	Update_State();
+
 	return OBJ_NOEVENT;
 }
 
@@ -139,6 +118,8 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC _DC)
 {
+	Check_State();
+	Update_State();
 	float ScrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	D3DXMATRIX matScale, matTrans;
 	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
@@ -211,6 +192,9 @@ void CPlayer::Update_State()
 	if (m_tFrame.dwTime + m_tFrame.dwDelayTime < GetTickCount()) {
 		m_tFrame.CurID++;
 		isFlicker = (isFlicker + 1) % 2;
+		if (curState == CPlayer::P_ATTACK && m_tFrame.CurID == 5) {
+			Shut_Bullet();
+		}
 		if (m_tFrame.CurID == m_tFrame.EndId) {
 			switch (curState)
 			{
@@ -289,18 +273,18 @@ void CPlayer::Shut_Bullet()
 	switch (_id)
 	{
 	case CPlayer::BULLET_MELEE:
-		CObjMgr::Get_Instance()->Add_Object(CMelee::Create({m_tInfo.vPos.x + m_tInfo.vSize.x * 0.75f , m_tInfo.vPos.y , m_tInfo.vPos.z}), OBJID::PLAYERBULLET);
+		CObjMgr::Get_Instance()->Add_Object(CMelee::Create({m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y + m_tInfo.vSize.y * 0.5f, m_tInfo.vPos.z}), OBJID::PLAYERBULLET);
 		break;
 	case CPlayer::BULLET_NORMAL:
 		if (Inven[cur_Weapon].cur_magazine > 0) {
 			Inven[cur_Weapon].cur_magazine--;
-			CObjMgr::Get_Instance()->Add_Object(CLinear_Bullet::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
+			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
 		}
 		break;
 	case CPlayer::BULLET_GUIDE:
 		if (Inven[cur_Weapon].cur_magazine > 0) {
 			Inven[cur_Weapon].cur_magazine--;
-			CObjMgr::Get_Instance()->Add_Object(CGuided_Bullet::Create(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f, m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f), OBJID::PLAYERBULLET);
+			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y), OBJID::PLAYERBULLET);
 		}
 		break;
 	}
@@ -328,6 +312,7 @@ void CPlayer::Drop()
 	if (m_tInfo.vPos.y > WINCY*2.f) {
 		m_tInfo.vPos.y = 100.f;
 		m_tInfo.vPos.x = 100.f;
+		m_tObjInfo.hp--;
 	}
 }
 

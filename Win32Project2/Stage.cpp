@@ -17,11 +17,10 @@ void CStage::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(100.f,100.f), OBJID::PLAYER);
 	CBckMgr::Get_Instance()->Initialize();
 	CDataMgr::Get_Instance()->Load_Data();
-	CUIMgr::Get_Instance()->Add_Object(CLife::Create({ 100.f,100.f,0.f }, { 50.f,50.f,0.f }), UIID::STAGEUI);
+	CUIMgr::Get_Instance()->Add_Object(CLife::Create({ 100.f,100.f,0.f }, { 10.f,10.f,0.f }), UIID::STAGEUI);
+	CUIMgr::Get_Instance()->Add_Object(CScore::Create({ WINCX>>1,100.f,0.f }, { 10.f,10.f,0.f }), UIID::STAGEUI);
 
-	////출력 테스트
-	//CObjMgr::Get_Instance()->Add_Object(CNormal_Monster::Create(1000.f, 450.f), OBJID::MONSTER);
-	//CObjMgr::Get_Instance()->Add_Object(CJump_Monster::Create(1000.f, 300.f), OBJID::MONSTER);
+	//CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CJump_Monster>::Create(800, 350), OBJID::MONSTER);
 }
 
 void CStage::Update()
