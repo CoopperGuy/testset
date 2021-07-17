@@ -17,10 +17,17 @@ public:
 	virtual void Render_UI(HDC _DC)PURE;
 	virtual void Release()PURE;
 public:
+	virtual void Update_State();
+public:
 	void Set_Pos(D3DXVECTOR3 _pos) { m_tInfo.vPos = _pos; }
 	void Set_Size(D3DXVECTOR3 _size) { m_tInfo.vSize = _size; }
 protected:
 	INFO m_tInfo;
+	D3DXMATRIX matScale;
+	D3DXMATRIX matTrans; 
+	D3DXMATRIX matWorld;
+	FRAME m_tFrame;
+
 
 
 };

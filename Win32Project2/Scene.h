@@ -14,6 +14,8 @@
 #include "Obj.h"
 #include "Player.h"
 #include "Life.h"
+#include "Score.h"
+#include "Inven.h"
 
 #include "TestMon.h"
 #include "Normal_Monster.h"
