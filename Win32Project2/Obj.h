@@ -27,13 +27,16 @@ public:
 public:
 	void Set_Dead() { m_bDead = OBJ_DEAD; }
 	void Set_Score(int _Point) { m_tObjInfo.score += _Point; }
+	void Set_Life(int life) { m_tObjInfo.hp += life; }
 public:
 	int Get_Score() { return m_tObjInfo.score; }
-
+	int Get_Life() { return m_tObjInfo.hp; }
 public:
 	void Set_Pos(float _fx, float _fy) { m_tInfo.vPos = { _fx, _fy, 0.f }; }
 	void Set_Dir(float _fx, float _fy) {m_tInfo.vDir = { _fx, _fy, 0.f }; }
 	void Set_Size(float _fx, float _fy) { m_tInfo.vSize = { _fx, _fy ,0.f }; }
+
+	void Set_vPos(D3DXVECTOR3 _pos) { m_tInfo.vPos = _pos; }
 
 	void Set_ObjInfo(OBJINFO _tobj) { m_tObjInfo = _tobj; }
 

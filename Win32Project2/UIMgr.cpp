@@ -18,16 +18,21 @@ CUIMgr::~CUIMgr()
 
 void CUIMgr::Update()
 {
-	for (auto& iter : m_listUI) {
-		(iter)->Update_UI();
+	for (int i = 0; i < UIID::END; i++) {
+		for (auto& iter : m_listUI[i]) {
+			iter->Update_UI();
+		}
 	}
 }
 
 void CUIMgr::Render(HDC _DC)
 {
-	for (auto& iter : m_listUI) {
-		(iter)->Render_UI();
+	for (int i = 0; i < UIID::END; i++) {
+		for (auto& iter : m_listUI[i]) {
+			iter->Render_UI(_DC);
+		}
 	}
+
 }
 
 void CUIMgr::Release()
