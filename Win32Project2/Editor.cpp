@@ -36,7 +36,6 @@ void CEditor::Initialize()
 void CEditor::Update()
 {
 	CBckMgr::Get_Instance()->Update();
-	//CObjMgr::Get_Instance()->Update();
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
 		CScrollMgr::Get_Instance()->Set_ScrollX(15.f);
@@ -148,6 +147,9 @@ void CEditor::Update()
 		CDataMgr::Get_Instance()->Save_Data();
 	if (CKeyMgr::Get_Instance()->Key_Down('L'))
 		CDataMgr::Get_Instance()->Load_Data();
+
+	CObjMgr::Get_Instance()->Update();
+
 }
 
 void CEditor::Late_Update()

@@ -14,7 +14,7 @@ CStage::~CStage()
 
 void CStage::Initialize()
 {
-	CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(), OBJID::PLAYER);
+	CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(100.f,100.f), OBJID::PLAYER);
 	CBckMgr::Get_Instance()->Initialize();
 	CDataMgr::Get_Instance()->Load_Data();
 	CUIMgr::Get_Instance()->Add_Object(CLife::Create({ 100.f,100.f,0.f }, { 50.f,50.f,0.f }), UIID::STAGEUI);

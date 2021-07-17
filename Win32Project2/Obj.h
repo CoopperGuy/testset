@@ -27,6 +27,9 @@ public:
 	const DWORD& Get_Time() { return m_dwTime; }
 	const DWORD& Get_Delaytime() { return m_dwDelayTime; }
 public:
+	virtual void Check_State();
+	virtual void Update_State();
+public:
 	void Set_Dead() { m_bDead = OBJ_DEAD; }
 	void Set_Score(int _Point) { m_tObjInfo.score += _Point; }
 	void Set_Life(int life) { m_tObjInfo.hp += life; }
@@ -47,8 +50,10 @@ public:
 protected:
 	D3DXVECTOR3 m_vQ[4];
 	D3DXVECTOR3 m_vP[4];
+	D3DXMATRIX matWorld;
 	INFO m_tInfo;
 	OBJINFO m_tObjInfo;
+	FRAME m_tFrame;
 	DWORD m_dwTime;
 	DWORD m_dwDelayTime;
 	bool	m_bDead;
