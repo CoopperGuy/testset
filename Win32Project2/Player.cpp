@@ -21,7 +21,6 @@ CPlayer::~CPlayer()
 
 HRESULT CPlayer::Initialize()
 {
-
 	m_tInfo.vPos = { 100.f, 100.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 100.f, 0.f);
@@ -123,7 +122,7 @@ void CPlayer::Render(HDC _DC)
 	float ScrollX = CScrollMgr::Get_Instance()->Get_ScrollX();
 	D3DXMATRIX matScale, matTrans;
 	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
-	D3DXMatrixTranslation(&matTrans,  (m_tInfo.vPos.x + ScrollX) , m_tInfo.vPos.y ,0.f );
+	D3DXMatrixTranslation(&matTrans,  (m_tInfo.vPos.x + ScrollX) , m_tInfo.vPos.y+50.f ,0.f );
 	matWorld = matScale * matTrans;
 	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Player", m_tFrame.m_pFrameKey, m_tFrame.CurID);
 	float fCenterX = 0;
@@ -361,11 +360,11 @@ void CPlayer::Set_Bullet(CItem::ITEMTAG _tag)
 CObj * CPlayer::Create(float _x,float _y)
 {
 	CPlayer* pInstance = new CPlayer;
-	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
+	pInstance->Set_Pos(_x, _y);
 	return pInstance;
 }

@@ -3,12 +3,14 @@
 #include "ScrollMgr.h"
 
 CLine::CLine()
+	: m_bDead(false)
 {
 }
 
 
 CLine::CLine(LINEPOS& _tLeftPos, LINEPOS& _tRightPos)
 	: m_tInfo(_tLeftPos, _tRightPos)
+	, m_bDead(false)
 {
 
 }
@@ -23,6 +25,18 @@ HRESULT CLine::Initialize()
 	return S_OK;
 }
 
+int CLine::Update()
+{
+	if (m_bDead)
+		return OBJ_DEAD;
+
+	if (m_tInfo.tRightPos.fX + CScrollMgr::Get_Instance()->Get_ScrollX() < 0)
+		m_bDead = true;
+
+
+	return OBJ_NOEVENT;
+}
+
 void CLine::Render(HDC _DC)
 {
 	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
@@ -32,6 +46,7 @@ void CLine::Render(HDC _DC)
 
 void CLine::Release()
 {
+
 }
 
 float CLine::Get_LineY(float _x) 

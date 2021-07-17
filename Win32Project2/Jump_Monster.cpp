@@ -18,6 +18,8 @@ HRESULT CJump_Monster::Initialize()
 {
 	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::TEX_ID::SINGLE_TEX, L"../Texture/Monster/Jump_Monster/Jump_Monster.png", L"Jump_Monster");
 
+	m_eID = EDITID::ID::JUMP_MONSTER;
+
 	//m_tInfo.vPos = { 800.f, 500.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(50.f, 75.f, 0.f);
@@ -96,6 +98,12 @@ void CJump_Monster::Render(HDC _DC)
 {
 	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	
+	D3DXMATRIX matScale, matRotZ, matTrans;
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(m_fAngle));
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x + ScrollX, m_tInfo.vPos.y, m_tInfo.vPos.z);
+	m_matWorld = matScale * matRotZ * matTrans;
+
 	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Jump_Monster");
 	float fCenterX = float(pTexInfo->tImageInfo.Width >> 1);
 	float fCenterY = float(pTexInfo->tImageInfo.Height >> 1);
@@ -111,12 +119,12 @@ void CJump_Monster::Release()
 CObj * CJump_Monster::Create(float _x, float _y)
 {
 	CJump_Monster* pInstance = new CJump_Monster;
-	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
+	pInstance->Set_Pos(_x, _y);
 	return pInstance;
 }
 

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Stage.h"
-
+#include "MapObjMgr.h"
 
 CStage::CStage()
 {
@@ -14,8 +14,11 @@ CStage::~CStage()
 
 void CStage::Initialize()
 {
-	CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(100.f,100.f), OBJID::PLAYER);
 	CBckMgr::Get_Instance()->Initialize();
+	CLineMgr::Get_Instance()->Initialize();
+	CTileMgr::Get_Instance()->Initialize();
+	CMapObjMgr::Get_Instance()->Ready_MapObj();
+
 	CDataMgr::Get_Instance()->Load_Data();
 	CUIMgr::Get_Instance()->Add_Object(CLife::Create({ 100.f,100.f,0.f }, { 10.f,10.f,0.f }), UIID::STAGEUI);
 	CUIMgr::Get_Instance()->Add_Object(CScore::Create({ WINCX>>1,100.f,0.f }, { 10.f,10.f,0.f }), UIID::STAGEUI);
@@ -43,7 +46,6 @@ void CStage::Render(HDC _DC)
 	CBckMgr::Get_Instance()->Render(_DC);
 	CTileMgr::Get_Instance()->Render(_DC);
 	CObjMgr::Get_Instance()->Render(_DC);
-	CLineMgr::Get_Instance()->Render(_DC);
 	CUIMgr::Get_Instance()->Render(_DC);
 }
 

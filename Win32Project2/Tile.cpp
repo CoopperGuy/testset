@@ -15,7 +15,7 @@ HRESULT CTile::Initialize()
 {
 	m_tInfo.vDir = { 1.f,0.f,0.f };
 	m_tInfo.vPos = { 0.f,0.f,0.f };
-	m_tInfo.vSize = { 100.f,100.f,0.f };
+	m_tInfo.vSize = { 75.f,75.f,0.f };
 
 
 	return S_OK;
@@ -25,6 +25,9 @@ int CTile::Update()
 {
 	if (m_bDead)
 		return OBJ_DEAD;
+
+	if (m_tInfo.vPos.x + CScrollMgr::Get_Instance()->Get_ScrollX() + m_tInfo.vSize.x < 0)
+		m_bDead = true;
 
 
 	return OBJ_NOEVENT;
