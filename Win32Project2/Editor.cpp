@@ -37,7 +37,6 @@ void CEditor::Update()
 {
 	CBckMgr::Get_Instance()->Update();
 	//CObjMgr::Get_Instance()->Update();
-	//CTileMgr::Get_Instance()->Update();
 
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
 		CScrollMgr::Get_Instance()->Set_ScrollX(15.f);

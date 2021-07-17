@@ -103,8 +103,7 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 			Safe_Delete(m_listObj[OBJID::PLAYER].front());
 			m_listObj[OBJID::PLAYER].clear();
 		}
-		CObj* pObj = CPlayer::Create();
-		pObj->Set_Pos((float)x, (float)y);
+		CObj* pObj = CAbstractFactory<CPlayer>::Create((float)x, (float)y);
 		m_listObj[OBJID::PLAYER].emplace_back(pObj);
 	}
 	break;
@@ -206,7 +205,7 @@ void CObjMgr::Load_Player()
 		if (0 == dwByte)
 			break;
 
-		CObj* pObj = CPlayer::Create();
+		CObj* pObj = CAbstractFactory<CPlayer>::Create(tInfo.vPos.x, tInfo.vPos.y);
 		pObj->Set_Info(tInfo);
 		pObj->Set_ObjInfo(tObjInfo);
 
