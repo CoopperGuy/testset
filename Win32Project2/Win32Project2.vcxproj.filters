@@ -163,6 +163,12 @@
     <Filter Include="소스 파일\01.Obj\03.Monster\Boss">
       <UniqueIdentifier>{86a1ec0b-56e6-49be-9623-5d594551d86a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\02.Bullet\Boss_Bullet">
+      <UniqueIdentifier>{4dc3f2b4-44f6-4c1e-a828-26c151e20053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\02.Bullet\Boss_Throw">
+      <UniqueIdentifier>{6843e5b3-43d4-4603-a504-4459648d6ff9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -324,6 +330,12 @@
     <ClInclude Include="Boss.h">
       <Filter>소스 파일\01.Obj\03.Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Boss_Bullet.h">
+      <Filter>소스 파일\01.Obj\02.Bullet\Boss_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_Throw.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -475,6 +487,12 @@
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>소스 파일\01.Obj\03.Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Bullet.cpp">
+      <Filter>소스 파일\01.Obj\02.Bullet\Boss_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Throw.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

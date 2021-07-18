@@ -42,7 +42,6 @@ void CObjMgr::Update()
 	}
 	//	Get_Player()->Update();
 
-	CCollisionMgr::COllision_Bulllet_Monster(m_listObj[OBJID::PLAYERBULLET], m_listObj[OBJID::MONSTER]);
 }
 
 void CObjMgr::Late_Update()
@@ -61,6 +60,8 @@ void CObjMgr::Late_Update()
 	CCollisionMgr::Collision_Player_Item(m_listObj[OBJID::PLAYER], m_listObj[OBJID::ITEM]);
 	CCollisionMgr::Collision_Player_Monster(m_listObj[OBJID::PLAYER], m_listObj[OBJID::MONSTER]);
 	CCollisionMgr::COllision_Bulllet_Monster(m_listObj[OBJID::PLAYERBULLET], m_listObj[OBJID::MONSTER]);
+	CCollisionMgr::COllision_Player_BossThing(m_listObj[OBJID::PLAYER], m_listObj[OBJID::BOSSBULLET]);
+	CCollisionMgr::COllision_Player_BossThing(m_listObj[OBJID::PLAYER], m_listObj[OBJID::BOSSTHROW]);
 
 }
 

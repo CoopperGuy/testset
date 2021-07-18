@@ -152,6 +152,8 @@
     <ClInclude Include="BckGround.h" />
     <ClInclude Include="BckMgr.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="Boss_Bullet.h" />
+    <ClInclude Include="Boss_Throw.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="DataMgr.h" />
@@ -206,6 +208,8 @@
     <ClCompile Include="BckGround.cpp" />
     <ClCompile Include="BckMgr.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Boss_Bullet.cpp" />
+    <ClCompile Include="Boss_Throw.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="DataMgr.cpp" />
