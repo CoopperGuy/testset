@@ -59,7 +59,10 @@ HRESULT CBoss::Initialize()
 int CBoss::Update()
 {
 	if (m_tInfo.vPos.x - CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x > WINCX)
+	{
+		m_tObjInfo.hp = 10;
 		return OBJ_NOEVENT;
+	}
 
 	m_tInfo.vPos.x = CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x + 550;
 
@@ -67,13 +70,13 @@ int CBoss::Update()
 	{
 		return OBJ_DEAD;
 	}
-
 	
 
 	if (m_eState == HIT)
 	{
 		--m_tObjInfo.hp;
 		m_eState = RUN;
+		m_bIsHit = false;
 	}
 
 	//BOSS_STATE¿¡ ¸Â°Ô if-else
