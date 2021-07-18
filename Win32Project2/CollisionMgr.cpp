@@ -76,7 +76,23 @@ void CCollisionMgr::COllision_Bulllet_Monster(list<CObj*> _Dst, list<CObj*> _src
 	}
 }
 
-
+void CCollisionMgr::COllision_Player_BossThing(list<CObj*> _Dst, list<CObj*> _src)
+{
+	for (auto& diter : _Dst)
+	{
+		for (auto& siter : _src)
+		{
+			if (static_cast<CPlayer*>(diter)->Get_Immortal())
+				return;
+			if (Collision_OBB(diter, siter))
+			{
+				static_cast<CPlayer*>(diter)->Set_Immortal();
+				diter->Set_Life(-1);
+				siter->Set_Dead();
+			}
+		}
+	}
+}
 
 
 //#####################################################################################//
