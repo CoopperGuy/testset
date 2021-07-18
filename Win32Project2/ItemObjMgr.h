@@ -4,6 +4,7 @@
 
 class CItemObjMgr
 {
+	DECLARE_SINGLETON(CItemObjMgr)
 public:
 	CItemObjMgr();
 	~CItemObjMgr();

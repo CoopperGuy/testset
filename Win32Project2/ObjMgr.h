@@ -29,6 +29,9 @@ public:
 	void Save_MapObj();
 	void Load_MapObj();
 
+	void Save_Item();
+	void Load_Item();
+
 public:
 	CObj* Get_TargetMonster(CObj* _pObject);
 

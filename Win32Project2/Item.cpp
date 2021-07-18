@@ -2,7 +2,9 @@
 #include "Item.h"
 
 
-CItem::CItem():ItemTag(ITEMTAG::ITEM_END)
+CItem::CItem()
+	:ItemTag(ITEMTAG::ITEM_END)
+	, m_eID(EDITID::END)
 {
 }
 

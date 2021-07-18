@@ -24,10 +24,8 @@ CPlayer::~CPlayer()
 
 HRESULT CPlayer::Initialize()
 {
-
-	m_tInfo.vPos = { 100.f, 100.f, 0.f };
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
-	m_tInfo.vSize = D3DXVECTOR3(100.f, 150.f, 0.f);
+	m_tInfo.vSize = D3DXVECTOR3(75.f, 75.f, 0.f);
 
 	//위치정보
 	m_tObjInfo.hp = 3;
@@ -146,7 +144,7 @@ void CPlayer::Render(HDC _DC)
 	float fCenterY = 0;
 	if (pTexInfo != nullptr) {
 		fCenterX = pTexInfo->tImageInfo.Width >> 1;
-		fCenterY = (pTexInfo->tImageInfo.Height>>1) + 150.f;
+		fCenterY = (pTexInfo->tImageInfo.Height>>1) + 160.f;
 		CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 		int alpha = 0;
 		switch (isImmortal)
