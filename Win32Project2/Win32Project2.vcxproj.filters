@@ -334,7 +334,7 @@
       <Filter>소스 파일\01.Obj\02.Bullet\Boss_Bullet</Filter>
     </ClInclude>
     <ClInclude Include="Boss_Throw.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\01.Obj\02.Bullet\Boss_Throw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -492,7 +492,7 @@
       <Filter>소스 파일\01.Obj\02.Bullet\Boss_Bullet</Filter>
     </ClCompile>
     <ClCompile Include="Boss_Throw.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\01.Obj\02.Bullet\Boss_Throw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

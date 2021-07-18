@@ -56,6 +56,11 @@ HRESULT CBoss::Initialize()
 
 int CBoss::Update()
 {
+	if (m_tInfo.vPos.x - CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x > WINCX)
+		return OBJ_NOEVENT;
+
+	m_tInfo.vPos.x = CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x + 550;
+
 	if (m_bDead)
 	{
 		return OBJ_DEAD;
@@ -99,7 +104,7 @@ int CBoss::Update()
 		}
 		else
 		{
-			if ((m_timeCount + 1200) < GetTickCount())
+			if ((m_timeCount + 1500) < GetTickCount())
 			{
 				//총알 발사
 				CObjMgr::Get_Instance()->Add_Object(CBoss_Bullet::Create(m_tInfo.vPos.x, m_tInfo.vPos.y), OBJID::BOSSBULLET);
@@ -129,7 +134,7 @@ int CBoss::Update()
 			m_tInfo.vPos.y -= 3.f;
 			//조금씩 Scale + 0.05f
 			m_fScale += 0.005f;
-			if (abs(m_tInfo.vPos.y - 150.f) < 20)
+			if (abs(m_tInfo.vPos.y - 200.f) < 20)
 			{
 				m_settled = true;
 			}
@@ -139,7 +144,7 @@ int CBoss::Update()
 			if ((m_timeCount + 1500) < GetTickCount())
 			{
 				//Attack_2 발사
-				CObjMgr::Get_Instance()->Add_Object(CBoss_Throw::Create(m_tInfo.vPos.x, m_tInfo.vPos.y + 50), OBJID::BOSSTHROW);
+				CObjMgr::Get_Instance()->Add_Object(CBoss_Throw::Create(m_tInfo.vPos.x, m_tInfo.vPos.y), OBJID::BOSSTHROW);
 
 				++m_patternCount;
 
@@ -185,6 +190,9 @@ void CBoss::Late_Update()
 
 void CBoss::Render(HDC _DC)
 {
+	if (m_tInfo.vPos.x - CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x > WINCX)
+		return ;
+
 	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(m_pTextureKey);
 	float fCenterX = float(pTexInfo->tImageInfo.Width >> 1);
 	float fCenterY = float(pTexInfo->tImageInfo.Height >> 1);

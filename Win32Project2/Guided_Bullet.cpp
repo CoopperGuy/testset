@@ -93,8 +93,6 @@ void CGuided_Bullet::Late_Update()
 
 void CGuided_Bullet::Render(HDC _DC)
 {
-	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-
 	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Guided_Bullet");
 	float fCenterX = float(pTexInfo->tImageInfo.Width >> 1);
 	float fCenterY = float(pTexInfo->tImageInfo.Height >> 1);

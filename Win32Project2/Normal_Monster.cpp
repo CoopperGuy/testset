@@ -40,6 +40,9 @@ HRESULT CNormal_Monster::Initialize()
 
 int CNormal_Monster::Update()
 {
+	if (m_tInfo.vPos.x - CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x > WINCX)
+		return OBJ_NOEVENT;
+
 	if (m_bDead)
 	{
 		return OBJ_DEAD;
@@ -88,7 +91,8 @@ void CNormal_Monster::Late_Update()
 
 void CNormal_Monster::Render(HDC _DC)
 {
-	//int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	if (m_tInfo.vPos.x - CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x > WINCX)
+		return;
 
 	++m_iDrawID;
 	if (m_eState == HIT || m_iDrawID > m_iMaxDrawID)

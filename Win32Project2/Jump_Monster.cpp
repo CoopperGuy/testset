@@ -40,6 +40,9 @@ HRESULT CJump_Monster::Initialize()
 
 int CJump_Monster::Update()
 {
+	if (m_tInfo.vPos.x - CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x > WINCX)
+		return OBJ_NOEVENT;
+
 	if (m_bDead)
 	{
 		return OBJ_DEAD;
@@ -94,7 +97,8 @@ void CJump_Monster::Late_Update()
 
 void CJump_Monster::Render(HDC _DC)
 {
-	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	if (m_tInfo.vPos.x - CObjMgr::Get_Instance()->Get_Player()->Get_Pos().x > WINCX)
+		return;
 	
 	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo_Texture(L"Jump_Monster");
 	float fCenterX = float(pTexInfo->tImageInfo.Width >> 1);

@@ -52,7 +52,7 @@ int CBoss_Throw::Update()
 	{
 		D3DXVECTOR3 _player = CObjMgr::Get_Instance()->Get_Player()->Get_Pos();
 		m_vTargetDir.x = float(_player.x - m_tInfo.vPos.x);
-		m_vTargetDir.y = float(_player.y - m_tInfo.vPos.y);
+		m_vTargetDir.y = float(_player.y + 300 - m_tInfo.vPos.y);
 		D3DXVec3Normalize(&m_vTargetDir, &m_vTargetDir);
 		m_bTargetLock = true;
 	}

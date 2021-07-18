@@ -20,7 +20,7 @@ void CStage::Initialize()
 	CUIMgr::Get_Instance()->Add_Object(CLife::Create({ 100.f,100.f,0.f }, { 10.f,10.f,0.f }), UIID::STAGEUI);
 	CUIMgr::Get_Instance()->Add_Object(CScore::Create({ WINCX>>1,100.f,0.f }, { 10.f,10.f,0.f }), UIID::STAGEUI);
 
-	//CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CJump_Monster>::Create(800, 350), OBJID::MONSTER);
+	//CObjMgr::Get_Instance()->Add_Object(CNormal_Monster::Create(1300, 400), OBJID::MONSTER);
 }
 
 void CStage::Update()

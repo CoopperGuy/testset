@@ -22,7 +22,7 @@ HRESULT CBoss_Bullet::Initialize()
 
 	m_tObjInfo.hp = 1;
 	m_tObjInfo.atk = 1;
-	m_tObjInfo.spd = 10.f;
+	m_tObjInfo.spd = 5.f;
 	m_tObjInfo.agl = 0.f;
 
 	/*m_dwTime = GetTickCount();
