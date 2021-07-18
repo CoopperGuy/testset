@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameOver.h"
 #include "SceneMgr.h"
-
+#include "Go.h"
 CGameOver::CGameOver()
 {
 }
@@ -14,7 +14,7 @@ CGameOver::~CGameOver()
 
 void CGameOver::Initialize()
 {
-	//uiÃß°¡
+	CUIMgr::Get_Instance()->Add_Object(CGo::Create({ WINCX>>1,WINCY>>1,0.f }, { 100.f,100.f,0.f }), UIID::OVERUI);
 }
 
 void CGameOver::Update()

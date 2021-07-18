@@ -172,6 +172,9 @@
     <Filter Include="소스 파일\99.Mgr\01.ObjMgr\03.ItemObjMgr">
       <UniqueIdentifier>{4d61d51d-57d7-4f00-888f-f936aed9c486}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\03.UI\04.GO">
+      <UniqueIdentifier>{a61e9373-811d-4e58-bc4f-45479917ac73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -348,6 +351,9 @@
     <ClInclude Include="Boss_Bullet.h">
       <Filter>소스 파일\01.Obj\03.Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Go.h">
+      <Filter>소스 파일\03.UI\04.GO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -514,6 +520,9 @@
     </ClCompile>
     <ClCompile Include="Boss_Throw.cpp">
       <Filter>소스 파일\01.Obj\03.Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Go.cpp">
+      <Filter>소스 파일\03.UI\04.GO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

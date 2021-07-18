@@ -160,6 +160,7 @@
     <ClInclude Include="DownSword.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="GameOver.h" />
+    <ClInclude Include="Go.h" />
     <ClInclude Include="Graphic_Device.h" />
     <ClInclude Include="Guided_Bullet.h" />
     <ClInclude Include="GuideItem.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="DownSword.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="Go.cpp" />
     <ClCompile Include="Graphic_Device.cpp" />
     <ClCompile Include="Guided_Bullet.cpp" />
     <ClCompile Include="GuideItem.cpp" />

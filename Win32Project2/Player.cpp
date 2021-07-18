@@ -308,14 +308,14 @@ void CPlayer::Shut_Bullet()
 		if (Inven[cur_Weapon].cur_magazine > 0) {
 			Inven[cur_Weapon].cur_magazine--;
 			CObjMgr::Get_Instance()->Add_Object(
-				CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y + m_tInfo.vSize.y*0.25f), OBJID::PLAYERBULLET);
+				CAbstractFactory<CLinear_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y - 20.f ), OBJID::PLAYERBULLET);
 		}
 		break;
 	case CPlayer::BULLET_GUIDE:
 		if (Inven[cur_Weapon].cur_magazine > 0) {
 			Inven[cur_Weapon].cur_magazine--;
 			CObjMgr::Get_Instance()->Add_Object(
-				CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y + m_tInfo.vSize.y*0.25f), OBJID::PLAYERBULLET);
+				CAbstractFactory<CGuided_Bullet>::Create(m_tInfo.vPos.x + m_tInfo.vSize.x*1.5f, m_tInfo.vPos.y - 20.f ), OBJID::PLAYERBULLET);
 		}
 		break;
 	}
@@ -342,7 +342,6 @@ void CPlayer::Drop()
 {
 	if (m_tInfo.vPos.y > WINCY*2.f) {
 		m_tInfo.vPos.y = 100.f;
-		m_tInfo.vPos.x = 100.f;
 		m_tObjInfo.hp--;
 	}
 }
