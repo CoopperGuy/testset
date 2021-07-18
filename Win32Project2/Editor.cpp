@@ -176,7 +176,7 @@ void CEditor::Update()
 	if (CKeyMgr::Get_Instance()->Key_Down('L'))
 	{
 		CDataMgr::Get_Instance()->Load_Data();
-		CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(150.f, 400.f), OBJID::PLAYER);
+		//CObjMgr::Get_Instance()->Add_Object(CPlayer::Create(150.f, 400.f), OBJID::PLAYER);
 	}
 	//CObjMgr::Get_Instance()->Update();
 	//if (CObjMgr::Get_Instance()->Get_Player())

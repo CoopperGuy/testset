@@ -37,6 +37,8 @@ void CStage::Update()
 	CBckMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 	CUIMgr::Get_Instance()->Update();
+	CLineMgr::Get_Instance()->Update();
+	CTileMgr::Get_Instance()->Update();
 }
 
 void CStage::Late_Update()
