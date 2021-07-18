@@ -342,7 +342,6 @@ void CPlayer::Drop()
 {
 	if (m_tInfo.vPos.y > WINCY*2.f) {
 		m_tInfo.vPos.y = 100.f;
-		m_tInfo.vPos.x = 100.f;
 		m_tObjInfo.hp--;
 	}
 }
