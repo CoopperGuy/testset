@@ -110,6 +110,8 @@ int CPlayer::Update()
 	}
 	if(CKeyMgr::Get_Instance()->Key_Down('M'))
 		m_tObjInfo.hp = 0;
+	if (CKeyMgr::Get_Instance()->Key_Down('S'))
+		m_tObjInfo.hp = 3;
 	Drop();
 	Jumping();
 	Offset();
