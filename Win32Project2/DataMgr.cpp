@@ -40,10 +40,13 @@ void CDataMgr::Save_Data()
 	//3. 맵 오브젝트 저장하고
 	CObjMgr::Get_Instance()->Save_MapObj();
 
-	//4. 몬스터 배치하고
+	//4. 아이템 오브젝트 저장하고
+	CObjMgr::Get_Instance()->Save_Item();
+
+	//5. 몬스터 배치하고
 	CObjMgr::Get_Instance()->Save_Monster();
 
-	//5. 플레이어 배치하고
+	//6. 플레이어 배치하고
 	CObjMgr::Get_Instance()->Save_Player();
 
 }
@@ -59,10 +62,13 @@ void CDataMgr::Load_Data()
 	//3. 맵 오브젝트 로드하고
 	CObjMgr::Get_Instance()->Load_MapObj();
 
-	//4. 몬스터 로드하고
+	//4. 아이템 오브젝트 저장하고
+	CObjMgr::Get_Instance()->Load_Item();
+
+	//5. 몬스터 로드하고
 	CObjMgr::Get_Instance()->Load_Monster();
 	
-	//5. 플레이어 로드하고
+	//6. 플레이어 로드하고
 	CObjMgr::Get_Instance()->Load_Player();
 
 }

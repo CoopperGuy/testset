@@ -13,6 +13,7 @@ CGuideItem::~CGuideItem()
 
 HRESULT CGuideItem::Initialize()
 {
+	m_eID = EDITID::GUIDEITEM;
 	ItemTag = CItem::ITEMTAG::ITEM_GUIDE;
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 100.f, 0.f);

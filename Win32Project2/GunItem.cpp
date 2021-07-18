@@ -13,6 +13,7 @@ CGunItem::~CGunItem()
 
 HRESULT CGunItem::Initialize()
 {
+	m_eID = EDITID::GUNITEM;
 	ItemTag = CItem::ITEMTAG::ITEM_GUN;
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 100.f, 0.f);

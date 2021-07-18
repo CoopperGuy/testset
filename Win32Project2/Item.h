@@ -23,8 +23,10 @@ public:
 	void Set_Item(ITEMTAG _tag) { ItemTag = _tag; }
 public:
 	ITEMTAG Get_Item() { return ItemTag; }
+	const EDITID::ID& Get_ID() { return m_eID; }
 protected:
-	ITEMTAG ItemTag;
+	ITEMTAG		ItemTag;
+	EDITID::ID	m_eID;
 };
 
 

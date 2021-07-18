@@ -8,6 +8,7 @@
 
 #include "MonObjMgr.h"
 #include "MapObjMgr.h"
+#include "ItemObjMgr.h"
 #include "CollisionMgr.h"
 #include "ScrollMgr.h"
 
@@ -58,11 +59,17 @@ void CObjMgr::Late_Update()
 				break;
 		}
 	}
+	// Item 충돌
 	CCollisionMgr::Collision_Player_Item(m_listObj[OBJID::PLAYER], m_listObj[OBJID::ITEM]);
+	// Monster 충돌
 	CCollisionMgr::Collision_Player_Monster(m_listObj[OBJID::PLAYER], m_listObj[OBJID::MONSTER]);
+	// MapObj 충돌
 	CCollisionMgr::Collision_Player_Obstacle(m_listObj[OBJID::PLAYER], m_listObj[OBJID::MAPOBJ]);
+	// Player Bullet 충돌
 	CCollisionMgr::COllision_Bulllet_Monster(m_listObj[OBJID::PLAYERBULLET], m_listObj[OBJID::MONSTER]);
-
+	// Boss Bullet 충돌
+	CCollisionMgr::COllision_Player_BossThing(m_listObj[OBJID::PLAYER], m_listObj[OBJID::BOSSBULLET]);
+	CCollisionMgr::COllision_Player_BossThing(m_listObj[OBJID::PLAYER], m_listObj[OBJID::BOSSTHROW]);
 }
 
 void CObjMgr::Render(HDC _DC)
@@ -112,6 +119,7 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 	// Monster
 	case EDITID::NORMAL_MONSTER:
 	case EDITID::JUMP_MONSTER:
+	case EDITID::BOSS:
 		if (_editid == EDITID::JUMP_MONSTER)
 			y -= 20;
 	{
@@ -157,6 +165,34 @@ void CObjMgr::Picking_Obj(EDITID::ID _editid)
 		}
 	}
 	break;
+	case EDITID::ID::PITEM:
+	case EDITID::ID::GUNITEM:
+	case EDITID::ID::GUIDEITEM:
+	{
+		int x = (pt.x / (TILECX >> 1))* (TILECX >> 1) + (TILECX >> 1);
+		int y = (pt.y / (TILECY >> 1))* (TILECY >> 1) + (TILECY >> 1);
+
+		CObj* pObj = CItemObjMgr::Get_Instance()->Create_ItemObj(_editid, (float)x, (float)y);
+		m_listObj[OBJID::ITEM].emplace_back(pObj);
+		}
+		break;
+	case EDITID::ITEMDEL:
+	{
+		int x = (pt.x / (TILECX >> 1))* (TILECX >> 1) + (TILECX >> 1);
+		int y = (pt.y / (TILECY >> 1))* (TILECY >> 1) + (TILECY >> 1);
+
+		for (auto& iter = m_listObj[OBJID::ITEM].begin(); iter != m_listObj[OBJID::ITEM].end(); ++iter)
+		{
+			if (((*iter)->Get_Pos().x == x) && (((*iter)->Get_Pos().y == y)))
+			{
+				Safe_Delete(*iter);
+				m_listObj[OBJID::ITEM].erase(iter);
+				return;
+			}
+		}
+	}
+	// Item
+
 	default:
 		break;
 	}
@@ -209,8 +245,6 @@ void CObjMgr::Load_Player()
 			break;
 
 		CObj* pObj = CAbstractFactory<CPlayer>::Create(tInfo.vPos.x, tInfo.vPos.y);
-		pObj->Set_Info(tInfo);
-		pObj->Set_ObjInfo(tObjInfo);
 
 		m_listObj[OBJID::PLAYER].emplace_back(pObj);
 	}
@@ -300,8 +334,6 @@ void CObjMgr::Save_MapObj()
 	{
 		WriteFile(hFile, &(static_cast<CMapObj*>(pMapObj))->Get_ID(), sizeof(EDITID::ID), &dwByte, NULL);
 		WriteFile(hFile, &pMapObj->Get_Info(), sizeof(INFO), &dwByte, NULL);
-		WriteFile(hFile, &pMapObj->Get_Time(), sizeof(DWORD), &dwByte, NULL);
-		WriteFile(hFile, &pMapObj->Get_Delaytime(), sizeof(DWORD), &dwByte, NULL);
 	}
 	CloseHandle(hFile);
 	MessageBox(g_hWnd, L"MapObj 저장 성공!", L"성공", MB_OK);
@@ -322,14 +354,11 @@ void CObjMgr::Load_MapObj()
 	DWORD		dwByte = 0;
 	EDITID::ID	eID = EDITID::END;
 	INFO		tInfo = {};
-	DWORD		dwTime = 0, dwDelay = 0;
 
 	while (true)
 	{
 		ReadFile(hFile, &eID, sizeof(EDITID::ID), &dwByte, NULL);
 		ReadFile(hFile, &tInfo, sizeof(INFO), &dwByte, NULL);
-		ReadFile(hFile, &dwTime, sizeof(DWORD), &dwByte, NULL);
-		ReadFile(hFile, &dwDelay, sizeof(DWORD), &dwByte, NULL);
 
 		if (0 == dwByte)
 			break;
@@ -340,8 +369,6 @@ void CObjMgr::Load_MapObj()
 			return;
 
 		pObj->Set_Info(tInfo);
-		pObj->Set_Time(dwTime);
-		pObj->Set_DelayTime(dwDelay);
 
 		m_listObj[OBJID::MAPOBJ].emplace_back(pObj);
 	}
@@ -349,6 +376,66 @@ void CObjMgr::Load_MapObj()
 	CloseHandle(hFile);
 	MessageBox(g_hWnd, L"MapObj 불러오기 성공!", L"성공", MB_OK);
 
+}
+
+void CObjMgr::Save_Item()
+{
+	HANDLE hFile = CreateFile(L"../Data/Item.dat", GENERIC_WRITE
+		, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+	{
+		MessageBox(g_hWnd, L"Item 저장 실패!", L"실패", MB_OK);
+		return;
+	}
+
+	DWORD dwByte = 0;
+
+	for (auto& pItem : m_listObj[OBJID::ITEM])
+	{
+		WriteFile(hFile, &(static_cast<CItem*>(pItem))->Get_ID(), sizeof(EDITID::ID), &dwByte, NULL);
+		WriteFile(hFile, &pItem->Get_Info(), sizeof(INFO), &dwByte, NULL);
+	}
+	CloseHandle(hFile);
+	MessageBox(g_hWnd, L"Item 저장 성공!", L"성공", MB_OK);
+
+}
+
+void CObjMgr::Load_Item()
+{
+	HANDLE hFile = CreateFile(L"../Data/Item.dat", GENERIC_READ
+		, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+	{
+		MessageBox(g_hWnd, L"Item 불러오기 실패!", L"실패", MB_OK);
+		return;
+	}
+
+	DWORD			dwByte = 0;
+	EDITID::ID		eID = EDITID::ID::END;
+	INFO			tInfo = {};
+
+	while (true)
+	{
+		ReadFile(hFile, &eID, sizeof(EDITID::ID), &dwByte, NULL);
+		ReadFile(hFile, &tInfo, sizeof(INFO), &dwByte, NULL);
+
+		if (0 == dwByte)
+			break;
+
+		CObj* pObj = CItemObjMgr::Get_Instance()->Create_ItemObj(eID, tInfo.vPos.x, tInfo.vPos.y);
+
+		if (!pObj)
+			return;
+
+		pObj->Set_Info(tInfo);
+
+		m_listObj[OBJID::ITEM].emplace_back(pObj);
+	}
+
+	CloseHandle(hFile);
+	MessageBox(g_hWnd, L"Item 불러오기 성공!", L"성공", MB_OK);
 }
 
 CObj* CObjMgr::Get_TargetMonster(CObj * _pObject)

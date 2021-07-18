@@ -14,6 +14,7 @@ CPItem::~CPItem()
 
 HRESULT CPItem::Initialize()
 {
+	m_eID = EDITID::PITEM;
 	ItemTag = CItem::ITEMTAG::ITEM_POINT;
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(30.f, 30.f, 0.f);

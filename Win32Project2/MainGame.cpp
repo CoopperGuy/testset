@@ -20,6 +20,7 @@ HRESULT CMainGame::Initialize()
 
 	m_hDC = GetDC(g_hWnd);
 	CSceneMgr::Get_Instance()->Scene_Change(CSceneMgr::STAGE);
+	//CSceneMgr::Get_Instance()->Scene_Change(CSceneMgr::EDIT);
 
 	return S_OK;
 }

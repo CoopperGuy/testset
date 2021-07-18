@@ -27,6 +27,8 @@ HRESULT CBoss::Initialize()
 	//보스 텍스처 전부 추가
 	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::SINGLE_TEX, L"../Texture/Monster/Boss/Boss_Idle.png", L"Boss_Idle");
 	CTexture_Manager::Get_Instance()->Insert_Texture(CTexture_Manager::SINGLE_TEX, L"../Texture/Monster/Boss/Boss_Attack_1.png", L"Boss_Attack_1");
+	
+	m_eID = EDITID::BOSS;
 
 	m_pTextureKey = L"Boss_Idle";
 	//투사체, 총알은 클래스 따로 구현

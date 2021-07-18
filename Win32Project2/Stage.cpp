@@ -25,9 +25,9 @@ void CStage::Initialize()
 	CUIMgr::Get_Instance()->Add_Object(CInven::Create({550,100.f,0.f }, { 100.f,100.f,0.f }), UIID::STAGEUI);
 
 
-	CObjMgr::Get_Instance()->Add_Object(CPItem::Create({ 1300.f,500.f,0.f }), OBJID::ITEM);
-	CObjMgr::Get_Instance()->Add_Object(CGunItem::Create({ 600.f,500.f,0.f }), OBJID::ITEM);
-	CObjMgr::Get_Instance()->Add_Object(CGuideItem::Create({ 900.f,500.f,0.f }), OBJID::ITEM);
+	//CObjMgr::Get_Instance()->Add_Object(CPItem::Create({ 1300.f,500.f,0.f }), OBJID::ITEM);
+	//CObjMgr::Get_Instance()->Add_Object(CGunItem::Create({ 600.f,500.f,0.f }), OBJID::ITEM);
+	//CObjMgr::Get_Instance()->Add_Object(CGuideItem::Create({ 900.f,500.f,0.f }), OBJID::ITEM);
 
 	//CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CJump_Monster>::Create(800, 350), OBJID::MONSTER);
 }
