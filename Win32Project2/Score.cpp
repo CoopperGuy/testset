@@ -36,7 +36,7 @@ void CScore::Render_UI(HDC _DC)
 	swprintf_s(buf, L"Score : %d", score);
 	CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&matTrans);
 	CGraphic_Device::Get_Instance()->Get_Font()->DrawTextW(CGraphic_Device::Get_Instance()->Get_Sprite(),
-		buf, lstrlen(buf), nullptr, 0, D3DCOLOR_ARGB(255, 0, 0, 0));
+		buf, lstrlen(buf), nullptr, 0, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
 void CScore::Release()

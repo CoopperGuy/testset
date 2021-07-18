@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Item.h"
 #include "Monster.h"
+#include "ObjMgr.h"
 CCollisionMgr::CCollisionMgr()
 {
 }
@@ -68,6 +69,7 @@ void CCollisionMgr::COllision_Bulllet_Monster(list<CObj*> _Dst, list<CObj*> _src
 				{
 					diter->Set_Dead();
 					static_cast<CMonster*>(siter)->Set_Hit();
+					CObjMgr::Get_Instance()->Get_Player()->Set_Score(50);
 				}
 			}
 		}

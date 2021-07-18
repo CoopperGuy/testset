@@ -49,11 +49,13 @@ int CMelee::Update()
 	D3DXMATRIX matScale, matTrans;
 	D3DXMATRIX matP = static_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->Get_PMat();
 	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
-	D3DXMatrixTranslation(&matTrans,150.f, 100.f, 0.f);
+	D3DXMatrixTranslation(&matTrans,150.f, 0.f, 0.f);
 	matWorld = matScale * matTrans * matP;
  
 	m_tInfo.vPos = { matWorld._41 - ScrollX , matWorld._42,0.f };
-
+	D3DXMatrixScaling(&matScale, 1.0f, 1.0f, 0.f);
+	D3DXMatrixTranslation(&matTrans, 150.f, 105.f, 0.f);
+	matWorld = matScale * matTrans * matP;
 	return OBJ_NOEVENT;
 }
 

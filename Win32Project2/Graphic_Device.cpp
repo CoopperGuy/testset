@@ -59,8 +59,8 @@ HRESULT CGraphic_Device::Ready_Graphic_Device()
 
 	D3DXFONT_DESCW tFontInfo;
 	ZeroMemory(&tFontInfo, sizeof(D3DXFONT_DESCW));
-	tFontInfo.Height = 20;
-	tFontInfo.Width = 20;
+	tFontInfo.Height = 17;
+	tFontInfo.Width = 17;
 	tFontInfo.Weight = FW_HEAVY;
 	tFontInfo.CharSet = HANGEUL_CHARSET;
 	lstrcpy(tFontInfo.FaceName, L"CookieRunOTF Black");
