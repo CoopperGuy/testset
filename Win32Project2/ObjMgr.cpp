@@ -308,7 +308,6 @@ void CObjMgr::Load_Monster()
 			return;
 
 		pObj->Set_Info(tInfo);
-		pObj->Set_ObjInfo(tObjInfo);
 
 		m_listObj[OBJID::MONSTER].emplace_back(pObj);
 	}
