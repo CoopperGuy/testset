@@ -108,11 +108,12 @@ void CGuided_Bullet::Release()
 CObj * CGuided_Bullet::Create(float _x, float _y)
 {
 	CGuided_Bullet* pInstance = new CGuided_Bullet;
-	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
+	pInstance->Set_Pos(_x, _y);
+
 	return pInstance;
 }

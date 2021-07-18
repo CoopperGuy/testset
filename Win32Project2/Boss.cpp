@@ -208,11 +208,12 @@ void CBoss::Release()
 CObj * CBoss::Create(float _x, float _y)
 {
 	CBoss* pInstance = new CBoss;
-	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
+	pInstance->Set_Pos(_x, _y);
+
 	return pInstance;
 }

@@ -115,12 +115,13 @@ void CJump_Monster::Release()
 CObj * CJump_Monster::Create(float _x, float _y)
 {
 	CJump_Monster* pInstance = new CJump_Monster;
-	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
+	pInstance->Set_Pos(_x, _y);
+
 	return pInstance;
 }
 

@@ -87,12 +87,12 @@ void CBoss_Bullet::Release()
 CObj * CBoss_Bullet::Create(float _x, float _y)
 {
 	CBoss_Bullet* pInstance = new CBoss_Bullet;
-	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
+	pInstance->Set_Pos(_x, _y);
 
 	return pInstance;
 }

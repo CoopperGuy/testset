@@ -116,11 +116,12 @@ void CNormal_Monster::Release()
 CObj* CNormal_Monster::Create(float _x, float _y)
 {
 	CNormal_Monster* pInstance = new CNormal_Monster;
-	pInstance->Set_Pos(_x, _y);
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
+	pInstance->Set_Pos(_x, _y);
+
 	return pInstance;
 }

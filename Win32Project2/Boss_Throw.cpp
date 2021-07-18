@@ -107,13 +107,12 @@ void CBoss_Throw::Release()
 CObj * CBoss_Throw::Create(float _x, float _y)
 {
 	CBoss_Throw* pInstance = new CBoss_Throw;
-	pInstance->Set_Pos(_x, _y);
-
 	if (FAILED(pInstance->Initialize()))
 	{
 		Safe_Delete(pInstance);
 		return nullptr;
 	}
-
+	pInstance->Set_Pos(_x, _y);
+	
 	return pInstance;
 }
