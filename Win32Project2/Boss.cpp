@@ -6,7 +6,7 @@
 #include "Boss_Throw.h"
 
 CBoss::CBoss()
-	: m_eState(IDLE)
+	: m_eBossState(IDLE)
 	, m_settled(false)
 	, m_pTextureKey(nullptr)
 	, m_timeCount(0)
@@ -37,7 +37,7 @@ HRESULT CBoss::Initialize()
 	m_tInfo.vDir = D3DXVECTOR3(1.f, 0.f, 0.f);
 	m_tInfo.vSize = D3DXVECTOR3(100.f, 85.f, 0.f);
 
-	m_tObjInfo.hp = 1;
+	m_tObjInfo.hp = 10;
 	m_tObjInfo.atk = 1;
 	m_tObjInfo.spd = 20.f;
 	m_tObjInfo.agl = 0.f;
@@ -68,8 +68,16 @@ int CBoss::Update()
 		return OBJ_DEAD;
 	}
 
+	
+
+	if (m_eState == HIT)
+	{
+		--m_tObjInfo.hp;
+		m_eState = RUN;
+	}
+
 	//BOSS_STATE에 맞게 if-else
-	if (m_eState == IDLE)
+	if (m_eBossState == IDLE)
 	{
 		if (m_timeCount + 2000 > GetTickCount())
 		{
@@ -79,13 +87,13 @@ int CBoss::Update()
 		}
 		else
 		{
-			m_eState = ATTACK_1;
+			m_eBossState = ATTACK_1;
 			m_settled = false;
 			m_timeCount = GetTickCount();
 			m_patternCount = 0;
 		}
 	}
-	else if (m_eState == ATTACK_1)
+	else if (m_eBossState == ATTACK_1)
 	{
 		m_pTextureKey = L"Boss_Attack_1";
 
@@ -117,7 +125,7 @@ int CBoss::Update()
 				{
 					//이 패턴은 5번
 					//5번 끝나면 ATTACK_2
-					m_eState = ATTACK_2;
+					m_eBossState = ATTACK_2;
 					m_patternCount = 0;
 					m_settled = false;
 				}
@@ -126,7 +134,7 @@ int CBoss::Update()
 			}
 		}
 	}
-	else if (m_eState == ATTACK_2)
+	else if (m_eBossState == ATTACK_2)
 	{
 		m_pTextureKey = L"Boss_Idle";
 
@@ -154,7 +162,7 @@ int CBoss::Update()
 				{
 					//이 패턴은 2번
 					//끝나면 IDLE
-					m_eState = IDLE;
+					m_eBossState = IDLE;
 					m_patternCount = 0;
 					m_settled = false;
 
@@ -165,9 +173,22 @@ int CBoss::Update()
 			}
 		}
 	}
-	else if (m_eState == DEAD)
+	//else if (m_eState == DEAD)
+	//{
+	//	//그 위치에서
+	//}
+
+	if (m_tObjInfo.hp <= 0)
 	{
-		//그 위치에서
+		if (!m_tG.m_bJump)
+		{
+			m_tG.m_fJumpY = m_tInfo.vPos.y;
+			m_tG.m_bJump = true;
+
+		}
+		m_fAngle += 2.f;
+		Hit_Jump();
+
 	}
 
 	int ScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
@@ -181,6 +202,11 @@ int CBoss::Update()
 	for (int i = 0; i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &m_matWorld);
+	}
+
+	if (IsOutside())
+	{
+		m_bDead = OBJ_DEAD;
 	}
 
 	return OBJ_NOEVENT;

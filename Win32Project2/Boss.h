@@ -19,7 +19,7 @@ public:
 	static CObj* Create(float _x, float _y);
 
 private:
-	BOSS_STATE	m_eState;
+	BOSS_STATE	m_eBossState;
 
 	float		m_fIdleY;
 	float		m_fIdleAngle;
